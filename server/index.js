@@ -32,7 +32,7 @@ app.get('/product', overview.listProducts)
 // CART
 
 // RELATED ITEMS
-app.get('/product', overview.relatedProducts)
+// app.get('/product', overview.relatedProducts)
 
 
 // INTERACTIONS

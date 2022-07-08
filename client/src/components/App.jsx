@@ -1,9 +1,9 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-import Overview from './Overview.jsx';
-import QandA from './QandA.jsx';
-import RatingsAndReviews from './RatingsAndReviews.jsx';
-import RelatedItems from './RelatedItems.jsx';
+// import Overview from './Overview.jsx';
+// import QandA from './QandA.jsx';
+// import RatingsAndReviews from './RatingsAndReviews.jsx';
+// import RelatedItems from './RelatedItems.jsx';
 
 class App extends React.Component {
   constructor(props) {
