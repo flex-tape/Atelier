@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 // PRODUCTS
 
 app.get('/product', overview.listProducts)
-// app.get('/product/id', overview.productInfo)
+app.get('/product/:id', overview.productInfo)
 // app.get('/product/styles', overview.productStyles)
 
 // REVIEWS
