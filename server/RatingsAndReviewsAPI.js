@@ -1,71 +1,95 @@
 const axios = require('axios');
-const config = require('../config.js')
+const config = require('../config.js');
 
 exports.listReviews = (req, res) => {
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/reviews`;
-  let options = {
-    headers: {
-      // 'User-Agent': 'FEC',
-      'Authorization': config.TOKEN
-    }
-  }
-  axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response) // should probably send response.data instead of whole response body
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
-}
-
-exports.productInfo = (req, res) => {
-  let product_id = req.body.data.id // req.body should be req.query or req.params
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/products/:${product_id}`
+  console.log(req.query)
   let options = {
     headers: {
       'Authorization': config.TOKEN
+    },
+    params: {
+      product_id: req.query.product_id,
+      page: req.query.page,
+      count: req.query.count,
+      sort: req.query.sort
     }
-  }
+   }
+   // 40344
+   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews`;
   axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response)
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+    .then( (result) => {
+      res.status(200).send(result.data);
+    })
+    .catch( (e) => {
+      res.status(400).send(e);
+    })
 }
 
-exports.productStyles = (req, res) => {
-  let product_id = req.body.data.id // req.body.data should be req.query?? not 100% sure
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/products/:${product_id}/styles`
+exports.getReviewMetadata = (req, res) => {
+  let options = {
+    headers: {
+      'Authorization': config.TOKEN
+    },
+    params: {
+      product_id: req.query.product_id
+    }
+   }
+   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta`;
+   axios.get(url, options)
+      .then( (result) => {
+        console.log('RESULT IS: ', result)
+        res.status(200).send(result.data)
+      })
+      .catch( (e) => {
+        res.status(400).send(e)
+      })
+}
+
+exports.addReview = (req, res) => {
+  let options = {
+    headers: {
+      'Authorization': config.TOKEN
+    },
+    // params: {
+    //   product_id: req.params.product_id,
+    //   rating: req.params.rating,
+    //   summary: req.params.summary,
+    //   body: req.params.body,
+    //   recommend: req.params.recommend,
+    //   name: req.params.name,
+    //   email: req.params.email,
+    //   photos: req.params.photos,
+    //   characteristics: req.params.characteristics,
+    // }
+   }
+   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/`;
+   axios.post(url, req.body, options)
+      .then( (result) => res.status(200).send(result.data) )
+      .catch( (e) => res.status(400).send(e) )
+}
+
+exports.markAsHelpful = (req, res) => {
+  // 1274559
+  console.log('REQUEST IS...' ,req)
+  console.log('REQUEST PARAMS IS...' ,req.params)
   let options = {
     headers: {
       'Authorization': config.TOKEN
     }
   }
-  axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response)
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${req.params.review_id}/helpful`;
+  axios.put(url, req.params, options)
+      .then( (result) => res.status(200).send(result.data))
+      .catch( (e) => res.status(404).send(e))
 }
 
-exports.relatedProduct = (req, res) => {
-  let product_id = req.body.data.id
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/products/:${product_id}/related`
+exports.reportReview = (req, res) => {
   let options = {
     headers: {
       'Authorization': config.TOKEN
     }
   }
-  axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response)
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+  axios.put(`/reviews/${req.params.review_id}/report`, options)
+      .then( (result) => res.status(200).send(result.data))
+      .catch( (e) => res.status(404).send(e))
 }
-
