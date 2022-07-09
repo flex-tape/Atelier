@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 // import api files
 const overview = require('./OverviewAPI.js');
+const qa = require('./QuestionsAndAnswersAPI.js');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/dist")));
@@ -26,6 +27,9 @@ app.get('/products/styles', overview.productStyles)
 
 
 // QUESTIONS & ANSWERS
+app.get('/qa/questions', qa.getQuestions);
+app.get('/qa/questions/:question_id/answers', qa.getAnswers);
+app.put('/qa/questions/:question_id/helpful', qa.markHelpful);
 
 
 // CART
