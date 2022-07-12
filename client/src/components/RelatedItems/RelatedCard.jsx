@@ -7,7 +7,13 @@ export default function RelatedCard({item}) {
 
   let productInfo =  axios.get(`/products/${item}`)
   .then((res) => {
-    console.log(res.data);
+    console.log('product level info: ', res.data);
+    return res.data;
+  })
+
+  let productStyles = axios.get(`/products/${item}/styles`)
+  .then((res) => {
+    console.log('product styles: ', res.data);
     return res.data;
   })
 
