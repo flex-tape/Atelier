@@ -1,8 +1,8 @@
-// import React from 'react';
+import React from 'react';
 // import ReactDOM from 'react-dom';
 // import Overview from './Overview.jsx';
 // import QandA from './QandA.jsx';
-// import RatingsAndReviews from './RatingsAndReviews.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 // import RelatedItems from './RelatedItems.jsx';
 
 class App extends React.Component {
@@ -17,10 +17,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>HELLO, WORLD!</h1>
-        <Overview/>
-        <QandA/>
+        {/* <Overview/> */}
+        {/* <QandA/> */}
         <RatingsAndReviews/>
-        <RelatedItems/>
+        {/* <RelatedItems/> */}
       </div>
     )
   }
