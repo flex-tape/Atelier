@@ -27,6 +27,14 @@ app.get('/products/styles', overview.productStyles)
 
 
 // QUESTIONS & ANSWERS
+app.get('/qa/questions', qa.getQuestions);
+app.get('/qa/questions/:question_id/answers', qa.getAnswers);
+app.post('/qa/questions', qa.postQuestion);
+app.post('/qa/questions/:question_id/answers', qa.postAnswer);
+app.put('/qa/questions/:question_id/helpful', qa.markQuestionHelpful);
+app.put('/qa/questions/:question_id/report', qa.reportQuestion);
+app.put('/qa/answers/:answer_id/helpful', qa.markAnswerHelpful);
+app.put('/qa/answers/:answer_id/report', qa.reportAnswer);
 
 
 // CART
