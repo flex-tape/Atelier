@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const axios = require('axios');
 const config = require('../config.js')
 
@@ -8,7 +7,6 @@ exports.getRelated = (req, res) => {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}/related`;
   let options = {
     headers: {
-      // 'User-Agent': 'FEC',
       'Authorization': config.TOKEN
     }
   }
