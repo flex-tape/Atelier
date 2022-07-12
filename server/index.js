@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 // import api files
 const overview = require('./OverviewAPI.js');
-const qa = require('./QuestionsAndAnswersAPI.js');
+const relatedAPI = require('./RelatedItems.js');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/dist")));
@@ -40,7 +40,7 @@ app.put('/qa/answers/:answer_id/report', qa.reportAnswer);
 // CART
 
 // RELATED ITEMS
-// app.get('/product', overview.relatedProducts)
+app.get('/products/related', relatedAPI.getRelated);
 
 
 // INTERACTIONS
