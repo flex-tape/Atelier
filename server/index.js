@@ -4,7 +4,11 @@ const app = express();
 const port = 3000;
 // import api files
 const overview = require('./OverviewAPI.js');
+<<<<<<< HEAD
+const ratings = require('./RatingsAndReviewsAPI.js')
+=======
 const relatedAPI = require('./RelatedItems.js');
+>>>>>>> main
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/dist")));
@@ -24,7 +28,13 @@ app.get('/products', overview.listProducts)
 app.get('/products/styles', overview.productStyles)
 
 // REVIEWS
+app.get('/reviews', ratings.listReviews)
+app.get('/reviews/meta', ratings.getReviewMetadata)
 
+app.post('/reviews', ratings.addReview)
+
+app.put('/reviews/:review_id/helpful', ratings.markAsHelpful)
+app.put('/reviews/:review_id/report', ratings.reportReview)
 
 // QUESTIONS & ANSWERS
 app.get('/qa/questions', qa.getQuestions);
