@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ReviewsList from './ReviewsList.jsx'
 
 // const Button = styled.button`
 //   padding: 10px;
@@ -24,16 +25,32 @@ const Main = styled.main`
   flex: 2;
   border: 1px dotted;
   margin: 5px;
+  padding: 15px;
+
+  div ul {
+    padding: 0;
+    max-height: 1000px;
+    overflow: auto;
+  }
+
+  div ul > li + li {
+    border-top: 1px solid black;
+  }
 `
 
-const RatingsAndReviews = () => {
+const RatingsAndReviews = (props) => {
 
   return (
+    <div>
+
     <Container>
       <Sidebar></Sidebar>
-      <Main></Main>
+      <Main>
+        <ReviewsList productID={props.productID}/>
+      </Main>
 
     </Container>
+    </div>
   )
 }
 
