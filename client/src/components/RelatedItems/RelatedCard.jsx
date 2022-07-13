@@ -29,12 +29,9 @@ export default function RelatedCard({item}) {
       return res.data;
     })
 
-
-
-
     let primaryPhoto = '';
     if (productStyles.results[0].photos[0].url === null) {
-      primaryPhoto = 'https://images.unsplash.com/photo-1553830591-2f39e38a013c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2760&q=80';
+      primaryPhoto = 'https://images.unsplash.com/photo-1535639818669-c059d2f038e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
     } else {
       primaryPhoto = productStyles.results[0].photos[0].url;
     }
@@ -53,10 +50,17 @@ export default function RelatedCard({item}) {
     getRelatedInfo();
   }, [])
 
+  useEffect(() => {
+    getRelatedInfo();
+  }, [item])
+
 
   return (
     <RelatedItemsList>
       <PrimaryImage src={relatedProductInfo.image}></PrimaryImage>
+      <div>{relatedProductInfo.category}</div>
+      <div>{relatedProductInfo.name}</div>
+      <div>{relatedProductInfo.price}</div>
     </RelatedItemsList>
   )
 }

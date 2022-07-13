@@ -16,13 +16,14 @@ export default function RelatedItems({ setID }) {
   const getRelatedItems = () => {
     axios.get('/productsrelated', {params: {product_id: productID}})
     .then((res) => {
+      console.log('new response: ', res)
       setRelatedItems(res.data);
     })
   }
 
   // run getRelatedItems whenever selected productID changes
   useEffect(() => {
-    getRelatedItems
+    getRelatedItems();
   }, [productID]);
 
 
