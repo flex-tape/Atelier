@@ -4,17 +4,30 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 const PrimaryImage = styled.img`
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// position: absolute;
 height: 350px;
-width: 350px;
+width: 250px;
 object-fit: contain;
+margin: 10px;
+background-color: #f0ffff;
 `
 
 const RelatedItemsList = styled.div`
+position: relative;
+height: 450px;
+width: 270px;
 display: inline-block;
+border: 1px solid;
+margin-right: 50px;
+margin-bottom: 30px;
 `
 
 export default function RelatedCard({item}) {
   const [relatedProductInfo, setRelatedProductInfo] = useState([]);
+  const [hoverStatus, setHoverStatus] = useState(false);
 
   const getRelatedInfo = async () => {
     let productLevelInfo = await axios.get(`/products/${item}`)
@@ -54,13 +67,21 @@ export default function RelatedCard({item}) {
     getRelatedInfo();
   }, [item])
 
+  let onHover = () => {
+    setHoverStatus(true);
+  }
+  let offHover = () => {
+    setHoverStatus(false);
+  }
 
   return (
     <RelatedItemsList>
-      <PrimaryImage src={relatedProductInfo.image}></PrimaryImage>
-      <div>{relatedProductInfo.category}</div>
+      <PrimaryImage src={relatedProductInfo.image} onMouseEnter={onHover} onMouseLeave={offHover}></PrimaryImage>
+      {hoverStatus ? <h3>Thumbnail photos go here</h3> : <div><div>{relatedProductInfo.category}</div>
       <div>{relatedProductInfo.name}</div>
       <div>{relatedProductInfo.price}</div>
+      <div>Star rating goes here</div></div>}
+
     </RelatedItemsList>
   )
 }
