@@ -11,12 +11,6 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // TODO: Define routes
 
-//OVERVIEW - KEVIN
-// app.get('/product', (req, res) => {
-//   overview.listProducts(req.params/req.query)
-//   res.send
-
-// })
 
 // PRODUCTS
 

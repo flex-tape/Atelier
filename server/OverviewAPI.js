@@ -9,26 +9,55 @@ let options = {
 }
 
 exports.listProducts = (req, res) => {
-  console.log(req)
+  console.log('this is req.query: ', req.query)
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products`;
-  if (req.query.product_id === undefined) {
+  if (req.query === undefined) {
     axios.get(url, options)
       .then((response) => {
+        console.log('getall', response.data);
         res.status(200).send(response.data)
       })
       .catch((err) => {
         res.status(400).send(err);
       })
   } else {
-    let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.query.product_id}`;
+    url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.query.product_id}`;
+    //`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/101`
+    //`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/$(req.query.product_id)`;
+    console.log('this is url:', url)
     axios.get(url, options)
     .then((response) => {
+      console.log('getOne', response.data);
       res.status(200).send(response.data)
     })
     .catch((err) => {
       res.status(400).send(err);
     })
   }
+}
+
+exports.productInfo = (req, res) => {
+  console.log('info req', req)
+  // /products/id/product_id
+  // /products/asda231a
+
+  // req.params = :id
+  let product_id = `${req.params.product_id}`; // req.body should be req.query or req.params
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}`
+  let options = {
+    headers: {
+      'Authorization': config.TOKEN
+    }
+  }
+  axios.get(url, options)
+  .then((response) => {
+    // console.log('resp', response)
+    res.status(200).send(response)
+  })
+  .catch((err) => {
+    console.log('err', err);
+    res.status(400).send(err);
+  })
 }
 
 exports.productStyles = (req, res) => {
@@ -60,27 +89,3 @@ exports.productStyles = (req, res) => {
 //   })
 // }
 
-// exports.productInfo = (req, res) => {
-//   console.log('info req', req.query.product_id)
-//   // /products/id/product_id
-//   // /products/asda231a
-
-//   // req.params = :id
-//   let product_id = req.query.product_id; // req.body should be req.query or req.params
-//   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}`
-//   console.log('url',url)
-//   let options = {
-//     headers: {
-//       'Authorization': config.TOKEN
-//     }
-//   }
-//   axios.get(url, options)
-//   .then((response) => {
-//     console.log('resp', response)
-//     res.status(200).send(response.data)
-//   })
-//   .catch((err) => {
-//     console.log('err', err);
-//     res.status(400).send(err);
-//   })
-// }
