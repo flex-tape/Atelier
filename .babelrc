@@ -1,15 +1,8 @@
 {
-<<<<<<< HEAD
   "presets": [
     "@babel/preset-env"
   ],
   "plugins": [
     "babel-plugin-styled-components"
   ]
-=======
-"presets": [
-  "@babel/preset-env"
-],
-"plugins": ["babel-plugin-styled-components"]
->>>>>>> main
 }
