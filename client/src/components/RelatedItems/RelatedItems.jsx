@@ -3,7 +3,16 @@ import React, { useState, useContext, useEffect } from 'react';
 import { IDContext } from '../App.jsx';
 import axios from 'axios';
 import RelatedCard from './RelatedCard.jsx'
+import RelatedListCarousel from './RelatedListCarousel.jsx'
+import styled from 'styled-components';
 
+export const RelatedContext = React.createContext()
+
+const RelatedCarousel = styled.div`
+display: flex;
+max-width: 1300px;
+overflow: scroll;
+`
 
 export default function RelatedItems({ setID }) {
   // will need product ID of current product
@@ -28,14 +37,16 @@ export default function RelatedItems({ setID }) {
 
 
   return (
+    <RelatedContext.Provider value={relatedItems}>
     <div>
       <div>
         <h3>Related Products</h3>
-          <div>
+          {/* <RelatedCarousel>
             {relatedItems.map((item, index) => (
               <RelatedCard item={item} key={index}/>
             ))}
-          </div>
+          </RelatedCarousel> */}
+          <RelatedListCarousel />
         <button onClick={getRelatedItems}>Get Related</button>
 
       </div>
@@ -45,5 +56,6 @@ export default function RelatedItems({ setID }) {
 
       </div>
     </div>
+    </RelatedContext.Provider>
   )
 }

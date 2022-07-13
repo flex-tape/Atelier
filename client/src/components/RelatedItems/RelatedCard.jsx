@@ -8,18 +8,19 @@ const PrimaryImage = styled.img`
 // justify-content: center;
 // align-items: center;
 // position: absolute;
-height: 350px;
+height: 320px;
 width: 250px;
 object-fit: contain;
 margin: 10px;
 background-color: #f0ffff;
 `
 
-const RelatedItemsList = styled.div`
+const RelatedItemsCard = styled.div`
 position: relative;
 height: 450px;
 width: 270px;
-display: inline-block;
+display: block;
+align-items: center;
 border: 1px solid;
 margin-right: 50px;
 margin-bottom: 30px;
@@ -75,13 +76,18 @@ export default function RelatedCard({item}) {
   }
 
   return (
-    <RelatedItemsList>
+    <RelatedItemsCard>
+      <button>Star</button>
       <PrimaryImage src={relatedProductInfo.image} onMouseEnter={onHover} onMouseLeave={offHover}></PrimaryImage>
-      {hoverStatus ? <h3>Thumbnail photos go here</h3> : <div><div>{relatedProductInfo.category}</div>
+      {hoverStatus ? <div>Thumbnail photos go here</div> : <div><div>{relatedProductInfo.category}</div>
       <div>{relatedProductInfo.name}</div>
       <div>{relatedProductInfo.price}</div>
       <div>Star rating goes here</div></div>}
+      {/* <div>{relatedProductInfo.category}</div>
+      <div>{relatedProductInfo.name}</div>
+      <div>{relatedProductInfo.price}</div>
+      <div>Star rating goes here</div> */}
 
-    </RelatedItemsList>
+    </RelatedItemsCard>
   )
 }
