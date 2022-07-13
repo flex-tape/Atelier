@@ -21,7 +21,8 @@ height: 450px;
 width: 270px;
 display: block;
 align-items: center;
-border: 1px solid;
+border: 1px solid lightgray;
+box-shadow: 7px 7px 7px lightgray;
 margin-right: 50px;
 margin-bottom: 30px;
 `
