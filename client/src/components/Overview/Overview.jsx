@@ -69,7 +69,6 @@ export default function Overview (props) {
       setProductInfo(response.data);
     })
     .catch((err) => {
-
     })
     axios.get(`/products/${props.productID}/styles`)
       .then((response) => {
@@ -84,7 +83,6 @@ export default function Overview (props) {
         setHasLoaded(true);
       })
       .catch((err) => {
-
       })
   }, [])
 

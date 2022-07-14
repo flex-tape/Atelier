@@ -17,9 +17,11 @@ const Container = styled.div`
 export default function ImageGallery (props) {
 
   return (
-    <Container>
-      {props.hasLoaded && <img src={props.productStyle.photos[0].url}/>}
-    </Container>
+    <>
+    {props.hasLoaded && <Container>
+      <img src={props.productStyle.photos[0].url}/>
+    </Container>}
+    </>
   )
 }
 
