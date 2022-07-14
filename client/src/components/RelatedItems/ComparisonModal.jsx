@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { CompareContext } from './RelatedCard.jsx';
+// import { CompareContext } from './RelatedCard.jsx';
 import { IDContext } from '../App.jsx';
 
 const CompareTable = styled.table`
@@ -22,14 +22,14 @@ const CompareDiv = styled.div`
   width: 550px;
   height: 550px;
 `
-export default function ComparisonModal ({item}) {
+export default function ComparisonModal ({item, relatedFeatures}) {
+  const [features, setFeatures] = useState([]);
 
 
-  let compareProducts = useContext(CompareContext);
   let productID = useContext(IDContext)
 
   const showID = () => {
-    console.log(item);
+    console.log(relatedFeatures);
   }
 
   useEffect(() => {

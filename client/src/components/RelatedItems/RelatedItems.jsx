@@ -19,6 +19,7 @@ export default function RelatedItems({ setID }) {
   // grab related products of current produt
   // related products for 40344: 40345, 40346, 40351, 40350
   const [relatedItems, setRelatedItems] = useState([40345, 40346, 40351, 40350]);
+  const [currentFeatures, setCurrentFeatures] = useState([{feature: 'Fabric', value: 'Canvas'}, {feature: 'Buttons', value: 'Brass'}])
 
   let productID = useContext(IDContext)
 
@@ -30,9 +31,20 @@ export default function RelatedItems({ setID }) {
     })
   }
 
+  const getCurrentFeatures = () => {
+    axios.get(`/products/${productID}`)
+      .then((res) => {
+      setCurrentFeatures(res.data.features);
+    })
+    .catch(() => {
+      console.log('GET request failed for getCurrentFeatures')
+    })
+  }
+
   // run getRelatedItems whenever selected productID changes
   useEffect(() => {
     getRelatedItems();
+    getCurrentFeatures();
   }, [productID]);
 
 
