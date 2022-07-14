@@ -49,11 +49,17 @@ export default function RelatedCard({item, setID}) {
       console.log('product level info: ', res.data);
       return res.data;
     })
+    .catch(() => {
+      console.log('GET request failed for relatedInfo')
+    })
 
     let productStyles = await axios.get(`/products/${item}/styles`)
       .then((res) => {
       // console.log('product styles: ', res.data);
       return res.data;
+    })
+    .catch(() => {
+      console.log('GET request failed for productStyles')
     })
 
     let primaryPhoto = '';
