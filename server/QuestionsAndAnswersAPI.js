@@ -2,7 +2,7 @@ const axios = require('axios');
 const config = require('../config.js')
 
 // default IDs for testing:
-// product_id: 40344
+// product_id: 40344 - 40348
 // question_id: 640785
 
 const options = {
@@ -13,7 +13,6 @@ const options = {
 
 exports.getQuestions = (req, res) => {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions`;
-  console.log(typeof req.query.product_id);
   let questionOptions = {
     headers: {
       'Authorization': config.TOKEN
@@ -21,7 +20,7 @@ exports.getQuestions = (req, res) => {
     params: {
       product_id: Number(req.query.product_id),
       page: Number(req.query.page) || 1,
-      count: Number(req.query.count) || 5
+      count: Number(req.query.count) || 10
     }
   }
   axios.get(url, questionOptions)
@@ -31,7 +30,7 @@ exports.getQuestions = (req, res) => {
 
 exports.getAnswers = (req, res) => {
   let page = req.query.page || 1;
-  let count = req.query.count || 2;
+  let count = req.query.count || 5;
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${req.params.question_id}/answers?page=${page}&count=${count}`;
   axios.get(url, options)
     .then((response) => { res.status(201).send(response.data.results); })

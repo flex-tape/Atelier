@@ -11,7 +11,7 @@ let options = {
 exports.listProducts = (req, res) => {
   console.log('this is req.query: ', req.query)
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products`;
-  if (req.query === undefined) {
+  if (req.query.product_id === undefined) {
     axios.get(url, options)
       .then((response) => {
         console.log('getall', response.data);
