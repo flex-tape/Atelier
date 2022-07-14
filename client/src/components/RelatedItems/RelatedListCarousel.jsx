@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import { RelatedContext } from './RelatedItems.jsx';
+import { IDContext } from '../App.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import RelatedCard from './RelatedCard.jsx'
@@ -15,6 +16,7 @@ export default function RelatedListCarousel({ setID }) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [carouselLength, setCarouselLength] = useState([0, 4])
 
+  let productID = useContext(IDContext)
   let relatedItems = useContext(RelatedContext);
   let slicedRelatedItems = relatedItems.slice(carouselLength[0], carouselLength[1]);
 
@@ -27,6 +29,10 @@ export default function RelatedListCarousel({ setID }) {
       setCarouselLength([carouselLength[0] + 1, carouselLength[1] + 1])
     }
   }
+
+  useEffect (() => {
+    setCarouselLength([0, 4])
+  }, [productID])
 
   return (
     <div>
