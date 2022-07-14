@@ -24,6 +24,8 @@ const CompareDiv = styled.div`
 `
 export default function ComparisonModal ({item}) {
 
+  // productID = current product on overview
+  // item = related product selected
 
   let compareProducts = useContext(CompareContext);
   let productID = useContext(IDContext)
@@ -31,6 +33,8 @@ export default function ComparisonModal ({item}) {
   const showID = () => {
     console.log(item);
   }
+
+  // implement function to grab feature data for each product
 
   useEffect(() => {
     showID();
