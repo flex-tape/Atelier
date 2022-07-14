@@ -4,25 +4,32 @@ import Question from './IndividualQuestion/Question.jsx'
 
 export default function QuestionsList() {
   const [questionsList, setQuestionsList] = useState([]);
-  // let [count, setCount] = useState(4);
-  // let [enoughQuestions, setEnoughQUestions] = useState(true);
+  const [fullList, setFullList] = useState([]);
+  let [moreQuestions, setMoreQuestions] = useState(true);
 
   useEffect(() => {
     axios.get('/qa/questions', {params: {product_id: 40347}})
-      .then((response) => {setQuestionsList(response.data.sort((a, b) => b.question_helpfulness - a.question_helpfulness))})
+      .then((response) => {
+        let sortedQuestions = response.data.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
+        setQuestionsList(sortedQuestions.slice(0, 4));
+        setFullList(sortedQuestions);
+        if (sortedQuestions.length <= 4) {
+          setMoreQuestions(false);
+        }
+      })
       .catch(err => console.log(err))
   }, [])
 
-  // handleMoreClick = (e) => {
-  //   e.preventDefault();
-  //   setCount(count += 2);
-  //   axios.get('/qa/questions', {params: {product_id: 40347, count: 2}})
-  // }
+  let handleMoreClick = (e) => {
+    e.preventDefault();
+    setQuestionsList(fullList);
+    setMoreQuestions(false);
+  }
 
   return (
     <div>
       {questionsList.map((question) => (<Question question={question} key={question.question_id}/>))}
-      <button>More Questions</button>
+      {moreQuestions && <button onClick={handleMoreClick}>More Questions</button>}
     </div>
   );
 
