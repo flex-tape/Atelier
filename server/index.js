@@ -45,7 +45,7 @@ app.put('/qa/answers/:answer_id/report', qa.reportAnswer);
 // CART
 
 // RELATED ITEMS
-app.get('/products/related', relatedAPI.getRelated);
+app.get('/productsrelated', relatedAPI.getRelated);
 
 
 // INTERACTIONS

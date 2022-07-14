@@ -11,6 +11,7 @@ export default function Overview(props) {
   return (
     <div>
       <h1>HELLO, OVERVIEW!</h1>
+      <button onClick={()=> props.setProductID(props.productID + 1)}>Click here!</button>
       {props.productID}
     </div>
   )
