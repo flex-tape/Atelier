@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 // import ReactDOM from 'react-dom';
 import Overview from './Overview/Overview.jsx';
-// import QandA from './QandA/QandA.jsx';
+import QandA from './QandA/QandA.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
@@ -25,7 +25,7 @@ export default function App() {
         <h1>HELLO, WORLD!</h1>
         <Overview setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
-        {/* <QandA productID={productID}/> */}
+        <QandA productID={productID}/>
         <RatingsAndReviews productID={productID}/>
       </div>
     </IDContext.Provider>
