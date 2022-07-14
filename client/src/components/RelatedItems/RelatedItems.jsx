@@ -46,7 +46,7 @@ export default function RelatedItems({ setID }) {
               <RelatedCard item={item} key={index}/>
             ))}
           </RelatedCarousel> */}
-          <RelatedListCarousel />
+          <RelatedListCarousel setID={setID}/>
         <button onClick={getRelatedItems}>Get Related</button>
 
       </div>

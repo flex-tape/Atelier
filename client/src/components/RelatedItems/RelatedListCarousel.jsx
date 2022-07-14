@@ -11,7 +11,7 @@ max-width: 1300px;
 overflow: hidden;
 `
 
-export default function RelatedListCarousel() {
+export default function RelatedListCarousel({ setID }) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [carouselLength, setCarouselLength] = useState([0, 4])
 
@@ -32,7 +32,7 @@ export default function RelatedListCarousel() {
     <div>
     <RelatedCarousel>
       {slicedRelatedItems.map((item, index) => (
-        <RelatedCard item={item} key={index}/>
+        <RelatedCard item={item} key={index} setID={setID}/>
       ))}
     </RelatedCarousel>
     {carouselLength[0] > 0 ? <button onClick={() => moveCarousel('left')}>Left</button> : null}

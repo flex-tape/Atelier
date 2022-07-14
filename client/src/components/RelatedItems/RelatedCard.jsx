@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import ComparisonModal from './ComparisonModal.jsx'
+
+export const CompareContext = React.createContext()
 
 const PrimaryImage = styled.img`
 // display: flex;
@@ -27,9 +30,18 @@ margin-right: 50px;
 margin-bottom: 30px;
 `
 
-export default function RelatedCard({item}) {
+const CompareButton = styled.button`
+position: absolute;
+z-index: 3;
+left: 400px;
+top: 200px;
+`
+
+
+export default function RelatedCard({item, setID}) {
   const [relatedProductInfo, setRelatedProductInfo] = useState([]);
   const [hoverStatus, setHoverStatus] = useState(false);
+  const [compareProducts, setCompareProducts] = useState(false);
 
   const getRelatedInfo = async () => {
     let productLevelInfo = await axios.get(`/products/${item}`)
@@ -76,19 +88,31 @@ export default function RelatedCard({item}) {
     setHoverStatus(false);
   }
 
-  return (
-    <RelatedItemsCard>
-      <button>Star</button>
-      <PrimaryImage src={relatedProductInfo.image} onMouseEnter={onHover} onMouseLeave={offHover}></PrimaryImage>
-      {hoverStatus ? <div>Thumbnail photos go here</div> : <div><div>{relatedProductInfo.category}</div>
-      <div>{relatedProductInfo.name}</div>
-      <div>{relatedProductInfo.price}</div>
-      <div>Star rating goes here</div></div>}
-      {/* <div>{relatedProductInfo.category}</div>
-      <div>{relatedProductInfo.name}</div>
-      <div>{relatedProductInfo.price}</div>
-      <div>Star rating goes here</div> */}
+  let setCompareOn = () => {
+    setCompareProducts(true)
+  }
 
-    </RelatedItemsCard>
+  let setCompareOff = () => {
+    setCompareProducts(false)
+  }
+
+  return (
+    <CompareContext.Provider value={compareProducts}>
+      <div>
+      {compareProducts ? <div><ComparisonModal /><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
+      <RelatedItemsCard>
+        <button onClick={setCompareOn}>Star</button>
+        <PrimaryImage src={relatedProductInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(item)}></PrimaryImage>
+        {hoverStatus ? <div>Thumbnail photos go here</div> : <div><div>{relatedProductInfo.category}</div>
+        <div>{relatedProductInfo.name}</div>
+        <div>{relatedProductInfo.price}</div>
+        <div>Star rating goes here</div></div>}
+        {/* <div>{relatedProductInfo.category}</div>
+        <div>{relatedProductInfo.name}</div>
+        <div>{relatedProductInfo.price}</div>
+        <div>Star rating goes here</div> */}
+      </RelatedItemsCard>
+    </div>
+    </CompareContext.Provider>
   )
 }
