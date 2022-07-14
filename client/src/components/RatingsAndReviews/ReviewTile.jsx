@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import dateHandler from '../../lib/dateHandler.js'
 
 const TileDiv = styled.div`
   // display: flex;
@@ -56,11 +57,8 @@ export default function ReviewTile(props) {
   // const toggleReadMore = () => {
   //   setIsReadMore(!isReadMore)
   // }
-  let dateObj = new Date(props.review.date);
-  let month = dateObj.toLocaleString("en-US", { month: "long" });
-  let day = dateObj.getUTCDate("en-US", { day: "long" });
-  let year = dateObj.getFullYear()
-  let date = month + ' ' + day + ', ' + year;
+
+  dateHandler(props.review.date)
 
   const RenderDescription = () => {
     if (props.review.body.length > 250) {
@@ -97,6 +95,12 @@ export default function ReviewTile(props) {
       {RenderDescription()}
       <PhotoCarousel>
         {listPhotos}
+        { lightBoxDisplay
+          ? <div id="lightbox">
+            <img id="lightbox-img" src={imageToShow}></img>
+          </div>
+          : ''
+        }
       </PhotoCarousel>
 
     </TileDiv>
