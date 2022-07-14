@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx'
 
 const MoreReviewsButton = styled.button`
-  // display: ${props => props.reviewMax === 0 || props.reviewMax === 1 || props.reviewMax === 2 || props.reviewCount === props.reviewMax || props.reviewCount === props.reviewMax - 1 ? 'none' : 'inline-block'}
   border: 1px solid;
   margin: 5px;
 `;
@@ -79,7 +78,7 @@ export default function ReviewsList(props) {
   return (
     <div>
       <div>
-          {reviewCounter}
+          {/* {reviewCounter} */}
         <ul>
           {listReviewTiles}
         </ul>

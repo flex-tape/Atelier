@@ -88,7 +88,7 @@ export default function ReviewTile(props) {
     <TileDiv>
 
       <StarsAndUserInfoBar>
-        <div>stars</div>
+        <div>star rating</div>
         <div>{props.review.reviewer_name}, {date}</div>
       </StarsAndUserInfoBar>
       <ReviewSummary>
