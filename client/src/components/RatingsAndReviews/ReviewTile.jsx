@@ -7,7 +7,7 @@ const TileDiv = styled.div`
   color: black;
 
   padding: 30px 0;
-  height: 200px;
+  // height: 200px;
 `;
 
 const StarsAndUserInfoBar = styled.div`
@@ -39,8 +39,20 @@ const ExpandReviewsButton = styled.button`
   }
 `;
 
+const PhotoCarousel = styled.div`
+  display: flex;
+  margin-top: 16px;
+  gap: 8px;
+
+  img {
+    height: 84px;
+    width: 84px;
+  }
+`
+
 export default function ReviewTile(props) {
   let [isReadMore, setIsReadMore] = useState(false);
+  const [lightBoxDisplay, setLightBoxDisplay] = useState(false);
   // const toggleReadMore = () => {
   //   setIsReadMore(!isReadMore)
   // }
@@ -68,6 +80,10 @@ export default function ReviewTile(props) {
     )
   }
 
+  const listPhotos = props.review.photos.map((photo) =>
+    <img src={photo.url}></img>
+  )
+
   return (
     <TileDiv>
 
@@ -79,6 +95,9 @@ export default function ReviewTile(props) {
         {props.review.summary}
       </ReviewSummary>
       {RenderDescription()}
+      <PhotoCarousel>
+        {listPhotos}
+      </PhotoCarousel>
 
     </TileDiv>
   )
