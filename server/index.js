@@ -13,12 +13,6 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // TODO: Define routes
 
-//OVERVIEW - KEVIN
-// app.get('/product', (req, res) => {
-//   overview.listProducts(req.params/req.query)
-//   res.send
-
-// })
 
 // PRODUCTS
 
@@ -51,7 +45,7 @@ app.put('/qa/answers/:answer_id/report', qa.reportAnswer);
 // CART
 
 // RELATED ITEMS
-app.get('/products/related', relatedAPI.getRelated);
+app.get('/productsrelated', relatedAPI.getRelated);
 
 
 // INTERACTIONS
