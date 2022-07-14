@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx'
 
 const MoreReviewsButton = styled.button`
-  display: ${props => props.reviewMax === 0 || props.reviewMax === 1 || props.reviewMax === 2 || props.reviewCount === props.reviewMax || props.reviewCount === props.reviewMax - 1 ? 'none' : 'inline-block'}
+  // display: ${props => props.reviewMax === 0 || props.reviewMax === 1 || props.reviewMax === 2 || props.reviewCount === props.reviewMax || props.reviewCount === props.reviewMax - 1 ? 'none' : 'inline-block'}
   border: 1px solid;
   margin: 5px;
 `;
@@ -23,11 +23,15 @@ export default function ReviewsList(props) {
   const [reviews, setReviews] = useState(() => []);
   const [reviewCounter, setReviewCount] = useState(() => 0);
   let [pageCount, setPageCount] = useState(1);
+  let [showMoreReviews, setShowMoreReviews] = useState(true);
 
   useEffect(() => {
 
     axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount } })
       .then((response) => {
+        if (response.data.results.length < 2) {
+          setShowMoreReviews(false);
+        }
         setReviews(response.data.results);
         setPageCount(pageCount + 1);
       })
@@ -56,13 +60,15 @@ export default function ReviewsList(props) {
     // default = 2 reviews
     axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount } })
     .then((response) => {
+      if (response.data.results.length < 2) {
+        setShowMoreReviews(false);
+      }
       let updatedReviews = reviews.concat(response.data.results)
       setReviews(updatedReviews);
       setPageCount(pageCount + 1);
       console.log(pageCount)
     })
     .catch((e) => console.log(e))
-
   }
 
 
@@ -73,12 +79,16 @@ export default function ReviewsList(props) {
   return (
     <div>
       <div>
+          {reviewCounter}
         <ul>
           {listReviewTiles}
         </ul>
       </div>
       <ButtonContainer>
-        <MoreReviewsButton onClick={() => getMoreReviews()} reviewCount={reviews.length} reviewMax={reviewCounter} > MORE REVIEWS </MoreReviewsButton>
+        { showMoreReviews
+          ? <MoreReviewsButton onClick={() => getMoreReviews()} > MORE REVIEWS </MoreReviewsButton>
+          : null
+        }
         <AddReviewButton reviewCount={reviews.length} > ADD A REVIEW </AddReviewButton>
       </ButtonContainer>
     </div>

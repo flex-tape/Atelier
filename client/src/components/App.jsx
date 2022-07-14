@@ -6,7 +6,7 @@ import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 // import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
 export default function App() {
-  const [productID, setProductID] = useState(40345);
+  const [productID, setProductID] = useState(40349);
 
   // const [productID, setProductID] = useState(() => { return 40344; }); best practice but probably doesn't matter here
   // const [productStyles, setProductStyle] = useState([]); // might not need this here, because to get product styles, all you need is product_id

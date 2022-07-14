@@ -40,7 +40,6 @@ const ExpandReviewsButton = styled.button`
 `;
 
 export default function ReviewTile(props) {
-  const reviewBodyText = props.review.body;
   let [isReadMore, setIsReadMore] = useState(false);
   // const toggleReadMore = () => {
   //   setIsReadMore(!isReadMore)
