@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { CompareContext } from './RelatedCard.jsx';
+import { IDContext } from '../App.jsx';
 
 const CompareTable = styled.table`
   position: absolute;
@@ -21,11 +22,19 @@ const CompareDiv = styled.div`
   width: 550px;
   height: 550px;
 `
-export default function ComparisonModal () {
+export default function ComparisonModal ({item}) {
 
 
   let compareProducts = useContext(CompareContext);
+  let productID = useContext(IDContext)
 
+  const showID = () => {
+    console.log(item);
+  }
+
+  useEffect(() => {
+    showID();
+  }, []);
 
   return (
     <div>
@@ -57,7 +66,6 @@ export default function ComparisonModal () {
             <td>Value</td>
             <td>Feature</td>
             <td>Value</td>
-            {/* <td> <button>X</button></td> */}
           </tr>
         </tbody>
       </CompareTable>

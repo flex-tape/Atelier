@@ -99,12 +99,12 @@ export default function RelatedCard({item, setID}) {
   return (
     <CompareContext.Provider value={compareProducts}>
       <div>
-      {compareProducts ? <div><ComparisonModal /><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
+      {compareProducts ? <div><ComparisonModal item={item}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
       <RelatedItemsCard>
         <button onClick={setCompareOn}>Star</button>
         <PrimaryImage src={relatedProductInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(item)}></PrimaryImage>
-        {hoverStatus ? <div>Thumbnail photos go here</div> : <div><div>{relatedProductInfo.category}</div>
-        <div>{relatedProductInfo.name}</div>
+        {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(item)}><div>{relatedProductInfo.category}</div>
+        <div >{relatedProductInfo.name}</div>
         <div>{relatedProductInfo.price}</div>
         <div>Star rating goes here</div></div>}
         {/* <div>{relatedProductInfo.category}</div>
