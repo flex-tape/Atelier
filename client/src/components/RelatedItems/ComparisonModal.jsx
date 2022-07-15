@@ -8,7 +8,7 @@ const CompareTable = styled.table`
   position: absolute;
   z-index: 2;
   left: 400px;
-  top: 200px;
+  top: 880px;
   width: 500px;
   height: 500px;
   overflow: auto;
