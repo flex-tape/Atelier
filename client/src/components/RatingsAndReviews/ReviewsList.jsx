@@ -71,8 +71,8 @@ export default function ReviewsList(props) {
   }
 
 
-  const listReviewTiles = reviews.map((review) =>
-    <li><ReviewTile review={review} /></li>
+  const listReviewTiles = reviews.map((review, key) =>
+    <ReviewTile key={key} review={review} />
   )
 
   return (

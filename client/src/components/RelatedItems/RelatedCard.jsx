@@ -46,7 +46,7 @@ export default function RelatedCard({item, setID}) {
   const getRelatedInfo = async () => {
     let productLevelInfo = await axios.get(`/products/${item}`)
       .then((res) => {
-      console.log('product level info: ', res.data);
+      // console.log('product level info: ', res.data);
       return res.data;
     })
 

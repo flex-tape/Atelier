@@ -30,15 +30,18 @@ const SubContainer2 = styled.div`
   max-width: 500px;
 `
 const Image = styled.div`
-  flex: 1 200px;
+  display: flex;
+  justify-content: center;
+  flex: 3 200px;
   border: 1px dotted;
   margin: 5px;
 `
+
 const Product = styled.div`
   flex: 1 200px;
   border: 1px dotted;
   margin: 5px;
-  padding-left: 10px;
+  padding-left: 29px;
 `
 const Selector = styled.div`
   flex: 1 200px;
@@ -56,7 +59,7 @@ export default function Overview (props) {
 
   // const [productID, setProductID] = useState(props.productID);
   const [productInfo, setProductInfo] = useState({});
-  const [styleID, setStyleID] = useState(240500);
+  // const [styleID, setStyleID] = useState(240500);
   const [styleInfo, setStyleInfo] = useState([]);
   const [productStyle, setProductStyle] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -72,9 +75,8 @@ export default function Overview (props) {
     })
     axios.get(`/products/${props.productID}/styles`)
       .then((response) => {
-        setStyleID(response.data.results[0].style_id);
         setStyleInfo(response.data.results);
-        const index = response.data.results.map((style) => (style.style_id)).indexOf(styleID);
+        const index = response.data.results.map((style) => (style.style_id)).indexOf(props.styleID);
         setProductStyle({
           ...productStyle,
           ...response.data.results[index]})
@@ -84,25 +86,24 @@ export default function Overview (props) {
       })
       .catch((err) => {
       })
-  }, [])
+  }, [props.productID, props.styleID])
 
   return (
     <>{hasLoaded &&
       <Container>
         <SubContainer1>
           <Image>
-            <ImageGallery hasLoaded={hasLoaded} productStyle={productStyle}/>
+              <ImageGallery hasLoaded={hasLoaded} productStyle={productStyle}/>
           </Image>
           <SubContainer2>
             <Product>
               <h1>{productInfo.name}</h1>
               <div>{productInfo.category}</div>
-              {productStyle.sale_price === null ? <div>{productStyle.original_price}</div> : <div><s>{productStyle.original_price}</s></div>}
-              <div>{productStyle.sale_price}</div>
-              <div>{productStyle.name}</div>
+              {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
+              {productStyle.sale_price === null ? null : <div>${productStyle.sale_price}</div>}
             </Product>
             <Selector>
-              <StyleList setStyleID={setStyleID} setProductStyle={setProductStyle} styleID={styleID} styleInfo={styleInfo}/>
+              <StyleList styleName={productStyle.name} setStyleID={props.setStyleID} setProductStyle={setProductStyle} styleID={props.styleID} styleInfo={styleInfo}/>
             </Selector>
             <AddtoCart>
               Add to Cart
