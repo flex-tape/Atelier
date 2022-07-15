@@ -37,6 +37,14 @@ left: 400px;
 top: 200px;
 `
 
+const StrikePrice = styled.div`
+text-decoration: line-through;
+text-decoration-thickness: 0.15rem;
+`
+
+const SalesPrice = styled.div`
+color: red;
+`
 
 export default function RelatedCard({id, setID, currentFeatures}) {
   const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
@@ -108,7 +116,8 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
         {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
-        <div>{relatedStyleInfo.default_price}</div>
+        {relatedStyleInfo.sale_price && relatedStyleInfo.sale_price !== null ?
+        <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>}
         {/* <div>{relatedProductInfo.category}</div>
         <div>{relatedProductInfo.name}</div>

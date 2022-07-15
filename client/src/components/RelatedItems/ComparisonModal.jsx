@@ -71,11 +71,9 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures})
         <tbody>
           {allFeatures.map((feature, index) => (
             <tr key={index}>
-              {/* {hasFeature(currentFeatures, feature) ? <td>{featureValue}</td> : <td></td>} */}
               {currentFeaturesObj[feature] ? <td>{currentFeaturesObj[feature]}</td>: <td></td>}
               <td>{feature}</td>
               {relatedFeaturesObj[feature] ? <td>{relatedFeaturesObj[feature]}</td>: <td></td>}
-              {/* {hasFeature(relatedFeatures, feature) ? <td>{featureValue}</td> : <td></td>} */}
             </tr>
             ))}
           {/* <tr>
