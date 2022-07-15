@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { CompareContext } from './RelatedCard.jsx';
+// import { CompareContext } from './RelatedCard.jsx';
 import { IDContext } from '../App.jsx';
 
 const CompareTable = styled.table`
@@ -22,23 +22,36 @@ const CompareDiv = styled.div`
   width: 550px;
   height: 550px;
 `
-export default function ComparisonModal ({item}) {
+export default function ComparisonModal ({id, relatedFeatures, currentFeatures}) {
+  const [allFeatures, setAllFeatures] = useState([]);
+  const [featureValue, setFeatureValue] = useState('');
+  const [relatedStatus, setRelatedStatus] = useState({});
+  const [currentStatus, setCurrentStatus] = useState({});
 
-  // productID = current product on overview
-  // item = related product selected
-
-  let compareProducts = useContext(CompareContext);
-  let productID = useContext(IDContext)
-
-  const showID = () => {
-    console.log(item);
+  let featuresObj = {};
+  let currentFeaturesObj = {};
+  let relatedFeaturesObj = {};
+  for (var i = 0; i < relatedFeatures.length; i++) {
+    featuresObj[relatedFeatures[i].feature] = true;
+    relatedFeaturesObj[relatedFeatures[i].feature] = [relatedFeatures[i].value]
   }
+  for (var i = 0; i < currentFeatures.length; i++) {
+    featuresObj[currentFeatures[i].feature] = true;
+    currentFeaturesObj[currentFeatures[i].feature] = [currentFeatures[i].value]
+  }
+  let featuresArray = Object.keys(featuresObj);
 
-  // implement function to grab feature data for each product
+  // useEffect (() => {
+  //   console.log('has feature? ', hasFeature(currentFeatures, 'Fabric'));
+  // }, [])
 
-  useEffect(() => {
-    showID();
-  }, []);
+  useEffect (() => {
+    setAllFeatures(featuresArray);
+    console.log('currentFeaturesObj: ', currentFeaturesObj)
+    console.log('relatedFeaturesObj: ', relatedFeaturesObj)
+    console.log('allFeatures: ', featuresArray)
+  }, [])
+
 
   return (
     <div>
@@ -56,7 +69,14 @@ export default function ComparisonModal ({item}) {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          {allFeatures.map((feature, index) => (
+            <tr key={index}>
+              {currentFeaturesObj[feature] ? <td>{currentFeaturesObj[feature]}</td>: <td></td>}
+              <td>{feature}</td>
+              {relatedFeaturesObj[feature] ? <td>{relatedFeaturesObj[feature]}</td>: <td></td>}
+            </tr>
+            ))}
+          {/* <tr>
             <td>Value</td>
             <td>Feature</td>
             <td>Value</td>
@@ -70,9 +90,53 @@ export default function ComparisonModal ({item}) {
             <td>Value</td>
             <td>Feature</td>
             <td>Value</td>
-          </tr>
+          </tr> */}
         </tbody>
       </CompareTable>
     </div>
   )
 }
+
+
+
+
+// const findFeatureData = () => {
+//   let currentFeatObj = {};
+//   let relatedFeatObj = {};
+//    for (var i = 0; i < featuresArray.length; i++) {
+//      for (var j = 0; j < currentFeatures.length; i++) {
+//        if (featuresArray[i] === currentFeatures[j].feature) {
+//          currentFeatObj[featuresArray[i]] === true;
+//        }
+//        if (featuresArray[i] !== currentFeatures[j] && currentFeatObj[featuresArray[i]] === undefined) {
+//          currentFeatObj[featuresArray[i]] === false;
+//        }
+//      }
+//    }
+//    for (var i = 0; i < featuresArray.length; i++) {
+//      for (var j = 0; j < relatedFeatures.length; i++) {
+//        if (featuresArray[i] === relatedFeatures[j].feature) {
+//          relatedFeatObj[featuresArray[i]] === true;
+//        }
+//        if (featuresArray[i] !== relatedFeatures[j] && relatedFeatObj[featuresArray[i]] === undefined) {
+//          relatedFeatObj[featuresArray[i]] === false;
+//        }
+//      }
+//    }
+//    setCurrentStatus(currentFeatObj);
+//    setRelatedStatus(relatedFeatObj);
+//    console.log('currentFeatObj: ', currentFeatObj);
+//    console.log('relatedFeatObj: ', relatedFeatObj)
+// }
+
+ // const hasFeature = (list, selectedFeature) => { // this function will tell us if the feature is present in the product
+  //   let featurePresent = false;
+  //   for (var i = 0; i < list.length; i++) {
+  //     if (list[i].feature === selectedFeature) {
+  //       console.log(list)
+  //       setFeatureValue(list[i].value);
+  //       featurePresent = true;
+  //     }
+  //   }
+  //   return featurePresent;
+  // }

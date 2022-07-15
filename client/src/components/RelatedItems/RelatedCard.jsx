@@ -37,55 +37,60 @@ left: 400px;
 top: 200px;
 `
 
+const StrikePrice = styled.div`
+text-decoration: line-through;
+text-decoration-thickness: 0.15rem;
+`
 
-export default function RelatedCard({item, setID}) {
-  const [relatedProductInfo, setRelatedProductInfo] = useState([]);
+const SalesPrice = styled.div`
+color: red;
+`
+
+export default function RelatedCard({id, setID, currentFeatures}) {
+  const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
+  const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
   const [hoverStatus, setHoverStatus] = useState(false);
   const [compareProducts, setCompareProducts] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
-  const getRelatedInfo = async () => {
-    let productLevelInfo = await axios.get(`/products/${item}`)
+
+  const getRelatedInfo = () => {
+    axios.get(`/products/${id}`)
       .then((res) => {
-      console.log('product level info: ', res.data);
-      return res.data;
+      // console.log('product level info: ', res.data);
+      let relatedLevelInfo = {name: res.data.name, category: res.data.category, features: res.data.features}
+      setRelatedProductInfo(relatedLevelInfo);
     })
     .catch(() => {
       console.log('GET request failed for relatedInfo')
     })
-
-    let productStyles = await axios.get(`/products/${item}/styles`)
+    axios.get(`/products/${id}/styles`)
       .then((res) => {
       // console.log('product styles: ', res.data);
-      return res.data;
+      let primaryPhoto = '';
+      if (res.data.results[0].photos[0].url === null) {
+        primaryPhoto = 'https://images.unsplash.com/photo-1535639818669-c059d2f038e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
+      } else {
+        primaryPhoto = res.data.results[0].photos[0].url;
+      }
+      let styleInfo = {default_price: res.data.results[0].original_price, sale_price: res.data.results[0].sale_price, image: primaryPhoto}
+      setRelatedStyleInfo(styleInfo);
     })
-    .catch(() => {
+    .then(() => {
+      setHasLoaded(true)
+    })
+    .catch((err) => {
       console.log('GET request failed for productStyles')
     })
-
-    let primaryPhoto = '';
-    if (productStyles.results[0].photos[0].url === null) {
-      primaryPhoto = 'https://images.unsplash.com/photo-1535639818669-c059d2f038e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
-    } else {
-      primaryPhoto = productStyles.results[0].photos[0].url;
-    }
-
-    let relatedInfo = {
-      name: productLevelInfo.name,
-      category: productLevelInfo.category,
-      price: productStyles.results[0].original_price,
-      image: primaryPhoto
-    }
-
-    await setRelatedProductInfo(relatedInfo)
   }
 
-  useEffect(() => {
-    getRelatedInfo();
-  }, [])
+  // useEffect(() => {
+  //   getRelatedInfo();
+  // }, [])
 
   useEffect(() => {
     getRelatedInfo();
-  }, [item])
+  }, [id])
 
   let onHover = () => {
     setHoverStatus(true);
@@ -105,20 +110,58 @@ export default function RelatedCard({item, setID}) {
   return (
     <CompareContext.Provider value={compareProducts}>
       <div>
-      {compareProducts ? <div><ComparisonModal item={item}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
-      <RelatedItemsCard>
+      {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
+      {hasLoaded && <RelatedItemsCard>
         <button onClick={setCompareOn}>Star</button>
-        <PrimaryImage src={relatedProductInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(item)}></PrimaryImage>
-        {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(item)}><div>{relatedProductInfo.category}</div>
+        <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
+        {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
-        <div>{relatedProductInfo.price}</div>
+        {relatedStyleInfo.sale_price && relatedStyleInfo.sale_price !== null ?
+        <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>}
         {/* <div>{relatedProductInfo.category}</div>
         <div>{relatedProductInfo.name}</div>
         <div>{relatedProductInfo.price}</div>
         <div>Star rating goes here</div> */}
-      </RelatedItemsCard>
+      </RelatedItemsCard>}
     </div>
     </CompareContext.Provider>
   )
 }
+
+
+// const getRelatedInfo = async () => {
+  //   let productLevelInfo = await axios.get(`/products/${item}`)
+  //     .then((res) => {
+  //     console.log('product level info: ', res.data);
+  //     return res.data;
+  //   })
+  //   .catch(() => {
+  //     console.log('GET request failed for relatedInfo')
+  //   })
+
+  //   let productStyles = await axios.get(`/products/${item}/styles`)
+  //     .then((res) => {
+  //     // console.log('product styles: ', res.data);
+  //     return res.data;
+  //   })
+  //   .catch(() => {
+  //     console.log('GET request failed for productStyles')
+  //   })
+
+  //   let primaryPhoto = '';
+  //   if (productStyles.results[0].photos[0].url === null) {
+  //     primaryPhoto = 'https://images.unsplash.com/photo-1535639818669-c059d2f038e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
+  //   } else {
+  //     primaryPhoto = productStyles.results[0].photos[0].url;
+  //   }
+
+  //   let relatedInfo = {
+  //     name: productLevelInfo.name,
+  //     category: productLevelInfo.category,
+  //     price: productStyles.results[0].original_price,
+  //     image: primaryPhoto
+  //   }
+
+  //   await setRelatedProductInfo(relatedInfo)
+  // }

@@ -2,7 +2,7 @@ const axios = require('axios');
 const config = require('../config.js')
 
 exports.listProducts = (req, res) => {
-  console.log('this is req.query: ', req.query)
+  // console.log(req)
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products`;
   // let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/?page=${req.query.page}&count=${req.query.count}`;
     let options = {
@@ -25,7 +25,7 @@ exports.listProducts = (req, res) => {
 }
 
 exports.productInfo = (req, res) => {
-  console.log(req.params);
+  // console.log(req);
   const product_id = req.params.product_id;
     let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}`;
     let options = {
@@ -68,7 +68,7 @@ exports.productInfo = (req, res) => {
 // }
 
 exports.productStyles = (req, res) => {
-  console.log(req.query.product_id)
+  // console.log(req.query.product_id)
   const product_id = req.params.product_id;
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}/styles`;
   let options = {
@@ -78,7 +78,7 @@ exports.productStyles = (req, res) => {
   }
   axios.get(url, options)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       res.status(200).send(response.data)
     })
     .catch((err) => {
