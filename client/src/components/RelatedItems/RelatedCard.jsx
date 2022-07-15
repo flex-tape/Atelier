@@ -119,10 +119,6 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         {relatedStyleInfo.sale_price && relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>}
-        {/* <div>{relatedProductInfo.category}</div>
-        <div>{relatedProductInfo.name}</div>
-        <div>{relatedProductInfo.price}</div>
-        <div>Star rating goes here</div> */}
       </RelatedItemsCard>}
     </div>
     </CompareContext.Provider>

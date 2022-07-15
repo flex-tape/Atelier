@@ -5,6 +5,7 @@ import axios from 'axios';
 import RelatedCard from './RelatedCard.jsx'
 import RelatedListCarousel from './RelatedListCarousel.jsx'
 import styled from 'styled-components';
+import OutfitList from './OutfitList.jsx'
 
 export const RelatedContext = React.createContext()
 
@@ -59,12 +60,12 @@ export default function RelatedItems({ setID }) {
             ))}
           </RelatedCarousel> */}
           <RelatedListCarousel setID={setID} currentFeatures={currentFeatures}/>
-        <button onClick={getRelatedItems}>Get Related</button>
+        {/* <button onClick={getRelatedItems}>Get Related</button> */}
 
       </div>
       <div>
         <h3>Your Outfit</h3>
-
+          <OutfitList />
 
       </div>
     </div>
