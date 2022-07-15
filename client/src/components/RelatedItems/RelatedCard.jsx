@@ -11,23 +11,11 @@ const PrimaryImage = styled.img`
 // justify-content: center;
 // align-items: center;
 // position: absolute;
-height: 320px;
+height: 280px;
 width: 250px;
 object-fit: contain;
 margin: 10px;
 background-color: #f0ffff;
-`
-
-const RelatedItemsCard = styled.div`
-position: relative;
-height: 450px;
-width: 270px;
-display: block;
-align-items: center;
-border: 1px solid lightgray;
-box-shadow: 7px 7px 7px lightgray;
-margin-right: 50px;
-margin-bottom: 30px;
 `
 
 const CompareButton = styled.button`
@@ -35,6 +23,18 @@ position: absolute;
 z-index: 3;
 left: 400px;
 top: 200px;
+`
+
+const RelatedItemsCard = styled.div`
+position: relative;
+height: 400px;
+width: 270px;
+display: block;
+align-items: center;
+border: 1px solid lightgray;
+box-shadow: 7px 7px 7px lightgray;
+margin-right: 50px;
+margin-bottom: 30px;
 `
 
 const StrikePrice = styled.div`
@@ -116,7 +116,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
         {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
-        {relatedStyleInfo.sale_price && relatedStyleInfo.sale_price !== null ?
+        {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>}
       </RelatedItemsCard>}

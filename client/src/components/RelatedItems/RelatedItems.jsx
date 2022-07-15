@@ -65,7 +65,7 @@ export default function RelatedItems({ setID }) {
       </div>
       <div>
         <h3>Your Outfit</h3>
-          <OutfitList />
+          <OutfitList setID={setID}/>
 
       </div>
     </div>

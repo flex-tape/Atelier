@@ -14,7 +14,6 @@ overflow: hidden;
 `
 
 export default function RelatedListCarousel({ setID, currentFeatures }) {
-  const [hoverStatus, setHoverStatus] = useState(false);
   const [carouselLength, setCarouselLength] = useState([0, 4])
 
   let productID = useContext(IDContext)
