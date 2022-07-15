@@ -38,7 +38,7 @@ top: 200px;
 `
 
 
-export default function RelatedCard({item, setID}) {
+export default function RelatedCard({id, setID, currentFeatures}) {
   const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
   const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
   const [hoverStatus, setHoverStatus] = useState(false);
@@ -47,16 +47,16 @@ export default function RelatedCard({item, setID}) {
 
 
   const getRelatedInfo = () => {
-    axios.get(`/products/${item}`)
+    axios.get(`/products/${id}`)
       .then((res) => {
-      console.log('product level info: ', res.data);
+      // console.log('product level info: ', res.data);
       let relatedLevelInfo = {name: res.data.name, category: res.data.category, features: res.data.features}
       setRelatedProductInfo(relatedLevelInfo);
     })
     .catch(() => {
       console.log('GET request failed for relatedInfo')
     })
-    axios.get(`/products/${item}/styles`)
+    axios.get(`/products/${id}/styles`)
       .then((res) => {
       // console.log('product styles: ', res.data);
       let primaryPhoto = '';
@@ -82,7 +82,7 @@ export default function RelatedCard({item, setID}) {
 
   useEffect(() => {
     getRelatedInfo();
-  }, [item])
+  }, [id])
 
   let onHover = () => {
     setHoverStatus(true);
@@ -102,11 +102,11 @@ export default function RelatedCard({item, setID}) {
   return (
     <CompareContext.Provider value={compareProducts}>
       <div>
-      {compareProducts ? <div><ComparisonModal item={item} relatedFeatures={relatedProductInfo.features}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
+      {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
       {hasLoaded && <RelatedItemsCard>
         <button onClick={setCompareOn}>Star</button>
-        <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(item)}></PrimaryImage>
-        {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(item)}><div>{relatedProductInfo.category}</div>
+        <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
+        {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
         <div>{relatedStyleInfo.default_price}</div>
         <div>Star rating goes here</div></div>}
