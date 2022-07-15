@@ -46,18 +46,19 @@ background-color: #f0ffff;
 
 export default function OutfitList ({ setID }) {
   const [outfitList, setOutfitList] = useState([]);
-  const [preList, setPrelist] = useState([]);
-  const [outfitLength, setOutfitLength] = useState([0, 4]);
+  // const [preList, setPreList] = useState([]);
+  const [outfitLength, setOutfitLength] = useState([0, 3]);
   const [hoverStatus, setHoverStatus] = useState(false);
 
   let productID = useContext(IDContext);
   let slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1]);
 
   const addToList = (id) => {
-    if (preList.indexOf(id) === -1) {
-      preList.push(id);
-      console.log('prelist', preList)
-      setOutfitList(preList);
+    if (outfitList.indexOf(id) === -1) {
+      // setPreList([...preList, id])
+      // preList.push(id);
+      // console.log('prelist', preList)
+      setOutfitList([...outfitList, id]);
       console.log(outfitList);
     }
   }
@@ -69,6 +70,10 @@ export default function OutfitList ({ setID }) {
     }
   }
 
+  useEffect(() => {
+    console.log('outfitlist Changing')
+    // setOutfitList([...outfitList, productID])
+  }, [outfitList])
 
   const seeChange = () => {
     console.log(outfitList)
