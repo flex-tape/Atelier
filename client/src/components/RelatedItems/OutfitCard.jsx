@@ -47,7 +47,7 @@ const SalesPrice = styled.div`
 color: red;
 `
 
-export default function OutfitCard({id, setID, addToList, removeFromList}) {
+export default function OutfitCard({id, setID, removeFromList}) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [outfitProductInfo, setOutfitProductInfo] = useState({});
@@ -98,7 +98,8 @@ export default function OutfitCard({id, setID, addToList, removeFromList}) {
   return (
     <div>
     {hasLoaded && <OutfitCardDiv>
-              <PrimaryImage src={outfitStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(item)}></PrimaryImage>
+              <button onClick={() => removeFromList(id)}>REMOVE</button>
+              <PrimaryImage src={outfitStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
               {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{outfitProductInfo.category}</div>
               <div >{outfitProductInfo.name}</div>
               {outfitStyleInfo.sale_price !== null ?

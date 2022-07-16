@@ -5,7 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import OutfitCard from './OutfitCard.jsx'
 import { BsPlus } from 'react-icons/bs';
-
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 
 const OutfitCarousel = styled.div`
 display: flex;
@@ -46,7 +46,6 @@ background-color: #f0ffff;
 
 export default function OutfitList ({ setID }) {
   const [outfitList, setOutfitList] = useState([]);
-  // const [preList, setPreList] = useState([]);
   const [outfitLength, setOutfitLength] = useState([0, 3]);
   const [hoverStatus, setHoverStatus] = useState(false);
 
@@ -64,20 +63,30 @@ export default function OutfitList ({ setID }) {
   }
 
   const removeFromList = (id) => {
-    let index = outfitList.indexOf(id);
-    if (index > -1) {
-      outfitList.splice(index, 1);
-    }
+    const newList = outfitList.filter((item) => item !== id);
+    setOutfitList(newList)
+    console.log('outfitlist: ', outfitList)
+    console.log(`REMOVED ${id}`)
   }
-
-  useEffect(() => {
-    console.log('outfitlist Changing')
-    // setOutfitList([...outfitList, productID])
-  }, [outfitList])
 
   const seeChange = () => {
     console.log(outfitList)
   }
+
+  const moveOutfit = (arrow) => {
+    if (arrow === 'left') {
+      setOutfitLength([outfitLength[0] - 1, outfitLength[1] - 1])
+      slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1])
+      console.log(outfitLength)
+    } else {
+      setOutfitLength([outfitLength[0] + 1, outfitLength[1] + 1])
+      slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1])
+      console.log(outfitLength)
+    }
+  }
+  // useEffect(() => {
+  //   slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1]);
+  // }, [outfitLength])
 
   return (
     <div>
@@ -86,10 +95,12 @@ export default function OutfitList ({ setID }) {
       </div>
       <OutfitCarousel>
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
-      {slicedOutfitList.map((item, index) => (
-          <OutfitCard id={item} key={index} setID={setID} addToList={addToList} removeFromList={removeFromList}/>
+      {outfitList.map((item, index) => (
+          <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList}/>
         ))}
       </OutfitCarousel>
+      {outfitLength[0] > 0 ? <FaAngleDoubleLeft onClick={() => moveOutfit('left')}/> : null}
+    {outfitLength[1] < outfitList.length ? <FaAngleDoubleRight onClick={() => moveOutfit('right')}/> : null}
     </div>
 
   )
