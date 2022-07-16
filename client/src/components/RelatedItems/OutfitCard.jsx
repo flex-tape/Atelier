@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ComparisonModal from './ComparisonModal.jsx'
 import { IDContext } from '../App.jsx';
-
+import { HiX } from 'react-icons/hi';
 
 
 const PrimaryImage = styled.img`
@@ -19,11 +19,10 @@ margin: 10px;
 background-color: #f0ffff;
 `
 
-const RemoveButton = styled.button`
-position: absolute;
-z-index: 3;
-left: 400px;
-top: 200px;
+const RemoveButton = styled(HiX)`
+float: right;
+height: 25px;
+width: 25px;
 `
 
 const OutfitCardDiv = styled.div`
@@ -117,7 +116,7 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
   return (
     <div>
     {hasLoaded && <OutfitCardDiv>
-              <button onClick={() => removeFromList(id)}>REMOVE</button>
+              <RemoveButton onClick={() => removeFromList(id)}></RemoveButton>
               <PrimaryImage src={outfitStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
               {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{outfitProductInfo.category}</div>
               <div >{outfitProductInfo.name}</div>

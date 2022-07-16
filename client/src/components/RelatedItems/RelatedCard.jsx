@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ComparisonModal from './ComparisonModal.jsx'
+import { GiStaryu } from 'react-icons/gi';
 
 export const CompareContext = React.createContext()
 
@@ -23,6 +24,12 @@ position: absolute;
 z-index: 3;
 left: 400px;
 top: 200px;
+`
+
+const StarButton = styled(GiStaryu)`
+float: right;
+height: 25px;
+width: 25px;
 `
 
 const RelatedItemsCard = styled.div`
@@ -112,7 +119,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
       <div>
       {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
       {hasLoaded && <RelatedItemsCard>
-        <button onClick={setCompareOn}>Star</button>
+        <StarButton onClick={setCompareOn}></StarButton>
         <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
         {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
