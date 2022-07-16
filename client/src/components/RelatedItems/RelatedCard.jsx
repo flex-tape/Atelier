@@ -22,7 +22,7 @@ const CompareButton = styled.button`
 position: absolute;
 z-index: 3;
 left: 400px;
-top: 200px;
+top: 880px;
 `
 
 const RelatedItemsCard = styled.div`
