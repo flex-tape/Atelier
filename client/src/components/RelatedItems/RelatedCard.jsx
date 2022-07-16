@@ -45,6 +45,7 @@ margin-bottom: 30px;
 `
 
 const StrikePrice = styled.div`
+float: left;
 text-decoration: line-through;
 text-decoration-thickness: 0.15rem;
 `
