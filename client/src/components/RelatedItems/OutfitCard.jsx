@@ -95,6 +95,10 @@ export default function OutfitCard({id, setID, removeFromList}) {
     getOutfitInfo();
   }, [])
 
+  useEffect (() => {
+    getOutfitInfo();
+  }, [id])
+
   return (
     <div>
     {hasLoaded && <OutfitCardDiv>
@@ -105,6 +109,7 @@ export default function OutfitCard({id, setID, removeFromList}) {
               {outfitStyleInfo.sale_price !== null ?
               <div><StrikePrice>{outfitStyleInfo.default_price}</StrikePrice><SalesPrice>{outfitStyleInfo.sale_price}</SalesPrice></div> : <div>{outfitStyleInfo.default_price}</div>}
               <div>Star rating goes here</div></div>}
+              <div>{id}</div>
             </OutfitCardDiv>}
     </div>
   )

@@ -54,9 +54,6 @@ export default function OutfitList ({ setID }) {
 
   const addToList = (id) => {
     if (outfitList.indexOf(id) === -1) {
-      // setPreList([...preList, id])
-      // preList.push(id);
-      // console.log('prelist', preList)
       setOutfitList([...outfitList, id]);
       console.log(outfitList);
     }
@@ -64,7 +61,7 @@ export default function OutfitList ({ setID }) {
 
   const removeFromList = (id) => {
     const newList = outfitList.filter((item) => item !== id);
-    setOutfitList(newList)
+    setOutfitList([...newList])
     console.log('outfitlist: ', outfitList)
     console.log(`REMOVED ${id}`)
   }
