@@ -18,12 +18,14 @@ export default function App() {
     setProductID(id);
   }
 
+
+
   return (
     <IDContext.Provider value={productID}>
-      <div>
+      <div >
         <h1>HELLO, WORLD!</h1>
         <Overview setProductID={setProductID} productID={productID}/>
-        <RelatedItems setID={setID} productID={productID}/>
+        <RelatedItems setID={setID} productID={productID} />
         {/* <QandA productID={productID}/> */}
         <RatingsAndReviews productID={productID}/>
       </div>

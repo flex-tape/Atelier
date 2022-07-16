@@ -114,12 +114,20 @@ export default function RelatedCard({id, setID, currentFeatures}) {
     setCompareProducts(false)
   }
 
+  const toggleCompare = (status) => {
+    if (status === 'true') {
+      setCompareProducts(true);
+    } else {
+      setCompareProducts(false);
+    }
+  }
+
   return (
     <CompareContext.Provider value={compareProducts}>
       <div>
-      {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
+      {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
-        <StarButton onClick={setCompareOn}></StarButton>
+        <StarButton onClick={() => toggleCompare('true')}></StarButton>
         <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
         {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
