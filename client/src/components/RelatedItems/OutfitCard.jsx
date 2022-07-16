@@ -60,7 +60,10 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
     if (styleCache[productID]) {
       setOutfitProductInfo(productCache[productID])
       setOutfitStyleInfo(styleCache[productID])
-      console.log('got from cache!!')
+      console.log('cache: ', productCache[productID])
+
+        setHasLoaded(true)
+
     } else {
       axios.get(`/products/${productID}`)
       .then((res) => {
@@ -108,8 +111,12 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
     getOutfitInfo();
   }, [id])
 
+  const showInfo = () => {
+    console.log('product info: ', outfitProductInfo)
+  }
   return (
     <div>
+      <button onClick={showInfo}>SHOW INFO</button>
     {hasLoaded && <OutfitCardDiv>
               <button onClick={() => removeFromList(id)}>REMOVE</button>
               <PrimaryImage src={outfitStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
