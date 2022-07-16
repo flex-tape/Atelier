@@ -98,9 +98,7 @@ export default function OutfitList ({ setID }) {
       console.log(outfitLength)
     }
   }
-  // useEffect(() => {
-  //   slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1]);
-  // }, [outfitLength])
+
 
   return (
     <div>
