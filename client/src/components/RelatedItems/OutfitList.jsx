@@ -109,7 +109,7 @@ export default function OutfitList ({ setID }) {
       </div>
       <OutfitCarousel>
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
-      {outfitList.map((item, index) => (
+      {slicedOutfitList.map((item, index) => (
           <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList} addProductCache={addProductCache} addStyleCache={addStyleCache} productCache={productCache} styleCache={styleCache}/>
         ))}
       </OutfitCarousel>

@@ -116,7 +116,6 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
   }
   return (
     <div>
-      <button onClick={showInfo}>SHOW INFO</button>
     {hasLoaded && <OutfitCardDiv>
               <button onClick={() => removeFromList(id)}>REMOVE</button>
               <PrimaryImage src={outfitStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
@@ -125,7 +124,6 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
               {outfitStyleInfo.sale_price !== null ?
               <div><StrikePrice>{outfitStyleInfo.default_price}</StrikePrice><SalesPrice>{outfitStyleInfo.sale_price}</SalesPrice></div> : <div>{outfitStyleInfo.default_price}</div>}
               <div>Star rating goes here</div></div>}
-              <div>{id}</div>
             </OutfitCardDiv>}
     </div>
   )
