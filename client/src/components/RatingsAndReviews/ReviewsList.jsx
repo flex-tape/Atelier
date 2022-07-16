@@ -18,30 +18,34 @@ const ButtonContainer = styled.div`
   display: inline-flex;
 `;
 
+const SortBar = styled.div`
+  margin-top: 5px;
+`;
+
+
 export default function ReviewsList(props) {
-  const [reviews, setReviews] = useState(() => []);
-  const [reviewCounter, setReviewCount] = useState(() => 0);
-  let [pageCount, setPageCount] = useState(1);
+  let [reviews, setReviews] = useState(() => []);
+  let [reviewTotal, setReviewTotal] = useState(0);
+  let [pageCount, setPageCount] = useState(2);
   let [showMoreReviews, setShowMoreReviews] = useState(true);
+  let [sortCategory, setSortCategory] = useState('relevant')
+
+  const getReviewCount = async () => {
+
+    let res = await axios.get('/reviews/meta', { params: { product_id: props.productID } })
+
+    let reviewCount = countReviews(res.data.ratings);
+    await setReviewTotal(reviewCount);
+
+    let res2 = await axios.get('/reviews', { params: { product_id: props.productID, count: reviewCount, sort: sortCategory } })
+
+    let final = res2.data.results;
+    console.log(final.length)
+    setReviews(final)
+  }
 
   useEffect(() => {
-
-    axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount } })
-      .then((response) => {
-        if (response.data.results.length < 2) {
-          setShowMoreReviews(false);
-        }
-        setReviews(response.data.results);
-        setPageCount(pageCount + 1);
-      })
-      .catch((e) => console.log(e));
-
-    // get review metadata to count total number of reviews; 'more reviews' button won't display if length of array exceeds the count
-    axios.get('/reviews/meta', { params: { product_id: props.productID } })
-      .then((response) => {
-        setReviewCount(countReviews(response.data.ratings));
-      })
-      .catch((e) => console.log(e));
+    getReviewCount();
 
   }, []);
 
@@ -57,34 +61,60 @@ export default function ReviewsList(props) {
 
   const getMoreReviews = () => {
     // default = 2 reviews
-    axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount } })
-    .then((response) => {
-      if (response.data.results.length < 2) {
-        setShowMoreReviews(false);
-      }
-      let updatedReviews = reviews.concat(response.data.results)
-      setReviews(updatedReviews);
-      setPageCount(pageCount + 1);
-      console.log(pageCount)
-    })
-    .catch((e) => console.log(e))
+    // axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount, sort: sortCategory } })
+    // .then((response) => {
+    //   if (response.data.results.length < 2) {
+    //     setShowMoreReviews(false);
+    //   }
+    //   let updatedReviews = reviews.concat(response.data.results)
+    //   setReviews(updatedReviews);
+    //   setPageCount(pageCount + 1);
+    //   console.log(pageCount)
+    // })
+    // .catch((e) => console.log(e))
+    setPageCount(pageCount + 2)
   }
 
+  const listReviewTiles = reviews.map((review, index) => {
+    if (index < pageCount) {
+      return <li><ReviewTile review={review} /></li>
+    }
+  });
 
-  const listReviewTiles = reviews.map((review) =>
-    <li><ReviewTile review={review} /></li>
-  )
+  const sortHandler = (event) => {
+    event.preventDefault();
+    setSortCategory(event.target.value)
+    // setPageCount(1);
+
+    // axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount, sort: sortCategory } })
+    //   .then((response) => {
+    //     if (response.data.results.length < 2) {
+    //       setShowMoreReviews(false);
+    //     }
+    //     setReviews(response.data.results);
+    //     setPageCount(pageCount + 1);
+    //   })
+    //   .catch((e) => console.log(e));
+  }
 
   return (
-    <div>
+    <div className="main-container">
+      <SortBar>
+        <label>{reviewTotal} reviews, sorted by </label>
+        <select id="sort-bar" value={sortCategory} onChange={sortHandler}>
+          <option value="relevant">relevance</option>
+          <option value="helpful">helpfulness</option>
+          <option value="newest">newest</option>
+        </select>
+      </SortBar>
       <div>
-          {/* {reviewCounter} */}
+        {/* {reviewTotal} */}
         <ul>
           {listReviewTiles}
         </ul>
       </div>
       <ButtonContainer>
-        { showMoreReviews
+        {showMoreReviews
           ? <MoreReviewsButton onClick={() => getMoreReviews()} > MORE REVIEWS </MoreReviewsButton>
           : null
         }

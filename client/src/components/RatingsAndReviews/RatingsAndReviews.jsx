@@ -36,6 +36,11 @@ const Main = styled.main`
   div ul > li + li {
     border-top: 1px solid black;
   }
+
+  div ul li:first-child div:first-child {
+    // border-box: content-box;
+    padding-top: 6px;
+  }
 `
 
 const RatingsAndReviews = (props) => {
