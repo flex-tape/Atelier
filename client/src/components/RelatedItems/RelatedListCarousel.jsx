@@ -5,6 +5,7 @@ import { IDContext } from '../App.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import RelatedCard from './RelatedCard.jsx'
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 
 const RelatedCarousel = styled.div`
 display: flex;
@@ -13,7 +14,6 @@ overflow: hidden;
 `
 
 export default function RelatedListCarousel({ setID, currentFeatures }) {
-  const [hoverStatus, setHoverStatus] = useState(false);
   const [carouselLength, setCarouselLength] = useState([0, 4])
 
   let productID = useContext(IDContext)
@@ -41,8 +41,8 @@ export default function RelatedListCarousel({ setID, currentFeatures }) {
         <RelatedCard id={item} key={index} setID={setID} currentFeatures={currentFeatures}/>
       ))}
     </RelatedCarousel>
-    {carouselLength[0] > 0 ? <button onClick={() => moveCarousel('left')}>Left</button> : null}
-    {carouselLength[1] < relatedItems.length ? <button onClick={() => moveCarousel('right')}>Right</button> : null}
+    {carouselLength[0] > 0 ? <FaAngleDoubleLeft onClick={() => moveCarousel('left')}/> : null}
+    {carouselLength[1] < relatedItems.length ? <FaAngleDoubleRight onClick={() => moveCarousel('right')}/> : null}
     </div>
   )
 }
