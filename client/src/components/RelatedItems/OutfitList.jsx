@@ -48,6 +48,8 @@ export default function OutfitList ({ setID }) {
   const [outfitList, setOutfitList] = useState([]);
   const [outfitLength, setOutfitLength] = useState([0, 3]);
   const [hoverStatus, setHoverStatus] = useState(false);
+  // store axios data in here.if exists dont do fetch, if it doesnt then ddo fetch
+  // set cache function in outfitlist. take in card info as paramater. pass into outfict card
 
   let productID = useContext(IDContext);
   let slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1]);
