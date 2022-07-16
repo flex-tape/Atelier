@@ -47,7 +47,7 @@ const SalesPrice = styled.div`
 color: red;
 `
 
-export default function OutfitCard({id, setID, removeFromList}) {
+export default function OutfitCard({id, setID, removeFromList, addProductCache, addStyleCache, productCache, styleCache}) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [outfitProductInfo, setOutfitProductInfo] = useState({});
@@ -57,10 +57,17 @@ export default function OutfitCard({id, setID, removeFromList}) {
   let productID = id;
 
   const getOutfitInfo = () => {
-    axios.get(`/products/${productID}`)
+    if (styleCache[productID]) {
+      setOutfitProductInfo(productCache[productID])
+      setOutfitStyleInfo(styleCache[productID])
+      console.log('got from cache!!')
+    } else {
+      axios.get(`/products/${productID}`)
       .then((res) => {
       let outfitLevelInfo = {name: res.data.name, category: res.data.category}
       setOutfitProductInfo(outfitLevelInfo);
+      addProductCache(productID, outfitLevelInfo);
+      console.log('is this adding??')
       })
       .catch(() => {
         console.log('GET request failed for outfitInfo')
@@ -75,6 +82,7 @@ export default function OutfitCard({id, setID, removeFromList}) {
       }
       let styleInfo = {default_price: res.data.results[0].original_price, sale_price: res.data.results[0].sale_price, image: primaryPhoto}
       setOutfitStyleInfo(styleInfo);
+      addStyleCache(productID, styleInfo);
       })
       .then(() => {
         setHasLoaded(true)
@@ -82,6 +90,7 @@ export default function OutfitCard({id, setID, removeFromList}) {
       .catch((err) => {
         console.log('GET request failed for outfitStyles')
       })
+    }
   }
 
   let onHover = () => {
