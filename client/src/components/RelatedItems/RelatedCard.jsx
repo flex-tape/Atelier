@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ComparisonModal from './ComparisonModal.jsx'
+import ThumbnailList from './ThumbnailList.jsx'
 import { GiStaryu } from 'react-icons/gi';
 
 export const CompareContext = React.createContext()
@@ -60,6 +61,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [compareProducts, setCompareProducts] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
 
 
   const getRelatedInfo = () => {
@@ -80,6 +82,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         primaryPhoto = 'https://images.unsplash.com/photo-1535639818669-c059d2f038e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
       } else {
         primaryPhoto = res.data.results[0].photos[0].url;
+        setThumbnailPhotos(res.data.results[0].photos)
       }
       let styleInfo = {default_price: res.data.results[0].original_price, sale_price: res.data.results[0].sale_price, image: primaryPhoto}
       setRelatedStyleInfo(styleInfo);
@@ -92,9 +95,9 @@ export default function RelatedCard({id, setID, currentFeatures}) {
     })
   }
 
-  // useEffect(() => {
-  //   getRelatedInfo();
-  // }, [])
+  useEffect(() => {
+    getRelatedInfo();
+  }, [])
 
   useEffect(() => {
     getRelatedInfo();
@@ -105,14 +108,6 @@ export default function RelatedCard({id, setID, currentFeatures}) {
   }
   let offHover = () => {
     setHoverStatus(false);
-  }
-
-  let setCompareOn = () => {
-    setCompareProducts(true)
-  }
-
-  let setCompareOff = () => {
-    setCompareProducts(false)
   }
 
   const toggleCompare = (status) => {
@@ -128,9 +123,10 @@ export default function RelatedCard({id, setID, currentFeatures}) {
       <div>
       {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
+        <button onClick={() => console.log(thumbnailPhotos)}>YO</button>
         <StarButton onClick={() => toggleCompare('true')}></StarButton>
         <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
-        {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
+        {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos}/> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
         {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}

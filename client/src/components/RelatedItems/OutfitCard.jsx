@@ -102,9 +102,9 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
     setHoverStatus(false);
   }
 
-  useEffect (() => {
-    getOutfitInfo();
-  }, [])
+  // useEffect (() => {
+  //   getOutfitInfo();
+  // }, [])
 
   useEffect (() => {
     getOutfitInfo();
