@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 // import { CompareContext } from './RelatedCard.jsx';
 import { IDContext } from '../App.jsx';
+import { HiX } from 'react-icons/hi';
 
 const CompareTable = styled.table`
   position: absolute;
@@ -22,7 +23,13 @@ const CompareDiv = styled.div`
   width: 550px;
   height: 550px;
 `
-export default function ComparisonModal ({id, relatedFeatures, currentFeatures}) {
+
+const RemoveButton = styled(HiX)`
+float: right;
+height: 25px;
+width: 25px;
+`
+export default function ComparisonModal ({id, relatedFeatures, currentFeatures, toggleCompare}) {
   const [allFeatures, setAllFeatures] = useState([]);
   const [featureValue, setFeatureValue] = useState('');
   const [relatedStatus, setRelatedStatus] = useState({});
@@ -58,7 +65,7 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures})
       <CompareTable>
         <thead>
           <tr>
-            <th colSpan={'3'}>Comparison</th>
+            <th colSpan={'3'}>Comparison<RemoveButton onClick={()=>toggleCompare()}></RemoveButton></th>
           </tr>
         </thead>
         <thead>

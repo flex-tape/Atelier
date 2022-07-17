@@ -3,26 +3,42 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ComparisonModal from './ComparisonModal.jsx'
+import ThumbnailList from './ThumbnailList.jsx'
+import { GiStaryu } from 'react-icons/gi';
 
 export const CompareContext = React.createContext()
 
 const PrimaryImage = styled.img`
-// display: flex;
+display: flex;
 // justify-content: center;
 // align-items: center;
-// position: absolute;
+position: relative;
+z-index: 1
+top: 0;
+left: 0;
 height: 280px;
 width: 250px;
 object-fit: contain;
 margin: 10px;
 background-color: #f0ffff;
 `
-
+const PhotosContainer = styled.div`
+position: relative;
+display: flex;
+align-items: flex-end;
+justify-content: space-around;
+`
 const CompareButton = styled.button`
 position: absolute;
 z-index: 3;
 left: 400px;
 top: 880px;
+`
+
+const StarButton = styled(GiStaryu)`
+float: right;
+height: 25px;
+width: 25px;
 `
 
 const RelatedItemsCard = styled.div`
@@ -38,6 +54,7 @@ margin-bottom: 30px;
 `
 
 const StrikePrice = styled.div`
+float: left;
 text-decoration: line-through;
 text-decoration-thickness: 0.15rem;
 `
@@ -52,6 +69,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [compareProducts, setCompareProducts] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
 
 
   const getRelatedInfo = () => {
@@ -72,6 +90,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         primaryPhoto = 'https://images.unsplash.com/photo-1535639818669-c059d2f038e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
       } else {
         primaryPhoto = res.data.results[0].photos[0].url;
+        setThumbnailPhotos(res.data.results[0].photos)
       }
       let styleInfo = {default_price: res.data.results[0].original_price, sale_price: res.data.results[0].sale_price, image: primaryPhoto}
       setRelatedStyleInfo(styleInfo);
@@ -84,9 +103,9 @@ export default function RelatedCard({id, setID, currentFeatures}) {
     })
   }
 
-  // useEffect(() => {
-  //   getRelatedInfo();
-  // }, [])
+  useEffect(() => {
+    getRelatedInfo();
+  }, [])
 
   useEffect(() => {
     getRelatedInfo();
@@ -99,26 +118,27 @@ export default function RelatedCard({id, setID, currentFeatures}) {
     setHoverStatus(false);
   }
 
-  let setCompareOn = () => {
-    setCompareProducts(true)
-  }
-
-  let setCompareOff = () => {
-    setCompareProducts(false)
+  const toggleCompare = (status) => {
+    if (status === 'true') {
+      setCompareProducts(true);
+    } else {
+      setCompareProducts(false);
+    }
   }
 
   return (
     <CompareContext.Provider value={compareProducts}>
       <div>
-      {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures}/><CompareButton onClick={setCompareOff}>EXIT</CompareButton></div> : null}
+      {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
-        <button onClick={setCompareOn}>Star</button>
-        <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
-        {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
+        <StarButton onClick={() => toggleCompare('true')}></StarButton>
+        <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage>
+        {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
+        <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
         {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
-        <div>Star rating goes here</div></div>}
+        <div>Star rating goes here</div></div>
       </RelatedItemsCard>}
     </div>
     </CompareContext.Provider>
