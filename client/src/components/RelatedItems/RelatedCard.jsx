@@ -9,17 +9,25 @@ import { GiStaryu } from 'react-icons/gi';
 export const CompareContext = React.createContext()
 
 const PrimaryImage = styled.img`
-// display: flex;
+display: flex;
 // justify-content: center;
 // align-items: center;
-// position: absolute;
+position: relative;
+z-index: 1
+top: 0;
+left: 0;
 height: 280px;
 width: 250px;
 object-fit: contain;
 margin: 10px;
 background-color: #f0ffff;
 `
-
+const PhotosContainer = styled.div`
+position: relative;
+display: flex;
+align-items: flex-end;
+justify-content: space-around;
+`
 const CompareButton = styled.button`
 position: absolute;
 z-index: 3;
@@ -125,12 +133,13 @@ export default function RelatedCard({id, setID, currentFeatures}) {
       {hasLoaded && <RelatedItemsCard>
         <button onClick={() => console.log(thumbnailPhotos)}>YO</button>
         <StarButton onClick={() => toggleCompare('true')}></StarButton>
-        <PrimaryImage src={relatedStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
-        {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos}/> : <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
+        <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage>
+        {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
+        <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
         {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
-        <div>Star rating goes here</div></div>}
+        <div>Star rating goes here</div></div>
       </RelatedItemsCard>}
     </div>
     </CompareContext.Provider>

@@ -42,8 +42,6 @@ background-color: #f0ffff;
 `
 
 
-
-
 export default function OutfitList ({ setID }) {
   const [outfitList, setOutfitList] = useState([]);
   const [outfitLength, setOutfitLength] = useState([0, 3]);
