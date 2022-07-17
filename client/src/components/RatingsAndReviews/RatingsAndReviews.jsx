@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReviewsList from './ReviewsList.jsx'
-
-// const Button = styled.button`
-//   padding: 10px;
-//   border: 2px solid blue;
-//   border-radius: 4px;
-// `;
+import RatingsBox from './RatingsBox.jsx'
 
 const Container = styled.div`
   display: flex;
@@ -15,48 +10,31 @@ const Container = styled.div`
   border: 1px dotted;
 `;
 
-const Ratings = styled.section`
+const RatingsContainer = styled.section`
   flex: 1;
   border: 1px dotted;
   margin: 5px;
 `
 
-const Reviews = styled.main`
+const ReviewsContainer = styled.main`
   flex: 2;
   border: 1px dotted;
   margin: 5px;
   padding: 15px;
-
-  div ul {
-    padding: 0;
-    max-height: 1000px;
-    overflow: auto;
-  }
-
-  div ul > li + li {
-    border-top: 1px solid black;
-  }
-
-  div ul li:first-child div:first-child {
-    // border-box: content-box;
-    padding-top: 6px;
-  }
 `
 
-const RatingsAndReviews = (props) => {
+export default function RatingsAndReviews (props) {
 
   return (
     <div>
-
     <Container id="ratings-reviews-container">
-      <Ratings></Ratings>
-      <Reviews>
-        <ReviewsList productID={props.productID}/>
-      </Reviews>
-
+      <RatingsContainer id="ratings-container">
+        <RatingsBox></RatingsBox>
+      </RatingsContainer>
+      <ReviewsContainer id="reviews-container">
+        <ReviewsList id="reviews-container" productID={props.productID}/>
+      </ReviewsContainer>
     </Container>
     </div>
   )
 }
-
-export default RatingsAndReviews;

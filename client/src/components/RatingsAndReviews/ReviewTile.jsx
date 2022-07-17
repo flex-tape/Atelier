@@ -4,10 +4,7 @@ import axios from 'axios';
 import dateHandler from '../../lib/dateHandler.js'
 
 const TileDiv = styled.div`
-  // display: flex;
-  // border: solid 1px black;
   color: black;
-
   padding: 30px 0;
 
 `;
@@ -29,8 +26,6 @@ const ReviewSummary = styled.h4`
 
 const ReviewBody = styled.div`
   box-sizing: border-box;
-  // padding-top: 2px;
-  // padding-bottom: 2px;
 `;
 
 const ExpandReviewsButton = styled.button`
@@ -46,6 +41,8 @@ const ExpandReviewsButton = styled.button`
   &:hover {
     text-decoration: underline;
   }
+  position: relative;
+  bottom: 0.5em;
 `;
 
 const PhotoCarousel = styled.div`
@@ -92,7 +89,6 @@ const Recommended = styled.div`
     position: relative;
     bottom: .10em;
   }
-  // vertical-align: middle;
   align-content: center;
 `;
 
@@ -103,7 +99,6 @@ const SellerResponse = styled.div`
 const Helpfulness = styled.div`
   box-sizing: border-box;
   padding-top: 10px;
-  // margin-bottom: px;
   font-size: 0.95em;
 `;
 

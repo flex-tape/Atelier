@@ -22,6 +22,19 @@ const SortBar = styled.form`
   margin-top: 5px;
 `;
 
+const UnorderedList = styled.ul`
+  padding: 0;
+  max-height: 1000px;
+  overflow: auto;
+  &> li + li {
+    border-top: 1px solid black;
+  }
+  & li:first-child div:first-child {
+    // border-box: content-box;
+    padding-top: 5px;
+  }
+`;
+
 
 export default function ReviewsList(props) {
   let [reviews, setReviews] = useState(() => []);
@@ -81,33 +94,14 @@ export default function ReviewsList(props) {
     console.log(event.target)
     console.log(event.target.value)
     let sort = await setSortCategory(event.target.value);
-    // console.log('SORT IS ... ', sortCategory)
 
-    // let pageCount = await setPageCount(2);
-
-    // let res2 = await axios.get('/reviews', { params: { product_id: props.productID, count: reviewTotal, sort: sortCategory } })
-
-    // let final = res2.data.results;
-    // console.log(final.length)
-    // setReviews(final)
-    // setPageCount(1);
-
-    // axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount, sort: sortCategory } })
-    //   .then((response) => {
-    //     if (response.data.results.length < 2) {
-    //       setShowMoreReviews(false);
-    //     }
-    //     setReviews(response.data.results);
-    //     setPageCount(pageCount + 1);
-    //   })
-    //   .catch((e) => console.log(e));
   }
 
   return (
-    <div className="main-container">
+    <>
       <SortBar>
         <label>{reviewTotal} reviews, sorted by </label>
-        <select id="sort-bar" value={sortCategory} onChange={(event) => sortHandler(event)}>
+        <select id="sort-bar" value={sortCategory} onChange={sortHandler}>
           <option value="relevant">relevance</option>
           <option value="helpful">helpfulness</option>
           <option value="newest">newest</option>
@@ -115,9 +109,9 @@ export default function ReviewsList(props) {
       </SortBar>
       <div>
         {/* {reviewTotal} */}
-        <ul>
+        <UnorderedList>
           {listReviewTiles}
-        </ul>
+        </UnorderedList>
       </div>
       <ButtonContainer>
         {showMoreReviews
@@ -126,7 +120,7 @@ export default function ReviewsList(props) {
         }
         <AddReviewButton reviewCount={reviews.length} > ADD A REVIEW </AddReviewButton>
       </ButtonContainer>
-    </div>
+    </>
 
   )
 }
