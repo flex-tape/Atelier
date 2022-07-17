@@ -15,13 +15,13 @@ const Container = styled.div`
   border: 1px dotted;
 `;
 
-const Sidebar = styled.aside`
+const Ratings = styled.section`
   flex: 1;
   border: 1px dotted;
   margin: 5px;
 `
 
-const Main = styled.main`
+const Reviews = styled.main`
   flex: 2;
   border: 1px dotted;
   margin: 5px;
@@ -48,11 +48,11 @@ const RatingsAndReviews = (props) => {
   return (
     <div>
 
-    <Container>
-      <Sidebar></Sidebar>
-      <Main>
+    <Container id="ratings-reviews-container">
+      <Ratings></Ratings>
+      <Reviews>
         <ReviewsList productID={props.productID}/>
-      </Main>
+      </Reviews>
 
     </Container>
     </div>

@@ -81,10 +81,19 @@ const LightBox = styled.div`
 `;
 
 const Recommended = styled.div`
+  display: flex;
   box-sizing: border-box;
   margin-top: 8px;
   margin-bottom: 8px;
-  // font-size: 10px;
+  font-size: 14px;
+  svg {
+    height: 18px;
+    margin-right: 4px;
+    position: relative;
+    bottom: .10em;
+  }
+  // vertical-align: middle;
+  align-content: center;
 `;
 
 const SellerResponse = styled.div`
@@ -144,14 +153,14 @@ export default function ReviewTile(props) {
     // checks if item has already been marked as helpful
     if (!helpfulnessClicked) {
       axios.put(`/reviews/${props.review.review_id}/helpful`)
-        .then( (response) => {
+        .then((response) => {
           console.log('RESPONSE IS...', response)
           if (response.status === 204) {
             setHelpfulnessCount(helpfulnessCount + 1);
             setHelpfulnessClicked(true);
           }
         })
-        .catch( (e) => {
+        .catch((e) => {
           console.error(e)
         })
     }
@@ -171,9 +180,9 @@ export default function ReviewTile(props) {
       {listPhotos.length > 0
         ? <PhotoCarousel>
           {listPhotos}
-          </PhotoCarousel>
+        </PhotoCarousel>
         : ''
-        }
+      }
       {lightBoxDisplay
         ? <LightBox onClick={closeImage}>
           <img id="lightbox-img" src={imageToShow} onClick={closeImage}></img>
@@ -182,6 +191,9 @@ export default function ReviewTile(props) {
       }
       {props.review.recommend
         ? <Recommended>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
           I recommend this product
         </Recommended>
         : ''
