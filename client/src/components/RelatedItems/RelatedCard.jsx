@@ -17,9 +17,10 @@ z-index: 1
 top: 0;
 left: 0;
 height: 280px;
-width: 250px;
+width: 225px;
 object-fit: contain;
-margin: 10px;
+margin: 10px 1px 10px 10px;
+max-width: 100%;
 background-color: #f0ffff;
 `
 const PhotosContainer = styled.div`
@@ -36,6 +37,7 @@ top: 200px;
 `
 
 const StarButton = styled(GiStaryu)`
+position: relative;
 float: right;
 height: 25px;
 width: 25px;
@@ -66,7 +68,7 @@ color: red;
 export default function RelatedCard({id, setID, currentFeatures}) {
   const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
   const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
-  const [hoverStatus, setHoverStatus] = useState(false);
+  const [hoverStatus, setHoverStatus] = useState(true);
   const [compareProducts, setCompareProducts] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
@@ -131,9 +133,8 @@ export default function RelatedCard({id, setID, currentFeatures}) {
       <div>
       {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
-        <button onClick={() => console.log(thumbnailPhotos)}>YO</button>
         <StarButton onClick={() => toggleCompare('true')}></StarButton>
-        <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage>
+        <PhotosContainer onMouseEnter={onHover} /*onMouseLeave={offHover}*/><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage>
         {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
         <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>

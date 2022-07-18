@@ -7,23 +7,33 @@ import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 
 const ThumbnailImage = styled.img`
 display: flex;
-// justify-content: center;
-// align-items: center;
+justify-content: center;
+align-items: center;
 position: relative;
-// top: 30px;
-// left: 30px;
-height: 60px;
-width: 60px;
-object-fit: contain;
-// margin: 10px;
+height: 45px;
+width: 35px;
+object-fit: cover;
+margin-left: 5px;
+margin-right: 5px;
+margin-bottom: 15px;
 // background-color: #f0ffff;
 background-color: rgba(168,168,168,.7);
-z-index: 3;
+z-index: 2;
+border: 1.5px solid white;
+border-radius: 10px;
 `
+const HideArrow = styled(FaAngleDoubleLeft)`
+visibility: hidden;
+`
+
+// const hideRight = styled(FaAngleDoubleRight)`
+// visibility: hidden;
+// `
 
 const Container = styled.div`
 display: flex;
 position: absolute;
+// max-width: 225px;
 `
 
 export default function ThumbnailList ({ id, setRelatedStyleInfo, thumbnailPhotos, relatedStyleInfo }) {
@@ -40,11 +50,11 @@ export default function ThumbnailList ({ id, setRelatedStyleInfo, thumbnailPhoto
 
   return (
     <Container>
+      {thumbnailLength[0] > 0 ? <FaAngleDoubleLeft onClick={() => moveCarousel('left')}/> : <HideArrow />}
       {slicedThumbnail.map((photo, index) => (
         <ThumbnailImage key={index} src={photo.thumbnail_url} onClick={() => setRelatedStyleInfo({...relatedStyleInfo, image: photo.thumbnail_url})}/>
       ))}
-      {thumbnailLength[0] > 0 ? <FaAngleDoubleLeft onClick={() => moveCarousel('left')}/> : null}
-      {thumbnailLength[1] < thumbnailPhotos.length ? <FaAngleDoubleRight onClick={() => moveCarousel('right')}/> : null}
+      {thumbnailLength[1] < thumbnailPhotos.length ? <FaAngleDoubleRight onClick={() => moveCarousel('right')}/> : <HideArrow />}
     </Container>
   )
 }
