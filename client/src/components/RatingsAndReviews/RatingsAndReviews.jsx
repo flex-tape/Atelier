@@ -29,7 +29,7 @@ export default function RatingsAndReviews (props) {
     <div>
     <Container id="ratings-reviews-container">
       <RatingsContainer id="ratings-container">
-        <RatingsBox></RatingsBox>
+        <RatingsBox />
       </RatingsContainer>
       <ReviewsContainer id="reviews-container">
         <ReviewsList id="reviews-container" productID={props.productID}/>

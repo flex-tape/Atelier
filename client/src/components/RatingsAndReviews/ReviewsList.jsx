@@ -89,12 +89,8 @@ export default function ReviewsList(props) {
     }
   });
 
-  const sortHandler = async (event) => {
-    event.preventDefault();
-    console.log(event.target)
-    console.log(event.target.value)
-    let sort = await setSortCategory(event.target.value);
-
+  const sortHandler = (event) => {
+    setSortCategory(event.target.value);
   }
 
   return (
@@ -114,10 +110,10 @@ export default function ReviewsList(props) {
         </UnorderedList>
       </div>
       <ButtonContainer>
-        {showMoreReviews
-          ? <MoreReviewsButton onClick={() => getMoreReviews()} > MORE REVIEWS </MoreReviewsButton>
-          : null
-        }
+          {pageCount < 2 || pageCount >= reviewTotal
+            ? null
+            : <MoreReviewsButton onClick={() => getMoreReviews()} > MORE REVIEWS </MoreReviewsButton>
+          }
         <AddReviewButton reviewCount={reviews.length} > ADD A REVIEW </AddReviewButton>
       </ButtonContainer>
     </>

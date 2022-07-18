@@ -4,7 +4,7 @@ export default function RatingsBox(props) {
 
   return(
     <>
-      <div>Ratings & Reviews</div>
+      <div>RATINGS & REVIEWS</div>
 
     </>
   )

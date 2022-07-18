@@ -6,7 +6,6 @@ import dateHandler from '../../lib/dateHandler.js'
 const TileDiv = styled.div`
   color: black;
   padding: 30px 0;
-
 `;
 
 const StarsAndUserInfoBar = styled.div`
@@ -26,6 +25,7 @@ const ReviewSummary = styled.h4`
 
 const ReviewBody = styled.div`
   box-sizing: border-box;
+  text-align: left;
 `;
 
 const ExpandReviewsButton = styled.button`
@@ -42,13 +42,14 @@ const ExpandReviewsButton = styled.button`
     text-decoration: underline;
   }
   position: relative;
-  bottom: 0.5em;
+  bottom: 0.4em;
 `;
 
 const PhotoCarousel = styled.div`
   display: flex;
   box-sizing: border-box;
   margin-top: 16px;
+  margin-bottom: 12px;
   gap: 8px;
 
   img {
@@ -82,7 +83,7 @@ const Recommended = styled.div`
   box-sizing: border-box;
   margin-top: 8px;
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 0.95em;
   svg {
     height: 18px;
     margin-right: 4px;
@@ -100,6 +101,10 @@ const Helpfulness = styled.div`
   box-sizing: border-box;
   padding-top: 10px;
   font-size: 0.95em;
+
+  & a:nth-child(3) {
+    margin-left: 4px;
+  }
 `;
 
 export default function ReviewTile(props) {
@@ -203,6 +208,7 @@ export default function ReviewTile(props) {
       <Helpfulness>
         <span>Helpful? </span>
         <a href="#" onClick={markAsHelpful}>Yes</a> ({helpfulnessCount})
+        <a href="#" onClick={() => setHelpfulnessClicked(true)}>No</a>
       </Helpfulness>
 
 
