@@ -9,15 +9,15 @@ import OutfitList from './OutfitList.jsx'
 
 export const RelatedContext = React.createContext()
 
+const RelatedItemsContainer = styled.div`
+margin-left: 200px;
+margin-right: 200px;
+`
+
 const RelatedCarousel = styled.div`
 display: flex;
 max-width: 1300px;
 overflow: scroll;
-`
-
-const RelatedItemsContainer = styled.div`
-margin-left: 200px;
-margin-right: 200px;
 `
 
 export default function RelatedItems({ setID }) {
@@ -59,11 +59,6 @@ export default function RelatedItems({ setID }) {
     <RelatedItemsContainer>
       <div>
         <h3>Related Products</h3>
-          {/* <RelatedCarousel>
-            {relatedItems.map((item, index) => (
-              <RelatedCard item={item} key={index}/>
-            ))}
-          </RelatedCarousel> */}
           <RelatedListCarousel setID={setID} currentFeatures={currentFeatures}/>
         {/* <button onClick={getRelatedItems}>Get Related</button> */}
 
