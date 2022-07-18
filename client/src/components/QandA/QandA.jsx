@@ -11,12 +11,12 @@ const Title = styled.p`
   opacity: 70%;
 `
 
-export default function QandA() {
+export default function QandA(props) {
 
   return(
     <Container>
       <Title>QUESTIONS & ANSWERS</Title>
-      <QuestionsList />
+      <QuestionsList productID={props.productID}/>
     </Container>
   )
 }

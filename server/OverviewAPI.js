@@ -35,25 +35,19 @@ exports.listProducts = (req, res) => {
 }
 
 exports.productInfo = (req, res) => {
-  console.log('info req', req)
-  // /products/id/product_id
-  // /products/asda231a
-
-  // req.params = :id
-  let product_id = `${req.params.product_id}`; // req.body should be req.query or req.params
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}`
+  const product_id = req.params.product_id;
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}`;
   let options = {
     headers: {
       'Authorization': config.TOKEN
     }
   }
   axios.get(url, options)
-  .then((response) => {
-    // console.log('resp', response)
-    res.status(200).send(response)
+    .then((response) => {
+      console.log('getOne', response.data);
+      res.status(200).send(response.data)
   })
   .catch((err) => {
-    console.log('err', err);
     res.status(400).send(err);
   })
 }

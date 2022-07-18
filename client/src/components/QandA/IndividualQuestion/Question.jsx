@@ -105,7 +105,7 @@ export default function Question(props) {
         <div>
           {moreAnswers && <Button onClick={moreAnswersClick}>{buttonText}</Button>}
         </div>
-        {openAnswerModal && <AnswerModal setMoreAnswers={setMoreAnswers} setAnswers={setAnswers} setAllAnswers={setAllAnswers} question_id={props.question.question_id} setOpenAnswerModal={setOpenAnswerModal}/>}
+        {openAnswerModal && <AnswerModal setMoreAnswers={setMoreAnswers} setAnswers={setAnswers} setAllAnswers={setAllAnswers} question_id={props.question.question_id} setOpenAnswerModal={setOpenAnswerModal} question_body={props.question.question_body} productName={props.productName}/>}
       </div>
     </Container>
   )

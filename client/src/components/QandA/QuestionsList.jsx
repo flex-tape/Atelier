@@ -18,8 +18,9 @@ const QuestionsListContainer = styled.div`
   overflow: auto;
 `
 
-export default function QuestionsList() {
-  const [productID, setProductID] = useState(40344);
+export default function QuestionsList(props) {
+  const [productID, setProductID] = useState(props.productID);
+  const [productName, setProductName] = useState('');
   const [questionsList, setQuestionsList] = useState([]);
   const [fullList, setFullList] = useState([]);
   const [count, setCount] = useState(4);
@@ -36,8 +37,16 @@ export default function QuestionsList() {
           setMoreQuestions(false);
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }, [])
+
+  useEffect(() => {
+    axios.get(`/products/${productID}`)
+      .then((response) => {
+        setProductName(response.data.name);
+      })
+      .catch(err => console.log(err));
+  })
 
   let handleMoreClick = (e) => {
     e.preventDefault();
@@ -57,13 +66,13 @@ export default function QuestionsList() {
     <div>
       <SearchBar questions={fullList} setQuestionsList={setQuestionsList} count={count}/>
       <QuestionsListContainer>
-        {questionsList.map((question) => (<Question question={question} key={question.question_id}/>))}
+        {questionsList.map((question) => (<Question question={question} key={question.question_id} productName={productName}/>))}
       </QuestionsListContainer>
       <div>
         {moreQuestions && <Button onClick={handleMoreClick}>SHOW MORE QUESTIONS</Button>}
         <Button onClick ={handleAddClick}>ADD A QUESTION +</Button>
       </div>
-      {openModal && <QuestionModal setMoreQuestions={setMoreQuestions} setQuestionsList={setQuestionsList} setFullList={setFullList} productID={productID} setOpenModal={setOpenModal}/>}
+      {openModal && <QuestionModal setMoreQuestions={setMoreQuestions} setQuestionsList={setQuestionsList} setFullList={setFullList} productID={productID} productName={productName} setOpenModal={setOpenModal}/>}
     </div>
   );
 }

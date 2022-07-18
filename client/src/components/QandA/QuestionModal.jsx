@@ -24,9 +24,10 @@ const ModalContainer = styled.div`
   flex-direction: column;
   padding: 25px;
 `
-const Title = styled.h3`
+const Title = styled.div`
   text-align: center;
   border-bottom: 1px solid black;
+  margin-bottom: 15px;
 `
 const QuestionBody = styled.textarea`
   width: 100%;
@@ -116,7 +117,10 @@ export default function QuestionModal(props) {
           <button onClick={() => props.setOpenModal(false)}>X</button>
         </div>
         <form onSubmit={handleSubmit}>
-          <Title>Ask Your Question about *Product Name Here*</Title>
+          <Title>
+            <h3>Ask Your Question</h3>
+            About the {props.productName} here
+          </Title>
           <QuestionContainer>
             <Label>What is your question?</Label>
             <QuestionBody type='text' value={questionForm} onChange={handleQuestionChange} maxLength='1000' required />

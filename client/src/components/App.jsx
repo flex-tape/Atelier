@@ -1,28 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import ReactDOM from 'react-dom';
 // import Overview from './Overview.jsx';
 import QandA from './QandA/QandA.jsx';
 // import RatingsAndReviews from './RatingsAndReviews.jsx';
 // import RelatedItems from './RelatedItems.jsx';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+export default function App() {
+  const [productID, setProductID] = useState(40344);
 
-    }
-  }
-  render () {
-    return (
-      <div>
-        <h1>FEC</h1>
-        {/* <Overview/> */}
-        <QandA />
-        {/* <RatingsAndReviews/> */}
-        {/* <RelatedItems/> */}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h1>FEC</h1>
+      {/* <Overview/> */}
+      <QandA productID={productID}/>
+      {/* <RatingsAndReviews/> */}
+      {/* <RelatedItems/> */}
+    </div>
+  )
 }
 
-export default App;

@@ -16,7 +16,7 @@ const ModalBackground = styled.div`
 `
 const ModalContainer = styled.div`
   width: 500px;
-  height: 500px;
+  height: 550px;
   border-radius: 12px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -29,9 +29,10 @@ const Thumbnail = styled.img`
   height: 100px;
   margin-right: 2px;
 `
-const Title = styled.h3`
+const Title = styled.div`
   text-align: center;
   border-bottom: 1px solid black;
+  margin-bottom: 15px;
 `
 const AnswerBody = styled.textarea`
   width: 100%;
@@ -164,7 +165,10 @@ export default function AnswerModal(props) {
           <button onClick={() => props.setOpenAnswerModal(false)}>X</button>
         </div>
         <form onSubmit={handleFormSubmit}>
-          <Title>Your Answer about *Product Name Here*</Title>
+          <Title>
+            <h3>Submit Your Answer</h3>
+            About {props.productName}: {props.question_body}
+          </Title>
           <AnswerContainer>
             <Label>What is your answer?</Label>
             <AnswerBody type='text' value={answerForm} onChange={handleAnswerChange} maxLength='1000' required />
