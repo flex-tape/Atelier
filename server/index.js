@@ -4,6 +4,8 @@ const app = express();
 const port = 3000;
 // import api files
 const overview = require('./OverviewAPI.js');
+const ratings = require('./RatingsAndReviewsAPI.js');
+const relatedAPI = require('./RelatedItems.js');
 const qa = require('./QuestionsAndAnswersAPI.js');
 const {cloudinary} = require('./Cloudinary.js');
 
@@ -15,12 +17,26 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // PRODUCTS
 
+<<<<<<< HEAD
 app.get('/products', overview.listProducts);
 app.get('/products/:product_id', overview.productInfo);
 app.get('/products/styles', overview.productStyles);
+=======
+app.get('/products/', overview.listProducts);
+app.get('/products/:product_id', overview.productInfo);
+app.get('/products/:product_id/styles', overview.productStyles);
+app.post('/cart', overview.postCart);
+app.get('/cart', overview.getCart);
+>>>>>>> main
 
 // REVIEWS
+app.get('/reviews', ratings.listReviews)
+app.get('/reviews/meta', ratings.getReviewMetadata)
 
+app.post('/reviews', ratings.addReview)
+
+app.put('/reviews/:review_id/helpful', ratings.markAsHelpful)
+app.put('/reviews/:review_id/report', ratings.reportReview)
 
 // QUESTIONS & ANSWERS
 app.get('/qa/questions', qa.getQuestions);
@@ -49,7 +65,7 @@ app.post('/api/upload', async (req, res) => {
 // CART
 
 // RELATED ITEMS
-// app.get('/product', overview.relatedProducts)
+app.get('/productsrelated', relatedAPI.getRelated);
 
 
 // INTERACTIONS

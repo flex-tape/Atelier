@@ -1,71 +1,63 @@
 const axios = require('axios');
-const config = require('../config.js')
+const config = require('../config.js');
+
+let options = {
+  headers: {
+    'Authorization': config.TOKEN
+  }
+}
 
 exports.listReviews = (req, res) => {
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/reviews`;
-  let options = {
-    headers: {
-      // 'User-Agent': 'FEC',
-      'Authorization': config.TOKEN
+  console.log(req.query)
+  let listReviewOptions = {
+    ...options,
+    params: {
+      product_id: req.query.product_id,
+      page: req.query.page,
+      count: req.query.count,
+      sort: req.query.sort
     }
   }
-  axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response) // should probably send response.data instead of whole response body
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews`;
+  axios.get(url, listReviewOptions)
+    .then((result) => res.status(200).send(result.data))
+    .catch((e) => res.status(400).send(e))
 }
 
-exports.productInfo = (req, res) => {
-  let product_id = req.body.data.id // req.body should be req.query or req.params
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/products/:${product_id}`
-  let options = {
-    headers: {
-      'Authorization': config.TOKEN
+exports.getReviewMetadata = (req, res) => {
+  let getReviewMetaOptions = {
+    ...options,
+    params: {
+      product_id: req.query.product_id
     }
   }
-  axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response)
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta`;
+  axios.get(url, getReviewMetaOptions)
+    .then((result) =>  res.status(200).send(result.data))
+    .catch((e) => res.status(400).send(e))
 }
 
-exports.productStyles = (req, res) => {
-  let product_id = req.body.data.id // req.body.data should be req.query?? not 100% sure
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/products/:${product_id}/styles`
-  let options = {
-    headers: {
-      'Authorization': config.TOKEN
-    }
-  }
-  axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response)
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+exports.addReview = (req, res) => {
+  console.log(req.body)
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/`;
+  axios.post(url, req.body, options)
+    .then((result) => res.status(201).send(result.data))
+    .catch((e) => res.status(400).send(e))
 }
 
-exports.relatedProduct = (req, res) => {
-  let product_id = req.body.data.id
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rfp/products/:${product_id}/related`
-  let options = {
-    headers: {
-      'Authorization': config.TOKEN
-    }
-  }
-  axios.get(url, options)
-  .then((response) => {
-    res.status(200).send(response)
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+exports.markAsHelpful = (req, res) => {
+  // 1274559
+  // console.log('REQUEST IS...', req)
+  // console.log('REQUEST PARAMS IS...', req.params)
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${req.params.review_id}/helpful`;
+  axios.put(url, req.params, options)
+    .then((result) => res.status(204).send(result.data))
+    .catch((e) => res.status(404).send(e))
 }
 
+exports.reportReview = (req, res) => {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${req.params.review_id}/report`
+  axios.put(url, req.params, options)
+    .then((result) => res.status(204).send(result.data))
+    .catch((e) => res.status(404).send(e))
+}
