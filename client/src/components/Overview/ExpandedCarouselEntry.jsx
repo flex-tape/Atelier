@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaCircle, FaHeart } from 'react-icons/fa';
 
 const Image = styled.div`
   object-fit: cover;
@@ -12,15 +13,13 @@ const Image = styled.div`
 `
 
 
-export default function IGCarouselEntry (props) {
+export default function ExpandedCarouselEntry (props) {
 
   const mappedIndex = props.photoArray.map((photo) => (photo.url)).indexOf(props.photo.url);
 
   return (
     <Image onClick={() => props.setCurrentIndex(mappedIndex)}>
-    {props.currentIndex === mappedIndex ? <img border="2px solid #000000" src={props.photo.thumbnail_url}/> : <img src={props.photo.thumbnail_url}/>}
+    {props.currentIndex === mappedIndex ? <FaHeart /> : <FaCircle/>}
     </Image>
   )
 }
-
-{/* <img src={props.productStyle.photos[0].url}/> */}

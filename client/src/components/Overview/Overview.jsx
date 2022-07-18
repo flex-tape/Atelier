@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import StyleList from './StyleList.jsx';
 import ImageGallery from './ImageGallery.jsx';
+import ExpandedModal from './ExpandedModal.jsx';
 const axios = require('axios');
 
 const Container = styled.div`
@@ -20,8 +21,6 @@ const Description = styled.div`
   border: 1px dotted;
   margin: 5px;
 `
-// align-self: flex-end;
-
 const SubContainer2 = styled.div`
   flex: 2 200px;
   display: flex;
@@ -36,7 +35,6 @@ const Image = styled.div`
   border: 1px dotted;
   margin: 5px;
 `
-
 const Product = styled.div`
   flex: 1 200px;
   border: 1px dotted;
@@ -55,15 +53,15 @@ const AddtoCart = styled.div`
 `
 
 export default function Overview (props) {
-  // props.productID
-
-  // const [productID, setProductID] = useState(props.productID);
   const [productInfo, setProductInfo] = useState({});
-  // const [styleID, setStyleID] = useState(240500);
   const [styleInfo, setStyleInfo] = useState([]);
   const [productStyle, setProductStyle] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   // const [cart, setCart] = useState({});
+  // const [productID, setProductID] = useState(props.productID);
+  // const [styleID, setStyleID] = useState(240500);
   //240500//240510
 
   useEffect(() => {
@@ -89,37 +87,34 @@ export default function Overview (props) {
   }, [props.productID, props.styleID])
 
   return (
-    <>{hasLoaded &&
-      <Container>
-        <SubContainer1>
-          <Image>
-              <ImageGallery hasLoaded={hasLoaded} productStyle={productStyle}/>
-          </Image>
-          <SubContainer2>
-            <Product>
-              <h1>{productInfo.name}</h1>
-              <div>{productInfo.category}</div>
-              {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
-              {productStyle.sale_price === null ? null : <div>${productStyle.sale_price}</div>}
-            </Product>
-            <Selector>
-              <StyleList styleName={productStyle.name} setStyleID={props.setStyleID} setProductStyle={setProductStyle} styleID={props.styleID} styleInfo={styleInfo}/>
-            </Selector>
-            <AddtoCart>
-              Add to Cart
-            </AddtoCart>
-          </SubContainer2>
-        </SubContainer1>
-        <Description>
-          <h4>{productInfo.slogan}</h4>
-          <div>{productInfo.description}</div>
-        </Description>
+    <>
+      {hasLoaded && <Container>
+        {showModal && <ExpandedModal setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>}
+          <SubContainer1>
+            <Image>
+                <ImageGallery setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
+            </Image>
+            <SubContainer2>
+              <Product>
+                <h1>{productInfo.name}</h1>
+                <div>{productInfo.category}</div>
+                {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
+                {productStyle.sale_price === null ? null : <div>${productStyle.sale_price}</div>}
+              </Product>
+              <Selector>
+                <StyleList styleName={productStyle.name} setStyleID={props.setStyleID} setProductStyle={setProductStyle} styleID={props.styleID} styleInfo={styleInfo}/>
+              </Selector>
+              <AddtoCart>
+                Add to Cart
+              </AddtoCart>
+            </SubContainer2>
+          </SubContainer1>
+          <Description>
+            <h4>{productInfo.slogan}</h4>
+            <div>{productInfo.description}</div>
+          </Description>
       </Container>}
     </>
   )
 }
-
-  // const changeID = () => {
-  //   props.setProductID(65656);
-  // }
 
