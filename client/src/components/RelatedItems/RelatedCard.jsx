@@ -52,8 +52,8 @@ display: block;
 align-items: center;
 border: 1px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
-margin-right: 50px;
-margin-bottom: 30px;
+// margin-right: 50px;
+// margin-bottom: 30px;
 `
 
 const StrikePrice = styled.div`
@@ -131,7 +131,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
 
   return (
     <CompareContext.Provider value={compareProducts}>
-      <div>
+
       {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
         {/* <StarButton onClick={() => toggleCompare('true')}></StarButton> */}
@@ -143,7 +143,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>
       </RelatedItemsCard>}
-    </div>
+
     </CompareContext.Provider>
   )
 }
