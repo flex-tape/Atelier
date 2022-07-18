@@ -7,12 +7,15 @@ const Container = styled.div`
   margin-left: 200px;
   font-family: Arial, sans-serif;
 `
+const Title = styled.p`
+  opacity: 70%;
+`
 
 export default function QandA() {
 
   return(
     <Container>
-      <p>Questions & Answers</p>
+      <Title>QUESTIONS & ANSWERS</Title>
       <QuestionsList />
     </Container>
   )
