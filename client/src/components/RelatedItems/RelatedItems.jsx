@@ -15,6 +15,11 @@ max-width: 1300px;
 overflow: scroll;
 `
 
+const RelatedItemsContainer = styled.div`
+margin-left: 200px;
+margin-right: 200px;
+`
+
 export default function RelatedItems({ setID }) {
   // will need product ID of current product
   // grab related products of current produt
@@ -51,7 +56,7 @@ export default function RelatedItems({ setID }) {
 
   return (
     <RelatedContext.Provider value={relatedItems}>
-    <div>
+    <RelatedItemsContainer>
       <div>
         <h3>Related Products</h3>
           {/* <RelatedCarousel>
@@ -68,7 +73,7 @@ export default function RelatedItems({ setID }) {
           <OutfitList setID={setID}/>
 
       </div>
-    </div>
+    </RelatedItemsContainer>
     </RelatedContext.Provider>
   )
 }
