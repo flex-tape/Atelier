@@ -1,4 +1,4 @@
-const calculateReviewAvg = (ratingsObj) => {
+export default function calculateReviewAvg (ratingsObj) {
   // Usage: function recieves a ratings object and returns a number consisting of 0-4 whole stars and a decimal ranging from 0-1 in 0.25 steps. Examples: 1.25, 2.50, 4
 
   // example ratingsObj: {
