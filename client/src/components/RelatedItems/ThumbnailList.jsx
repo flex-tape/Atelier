@@ -18,7 +18,7 @@ margin-right: 5px;
 margin-bottom: 15px;
 // background-color: #f0ffff;
 background-color: rgba(168,168,168,.7);
-z-index: 2;
+z-index: 1;
 border: 1.5px solid white;
 border-radius: 10px;
 `
