@@ -19,8 +19,6 @@ export default function App() {
     setProductID(id);
   }
 
-
-
   return (
     <IDContext.Provider value={productID}>
       <div >

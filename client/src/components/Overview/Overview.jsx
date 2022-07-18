@@ -118,10 +118,3 @@ export default function Overview (props) {
   )
 }
 
-<<<<<<< HEAD
-  // const changeID = () => {
-  //   props.setProductID(65656);
-  // }
-
-=======
->>>>>>> main
