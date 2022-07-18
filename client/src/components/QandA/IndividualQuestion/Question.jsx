@@ -69,8 +69,6 @@ export default function Question(props) {
       axios.put(`/qa/questions/${props.question.question_id}/helpful`)
         .then(() => {setHelpfulCount(helpfulCount + 1)})
         .catch(err => console.log(err));
-    } else {
-      return
     }
   }
 

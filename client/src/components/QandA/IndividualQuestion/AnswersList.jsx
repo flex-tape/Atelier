@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {format} from 'date-fns';
 import styled from 'styled-components';
@@ -22,12 +22,16 @@ const AnswerLower = styled.p`
 export default function AnswerList(props) {
   const [answerHelpfulness, setAnswerHelpfulness] = useState(props.answer.helpfulness);
   const [reported, setReported] = useState('Report');
+  const [clicked, setClicked] = useState(false);
 
   const helpfulClick = (e) => {
     e.preventDefault();
-    axios.put(`/qa/answers/${props.answer.answer_id}/helpful`)
-    .then(() => {setAnswerHelpfulness(answerHelpfulness + 1)})
-    .catch(err => console.log(err));
+    if (!clicked) {
+      setClicked(true);
+      axios.put(`/qa/answers/${props.answer.answer_id}/helpful`)
+        .then(() => {setAnswerHelpfulness(answerHelpfulness + 1)})
+        .catch(err => console.log(err));
+    }
   };
 
   const reportClick = (e) => {
