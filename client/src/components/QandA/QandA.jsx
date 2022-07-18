@@ -1,12 +1,19 @@
 import React from 'react';
 import QuestionsList from './QuestionsList.jsx';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  margin-right: 200px;
+  margin-left: 200px;
+  font-family: Arial, sans-serif;
+`
 
 export default function QandA() {
 
   return(
-    <div>
-      <h3>Q & A</h3>
+    <Container>
+      <p>Questions & Answers</p>
       <QuestionsList />
-    </div>
+    </Container>
   )
 }

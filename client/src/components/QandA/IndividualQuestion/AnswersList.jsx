@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {format} from 'date-fns';
+import styled from 'styled-components';
+
+const Container = styled.div`
+
+`
+const Image = styled.img`
+  border: 1px solid black;
+  width: 120px;
+  height: 100px;
+  opacity: 1.0;
+  margin-right: 5px;
+`
+
+const AnswerLower = styled.p`
+  font-size: 12px;
+  opacity: 0.7;
+`
 
 export default function AnswerList(props) {
   const [answerHelpfulness, setAnswerHelpfulness] = useState(props.answer.helpfulness);
@@ -11,7 +28,7 @@ export default function AnswerList(props) {
     axios.put(`/qa/answers/${props.answer.answer_id}/helpful`)
     .then(() => {setAnswerHelpfulness(answerHelpfulness + 1)})
     .catch(err => console.log(err));
-  }
+  };
 
   const reportClick = (e) => {
     e.preventDefault();
@@ -20,22 +37,25 @@ export default function AnswerList(props) {
         .then(() => {setReported('Reported')})
         .catch(err => console.log(err));
     }
-  }
+  };
 
   const renderPhotos = () => {
     if (props.answer.photos !== undefined) {
       return(
-        <p>{props.answer.photos.map((photo) => (<img width='100' height='100' src={photo.url} key={photo.id}/>))}</p>
+        <p>{props.answer.photos.map((photo) => (<Image src={photo.url} key={photo.id}/>))}</p>
       )
     }
-  }
+  };
+
 
   return(
-    <pre>
+    <Container>
       {props.answer.body}
-      <p>by {props.answer.answerer_name}, {format(new Date(props.answer.date), 'MM/dd/yyyy')} | Helpful? <a href='' onClick={helpfulClick}>Yes</a> {`(${answerHelpfulness})`} | <a href='' onClick={reportClick}>{reported}</a></p>
+      <AnswerLower>
+        by {props.answer.answerer_name === 'Seller' ? <b>{props.answer.answerer_name}</b> : props.answer.answerer_name}, {format(new Date(props.answer.date), 'MM/dd/yyyy')} &emsp;|&emsp; Helpful? &nbsp; <a href='' onClick={helpfulClick}>Yes</a> {`(${answerHelpfulness})`} &emsp;|&emsp; <a href='' onClick={reportClick}>{reported}</a>
+      </AnswerLower>
       {renderPhotos()}
-    </pre>
+    </Container>
   )
 
 }
