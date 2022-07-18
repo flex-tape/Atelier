@@ -17,9 +17,9 @@ z-index: 1
 top: 0;
 left: 0;
 height: 280px;
-width: 225px;
+width: 245px;
 object-fit: contain;
-margin: 10px 1px 10px 10px;
+margin: 10px 5px 10px 5px;
 max-width: 100%;
 background-color: #f0ffff;
 `
@@ -33,12 +33,13 @@ const CompareButton = styled.button`
 position: absolute;
 z-index: 3;
 left: 400px;
-top: 200px;
+top: 880px;
 `
 
 const StarButton = styled(GiStaryu)`
-position: relative;
-float: right;
+position: absolute;
+top: 0;
+right: 0;
 height: 25px;
 width: 25px;
 `
@@ -68,7 +69,7 @@ color: red;
 export default function RelatedCard({id, setID, currentFeatures}) {
   const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
   const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
-  const [hoverStatus, setHoverStatus] = useState(true);
+  const [hoverStatus, setHoverStatus] = useState(false);
   const [compareProducts, setCompareProducts] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
@@ -133,8 +134,8 @@ export default function RelatedCard({id, setID, currentFeatures}) {
       <div>
       {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
-        <StarButton onClick={() => toggleCompare('true')}></StarButton>
-        <PhotosContainer onMouseEnter={onHover} /*onMouseLeave={offHover}*/><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage>
+        {/* <StarButton onClick={() => toggleCompare('true')}></StarButton> */}
+        <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage><StarButton onClick={() => toggleCompare('true')}></StarButton>
         {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
         <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
         <div >{relatedProductInfo.name}</div>
@@ -146,7 +147,6 @@ export default function RelatedCard({id, setID, currentFeatures}) {
     </CompareContext.Provider>
   )
 }
-
 
 // const getRelatedInfo = async () => {
   //   let productLevelInfo = await axios.get(`/products/${item}`)
