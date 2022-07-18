@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx'
 
@@ -37,84 +36,34 @@ const UnorderedList = styled.ul`
 
 
 export default function ReviewsList(props) {
-  let [reviews, setReviews] = useState(() => []);
-  let [reviewTotal, setReviewTotal] = useState(0);
-  let [pageCount, setPageCount] = useState(2);
-  let [showMoreReviews, setShowMoreReviews] = useState(true);
-  let [sortCategory, setSortCategory] = useState('relevant')
 
-  const getReviews = async () => {
-
-    let res = await axios.get('/reviews/meta', { params: { product_id: props.productID } })
-
-    let reviewCount = countReviews(res.data.ratings);
-    console.log('REVIEW COUNT IS...', reviewCount)
-    await setReviewTotal(reviewCount);
-
-    let res2 = await axios.get('/reviews', { params: { product_id: props.productID, count: reviewCount, sort: sortCategory } })
-    console.log(res2)
-    let final = res2.data.results;
-    console.log('RESULTS ARRAY LENGTH IS...', final.length)
-    console.log('RESULTS ARRAY IS...', final)
-    setReviews(final)
-  }
-
-  useEffect(() => {
-    setPageCount(2);
-    getReviews();
-
-  }, [sortCategory]);
-
-  // useEffect( () => {
-
-  // }, [sortCategory])
-
-  const countReviews = (ratingsObj) => {
-    let counter = 0;
-    for (let key in ratingsObj) {
-      if (Object.hasOwn(ratingsObj, key)) {
-        counter += parseInt(ratingsObj[key])
-      }
-    }
-    return counter;
-  }
-
-  const getMoreReviews = () => {
-    setPageCount(pageCount + 2)
-  }
-
-  const listReviewTiles = reviews.map((review, index) => {
-    if (index < pageCount) {
+  const listReviewTiles = props.reviews.map((review, index) => {
+    if (index < props.reviewDisplayCount) {
       return <li><ReviewTile review={review} /></li>
     }
   });
 
-  const sortHandler = (event) => {
-    setSortCategory(event.target.value);
-  }
-
   return (
     <>
       <SortBar>
-        <label>{reviewTotal} reviews, sorted by </label>
-        <select id="sort-bar" value={sortCategory} onChange={sortHandler}>
+        <label>{props.reviewTotal} reviews, sorted by </label>
+        <select id="sort-bar" value={props.sortCategory} onChange={props.sortHandler}>
           <option value="relevant">relevance</option>
           <option value="helpful">helpfulness</option>
           <option value="newest">newest</option>
         </select>
       </SortBar>
-      <div>
-        {/* {reviewTotal} */}
-        <UnorderedList>
-          {listReviewTiles}
-        </UnorderedList>
-      </div>
+
+      <UnorderedList>
+        {listReviewTiles}
+      </UnorderedList>
+
       <ButtonContainer>
-          {pageCount < 2 || pageCount >= reviewTotal
-            ? null
-            : <MoreReviewsButton onClick={() => getMoreReviews()} > MORE REVIEWS </MoreReviewsButton>
-          }
-        <AddReviewButton reviewCount={reviews.length} > ADD A REVIEW </AddReviewButton>
+        {props.reviewDisplayCount < 2 || props.reviewDisplayCount >= props.reviewTotal
+          ? null
+          : <MoreReviewsButton onClick={props.getMoreReviews} > MORE REVIEWS </MoreReviewsButton>
+        }
+        <AddReviewButton reviewCount={props.reviews.length} > ADD A REVIEW </AddReviewButton>
       </ButtonContainer>
     </>
 
