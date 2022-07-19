@@ -28,21 +28,9 @@ export default function RelatedItems({ setID }) {
   // grab related products of current produt
   // related products for 40344: 40345, 40346, 40351, 40350
   const [relatedItems, setRelatedItems] = useState([40345, 40346, 40351, 40350]);
-  const [productCache, setProductCache] = useState({});
-  const [styleCache, setStyleCache] = useState({});
   const [currentFeatures, setCurrentFeatures] = useState([{feature: 'Fabric', value: 'Canvas'}, {feature: 'Buttons', value: 'Brass'}])
 
   let productID = useContext(IDContext)
-
-  const addProductCache = (id, obj) => {
-    setProductCache({...productCache, [id]: obj});
-}
-
-const addStyleCache = (id, obj) => {
-  if (!styleCache[id]) {
-    setStyleCache({...styleCache, [id]: obj});
-  }
-}
 
   const getRelatedItems = () => {
     axios.get('/productsrelated', {params: {product_id: productID}})
@@ -74,13 +62,13 @@ const addStyleCache = (id, obj) => {
     <RelatedItemsContainer>
       {/* <div> */}
         <h3>Related Products</h3>
-          <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} addProductCache={addProductCache} addStyleCache={addStyleCache} productCache={productCache} styleCache={styleCache}/>
+          <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} />
         {/* <button onClick={getRelatedItems}>Get Related</button> */}
 
       {/* </div> */}
       <div>
         <h3>Your Outfit</h3>
-          <OutfitList setID={setID} addProductCache={addProductCache} addStyleCache={addStyleCache} productCache={productCache} styleCache={styleCache}/>
+          <OutfitList setID={setID} />
 
       </div>
     </RelatedItemsContainer>
