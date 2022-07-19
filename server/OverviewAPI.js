@@ -41,9 +41,10 @@ exports.productInfo = (req, res) => {
     })
 }
 
-exports.productInfo = (req, res) => {
+exports.productStyles = (req, res) => {
+  console.log(req.query.product_id)
   const product_id = req.params.product_id;
-  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}`;
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}/styles`;
   let options = {
     headers: {
       'Authorization': config.TOKEN
