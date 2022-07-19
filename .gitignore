@@ -12,3 +12,5 @@ bower_components
 
 client/dist/bundle.js
 config.js
+
+coverage
