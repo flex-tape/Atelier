@@ -47,7 +47,8 @@ display: block;
 align-items: center;
 border: 1px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
-margin-right: 50px;
+margin-right: 15px;
+margin-left: 15px;
 margin-bottom: 30px;
 `
 
@@ -77,16 +78,13 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
       setRelatedProductInfo(productCache[productID])
       setRelatedStyleInfo(styleCache[productID])
       console.log('cache: ', productCache[productID])
-
-        setHasLoaded(true)
-
+      setHasLoaded(true)
     } else {
       axios.get(`/products/${productID}`)
       .then((res) => {
       let outfitLevelInfo = {name: res.data.name, category: res.data.category}
       setRelatedProductInfo(outfitLevelInfo);
       addProductCache(productID, outfitLevelInfo);
-      console.log('is this adding??')
       })
       .catch(() => {
         console.log('GET request failed for outfitInfo')

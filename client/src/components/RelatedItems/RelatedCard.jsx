@@ -52,7 +52,8 @@ display: block;
 align-items: center;
 border: 1px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
-// margin-right: 50px;
+margin-right: 15px;
+margin-left: 15px;
 // margin-bottom: 30px;
 `
 
