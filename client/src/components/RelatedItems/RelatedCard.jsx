@@ -78,12 +78,8 @@ export default function RelatedCard({id, setID, currentFeatures}) {
     axios.get(`/products/${id}`)
       .then((res) => {
       // console.log('product level info: ', res.data);
-<<<<<<< HEAD
-      return res.data;
-=======
       let relatedLevelInfo = {name: res.data.name, category: res.data.category, features: res.data.features}
       setRelatedProductInfo(relatedLevelInfo);
->>>>>>> main
     })
     .catch(() => {
       console.log('GET request failed for relatedInfo')
