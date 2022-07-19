@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ExpandedCarousel from './ExpandedCarousel.jsx';
+import ExpandedZoomIn from './ExpandedZoomIn.jsx';
 
 const Container = styled.div`
   width: 100%;
@@ -31,9 +32,12 @@ const Header = styled.div`
 `
 const Body = styled.img`
   max-height: 750px;
+  cursor: cell;
 `
 
 export default function ExpandedModal (props) {
+
+  const [zoomIn, setZoomIn] = useState(false);
 
   return (
     <>
@@ -42,7 +46,9 @@ export default function ExpandedModal (props) {
           <Header>
             <button onClick={()=> props.setShowModal(false)}>x</button>
           </Header>
-          <Body src={props.productStyle.photos[props.currentIndex].url}/>
+          <Body onClick={()=> setZoomIn(true)} src={props.productStyle.photos[props.currentIndex].url}/>
+          {zoomIn && <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/>}
+          {/* <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/> */}
           <ExpandedCarousel currentIndex={props.currentIndex} setCurrentIndex={props.setCurrentIndex} productStyle={props.productStyle}/>
         </Content>
       </Container>}

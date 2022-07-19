@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import StyleList from './StyleList.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ExpandedModal from './ExpandedModal.jsx';
+import StyleCart from './StyleCart.jsx';
 const axios = require('axios');
 
 const Container = styled.div`
@@ -59,7 +60,7 @@ export default function Overview (props) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [cart, setCart] = useState({});
+  const [cart, setCart] = useState([]);
   // const [productID, setProductID] = useState(props.productID);
   // const [styleID, setStyleID] = useState(240500);
   //240500//240510
@@ -72,18 +73,25 @@ export default function Overview (props) {
     .catch((err) => {
     })
     axios.get(`/products/${props.productID}/styles`)
-      .then((response) => {
-        setStyleInfo(response.data.results);
-        const index = response.data.results.map((style) => (style.style_id)).indexOf(props.styleID);
-        setProductStyle({
-          ...productStyle,
-          ...response.data.results[index]})
-      })
-      .then(() => {
-        setHasLoaded(true);
-      })
-      .catch((err) => {
-      })
+    .then((response) => {
+      setStyleInfo(response.data.results);
+      const index = response.data.results.map((style) => (style.style_id)).indexOf(props.styleID);
+      setProductStyle({
+        ...productStyle,
+        ...response.data.results[index]})
+    })
+    .then(() => {
+      setHasLoaded(true);
+    })
+    .catch((err) => {
+    })
+    axios.get('/cart')
+    .then((response) => {
+      setCart(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }, [props.productID, props.styleID])
 
   return (
@@ -105,7 +113,7 @@ export default function Overview (props) {
                 <StyleList styleName={productStyle.name} setStyleID={props.setStyleID} setProductStyle={setProductStyle} styleID={props.styleID} styleInfo={styleInfo}/>
               </Selector>
               <AddtoCart>
-                Add to Cart
+                <StyleCart styleID={props.styleID} cart={cart} setCart={setCart} productStyle={productStyle}/>
               </AddtoCart>
             </SubContainer2>
           </SubContainer1>
