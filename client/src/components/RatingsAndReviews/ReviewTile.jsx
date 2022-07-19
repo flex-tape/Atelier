@@ -107,12 +107,18 @@ const Helpfulness = styled.div`
   }
 `;
 
+const HelpfulnessDivider = styled.span`
+  margin-left: 8px;
+  margin-right: 8px;
+`
+
 export default function ReviewTile(props) {
   let [isReadMore, setIsReadMore] = useState(false);
   let [lightBoxDisplay, setLightBoxDisplay] = useState(false);
   let [imageToShow, setImageToShow] = useState('');
   let [helpfulnessCount, setHelpfulnessCount] = useState(props.review.helpfulness);
   let [helpfulnessClicked, setHelpfulnessClicked] = useState(false);
+  let [reportedClicked, setReportedClicked] = useState(false);
 
   let date = dateHandler(props.review.date)
 
@@ -166,6 +172,23 @@ export default function ReviewTile(props) {
     }
   }
 
+  const markAsReported = (e) => {
+    e.preventDefault();
+    // checks if item has already been marked as helpful
+    if (!reportedClicked) {
+      axios.put(`/reviews/${props.review.review_id}/report`)
+        .then((response) => {
+          console.log('RESPONSE IS...', response)
+          if (response.status === 204) {
+            setReportedClicked(true);
+          }
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
+  }
+
   return (
     <TileDiv>
 
@@ -209,6 +232,10 @@ export default function ReviewTile(props) {
         <span>Helpful? </span>
         <a href="#" onClick={markAsHelpful}>Yes</a> ({helpfulnessCount})
         <a href="#" onClick={() => setHelpfulnessClicked(true)}>No</a>
+        <HelpfulnessDivider> | </HelpfulnessDivider>
+        <a href="#" onClick={markAsReported}>Report</a>
+
+
       </Helpfulness>
 
 

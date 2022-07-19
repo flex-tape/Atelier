@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import ReviewsList from './ReviewsList.jsx'
 import RatingsBox from './RatingsBox.jsx'
-import calculateReviewAvg from '../../lib/calculateReviewAvg.js'
 
 const Container = styled.div`
   display: flex;
@@ -29,16 +28,16 @@ export default function RatingsAndReviews (props) {
   let [reviews, setReviews] = useState(() => []);
   let [reviewTotal, setReviewTotal] = useState(0);
   let [reviewDisplayCount, setReviewDisplayCount] = useState(2);
-  let [reviewAvg, setReviewAvg] = useState(0);
+  let [reviewMetadata, setReviewMetadata] = useState('');
   let [sortCategory, setSortCategory] = useState('relevant');
 
   const getReviews = async () => {
     let res = await axios.get('/reviews/meta', { params: { product_id: props.productID } })
 
+    setReviewMetadata(res.data)
+
     let reviewCount = countReviews(res.data.ratings);
-    let reviewAverage = calculateReviewAvg(res.data.ratings)
     await setReviewTotal(reviewCount);
-    await setReviewAvg(reviewAverage);
 
     let res2 = await axios.get('/reviews', { params: { product_id: props.productID, count: reviewCount, sort: sortCategory } })
     let final = res2.data.results;
@@ -64,7 +63,6 @@ export default function RatingsAndReviews (props) {
     return counter;
   }
 
-
   const getMoreReviews = () => {
     setReviewDisplayCount(reviewDisplayCount + 2)
   }
@@ -77,8 +75,7 @@ export default function RatingsAndReviews (props) {
     <div>
     <Container id="ratings-reviews-container">
       <RatingsContainer id="ratings-container">
-        {reviewAvg}
-        <RatingsBox />
+        <RatingsBox metadata={reviewMetadata} />
       </RatingsContainer>
       <ReviewsContainer id="reviews-container">
         <ReviewsList id="reviews-container" reviews={reviews} reviewDisplayCount={reviewDisplayCount} reviewTotal={reviewTotal} productID={props.productID} sortCategory={sortCategory} sortHandler={sortHandler} getMoreReviews={getMoreReviews} />
