@@ -17,9 +17,11 @@ z-index: 1
 top: 0;
 left: 0;
 height: 280px;
-width: 245px;
+width: 260px;
 object-fit: contain;
-margin: 10px 5px 10px 5px;
+// margin: 10px 5px 10px 5px;
+margin-top: 5px;
+margin-bottom: 10px;
 max-width: 100%;
 background-color: #f0ffff;
 `
@@ -33,8 +35,8 @@ justify-content: space-around;
 
 const RemoveButton = styled(HiX)`
 position: absolute;
-top: 0;
-right: 0;
+top: 6px;
+right: 6px;
 height: 25px;
 width: 25px;
 `
