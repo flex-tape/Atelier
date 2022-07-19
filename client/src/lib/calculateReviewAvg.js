@@ -1,5 +1,5 @@
 export default function calculateReviewAvg (ratingsObj) {
-  // Usage: function recieves a ratings object and returns a number consisting of 0-4 whole stars and a decimal ranging from 0-1 in 0.25 steps. Examples: 1.25, 2.50, 4
+  // Usage: function recieves a ratings object and returns an object with two items: the first is a string of the average rating to a single decimal (e.g. 3.125 -> "3.1") and the second is an array in which the first element represents the whole star count and the second represents the fractional star count
 
   // example ratingsObj: {
   //     "1": "77",
@@ -11,7 +11,6 @@ export default function calculateReviewAvg (ratingsObj) {
 
   let counter = 0;
   let sum = 0;
-  let result = 0;
 
   for (let key in ratingsObj) {
     if (Object.hasOwn(ratingsObj, key)) {
@@ -25,24 +24,27 @@ export default function calculateReviewAvg (ratingsObj) {
   // and round to 2 decimals (i.e. 3.13) stored as a string
   let numArray = roundedAvg.split('.');
   // this rounded average will be evaluated by splitting the string representing an integer and a decimal (3.13 -> ["3", "13"])
-  let wholeStarCount = numArray[0]; // "3"
+  let starWholeNumber = parseInt(numArray[0]); // 3
+  let starDecimal;
 
-  result += parseInt(wholeStarCount);
-  // converts string whole number to integer for addition operations in the next part
-
-  let parsedDecimal = parseInt(numArray[1]); // "13" -> 13
+  let parsedDecimal = numArray[1]; // "13"
 
   if (parsedDecimal >= 0 && parsedDecimal <= 13) {
-    result += 0;
+    starDecimal = 0;
   } else if (parsedDecimal >= 13 && parsedDecimal <= 38) {
-    result += 0.25;
+    starDecimal = .25;
   } else if (parsedDecimal >= 38 && parsedDecimal <= 63) {
-    result += 0.5;
+    starDecimal = 0.5;
   } else if (parsedDecimal >= 63 && parsedDecimal <= 88) {
-    result += 0.75;
+    starDecimal = 0.75;
   } else if (parsedDecimal >= 88 && parsedDecimal <= 100) {
-    result += 1;
+    starDecimal = 1;
   }
-  return result;
+  let obj = {
+    ratingSummary: (sum / counter).toFixed(1), // e.g. "3.1"
+    starSummary: [starWholeNumber, starDecimal] // e.g. [3, 0]
+  }
+
+  return obj;
   // result can be used as an argument to another function that renders the star elements, or it can also be a part of this function
 }
