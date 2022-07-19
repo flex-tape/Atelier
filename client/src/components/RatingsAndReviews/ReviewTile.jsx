@@ -102,14 +102,21 @@ const Helpfulness = styled.div`
   padding-top: 10px;
   font-size: 0.95em;
 
+  & a:nth-child(2) {
+    margin-left: 4px;
+  }
+
   & a:nth-child(3) {
     margin-left: 4px;
   }
+
 `;
 
 const HelpfulnessDivider = styled.span`
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
+  font-size: 16px;
+  vertical-align: bottom;
 `
 
 export default function ReviewTile(props) {
@@ -231,7 +238,7 @@ export default function ReviewTile(props) {
       <Helpfulness>
         <span>Helpful? </span>
         <a href="#" onClick={markAsHelpful}>Yes</a> ({helpfulnessCount})
-        <a href="#" onClick={() => setHelpfulnessClicked(true)}>No</a>
+        {/* <a href="#" onClick={() => setHelpfulnessClicked(true)}>No</a> */}
         <HelpfulnessDivider> | </HelpfulnessDivider>
         <a href="#" onClick={markAsReported}>Report</a>
 
