@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext } from 'react';
-// import ReactDOM from 'react-dom';
 import Overview from './Overview/Overview.jsx';
 import QandA from './QandA/QandA.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
@@ -18,8 +17,6 @@ export default function App() {
   const setID = (id) => {
     setProductID(id);
   }
-
-
 
   return (
     <IDContext.Provider value={productID}>

@@ -13,7 +13,7 @@ exports.listReviews = (req, res) => {
     ...options,
     params: {
       product_id: req.query.product_id,
-      page: req.query.page,
+      page: req.query.page || 1,
       count: req.query.count,
       sort: req.query.sort
     }
