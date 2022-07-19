@@ -9,7 +9,7 @@ import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 
 const RelatedCarousel = styled.div`
 display: flex;
-position: relative;
+// position: relative;
 max-width: 1300px;
 overflow: hidden;
 justify-content: space-between;

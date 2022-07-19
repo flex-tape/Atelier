@@ -132,7 +132,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
 
   return (
     <CompareContext.Provider value={compareProducts}>
-
+      <div>
       {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
         {/* <StarButton onClick={() => toggleCompare('true')}></StarButton> */}
@@ -144,7 +144,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>
       </RelatedItemsCard>}
-
+      </div>
     </CompareContext.Provider>
   )
 }
