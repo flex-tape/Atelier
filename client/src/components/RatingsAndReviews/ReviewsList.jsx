@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx'
 
@@ -18,79 +17,55 @@ const ButtonContainer = styled.div`
   display: inline-flex;
 `;
 
+const SortBar = styled.form`
+  margin-top: 5px;
+`;
+
+const UnorderedList = styled.ul`
+  padding: 0;
+  max-height: 1000px;
+  overflow: auto;
+  &> li + li {
+    border-top: 1px solid black;
+  }
+  & li:first-child div:first-child {
+    // border-box: content-box;
+    padding-top: 5px;
+  }
+`;
+
+
 export default function ReviewsList(props) {
-  const [reviews, setReviews] = useState(() => []);
-  const [reviewCounter, setReviewCount] = useState(() => 0);
-  let [pageCount, setPageCount] = useState(1);
-  let [showMoreReviews, setShowMoreReviews] = useState(true);
 
-  useEffect(() => {
-
-    axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount } })
-      .then((response) => {
-        if (response.data.results.length < 2) {
-          setShowMoreReviews(false);
-        }
-        setReviews(response.data.results);
-        setPageCount(pageCount + 1);
-      })
-      .catch((e) => console.log(e));
-
-    // get review metadata to count total number of reviews; 'more reviews' button won't display if length of array exceeds the count
-    axios.get('/reviews/meta', { params: { product_id: props.productID } })
-      .then((response) => {
-        setReviewCount(countReviews(response.data.ratings));
-      })
-      .catch((e) => console.log(e));
-
-  }, []);
-
-  const countReviews = (ratingsObj) => {
-    let counter = 0;
-    for (let key in ratingsObj) {
-      if (Object.hasOwn(ratingsObj, key)) {
-        counter += parseInt(ratingsObj[key])
-      }
+  const listReviewTiles = props.reviews.map((review, index) => {
+    if (index < props.reviewDisplayCount) {
+      return <li><ReviewTile review={review} /></li>
     }
-    return counter;
-  }
-
-  const getMoreReviews = () => {
-    // default = 2 reviews
-    axios.get('/reviews', { params: { product_id: props.productID, count: 2, page: pageCount } })
-    .then((response) => {
-      if (response.data.results.length < 2) {
-        setShowMoreReviews(false);
-      }
-      let updatedReviews = reviews.concat(response.data.results)
-      setReviews(updatedReviews);
-      setPageCount(pageCount + 1);
-      console.log(pageCount)
-    })
-    .catch((e) => console.log(e))
-  }
-
-
-  const listReviewTiles = reviews.map((review) =>
-    <li><ReviewTile review={review} /></li>
-  )
+  });
 
   return (
-    <div>
-      <div>
-          {/* {reviewCounter} */}
-        <ul>
-          {listReviewTiles}
-        </ul>
-      </div>
+    <>
+      <SortBar>
+        <label>{props.reviewTotal} reviews, sorted by </label>
+        <select id="sort-bar" value={props.sortCategory} onChange={props.sortHandler}>
+          <option value="relevant">relevance</option>
+          <option value="helpful">helpfulness</option>
+          <option value="newest">newest</option>
+        </select>
+      </SortBar>
+
+      <UnorderedList>
+        {listReviewTiles}
+      </UnorderedList>
+
       <ButtonContainer>
-        { showMoreReviews
-          ? <MoreReviewsButton onClick={() => getMoreReviews()} > MORE REVIEWS </MoreReviewsButton>
-          : null
+        {props.reviewDisplayCount < 2 || props.reviewDisplayCount >= props.reviewTotal
+          ? null
+          : <MoreReviewsButton onClick={props.getMoreReviews} > MORE REVIEWS </MoreReviewsButton>
         }
-        <AddReviewButton reviewCount={reviews.length} > ADD A REVIEW </AddReviewButton>
+        <AddReviewButton reviewCount={props.reviews.length} > ADD A REVIEW </AddReviewButton>
       </ButtonContainer>
-    </div>
+    </>
 
   )
 }

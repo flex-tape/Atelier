@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import dateHandler from '../../lib/dateHandler.js'
 
 const TileDiv = styled.div`
-  // display: flex;
-  // border: solid 1px black;
   color: black;
-
   padding: 30px 0;
-  // height: 200px;
 `;
 
 const StarsAndUserInfoBar = styled.div`
   display: flex;
+  box-sizing: border-box;
   justify-content: space-between;
   margin-bottom: 10px;
+  padding-right: 5px;
 `;
 
 const ReviewSummary = styled.h4`
   box-sizing: border-box;
   width: 960px;
+  font-size: 18px;
+  margin-bottom: 20px;
 `;
 
 const ReviewBody = styled.div`
+  box-sizing: border-box;
+  text-align: left;
 `;
 
 const ExpandReviewsButton = styled.button`
@@ -37,30 +41,80 @@ const ExpandReviewsButton = styled.button`
   &:hover {
     text-decoration: underline;
   }
+  position: relative;
+  bottom: 0.4em;
 `;
 
 const PhotoCarousel = styled.div`
   display: flex;
+  box-sizing: border-box;
   margin-top: 16px;
+  margin-bottom: 12px;
   gap: 8px;
 
   img {
-    height: 84px;
-    width: 84px;
+    object-fit: cover;
+    height: 80px;
+    width: 10%
   }
 `
 
+const LightBox = styled.div`
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.80);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    object-fit: cover;
+    width: 50%;
+    height: 50%;
+  }
+`;
+
+const Recommended = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+  svg {
+    height: 18px;
+    margin-right: 4px;
+    position: relative;
+    bottom: .10em;
+  }
+  align-content: center;
+`;
+
+const SellerResponse = styled.div`
+  background-color: grey;
+`;
+
+const Helpfulness = styled.div`
+  box-sizing: border-box;
+  padding-top: 10px;
+  font-size: 0.95em;
+
+  & a:nth-child(3) {
+    margin-left: 4px;
+  }
+`;
+
 export default function ReviewTile(props) {
   let [isReadMore, setIsReadMore] = useState(false);
-  const [lightBoxDisplay, setLightBoxDisplay] = useState(false);
-  // const toggleReadMore = () => {
-  //   setIsReadMore(!isReadMore)
-  // }
-  let dateObj = new Date(props.review.date);
-  let month = dateObj.toLocaleString("en-US", { month: "long" });
-  let day = dateObj.getUTCDate("en-US", { day: "long" });
-  let year = dateObj.getFullYear()
-  let date = month + ' ' + day + ', ' + year;
+  let [lightBoxDisplay, setLightBoxDisplay] = useState(false);
+  let [imageToShow, setImageToShow] = useState('');
+  let [helpfulnessCount, setHelpfulnessCount] = useState(props.review.helpfulness);
+  let [helpfulnessClicked, setHelpfulnessClicked] = useState(false);
+
+  let date = dateHandler(props.review.date)
 
   const RenderDescription = () => {
     if (props.review.body.length > 250) {
@@ -81,8 +135,36 @@ export default function ReviewTile(props) {
   }
 
   const listPhotos = props.review.photos.map((photo) =>
-    <img src={photo.url}></img>
+    <img src={photo.url} onClick={() => showImage(photo.url)}></img>
   )
+
+  const showImage = (image) => {
+    setImageToShow(image);
+
+    setLightBoxDisplay(true);
+  }
+
+  const closeImage = () => {
+    setLightBoxDisplay(false);
+  }
+
+  const markAsHelpful = (e) => {
+    e.preventDefault();
+    // checks if item has already been marked as helpful
+    if (!helpfulnessClicked) {
+      axios.put(`/reviews/${props.review.review_id}/helpful`)
+        .then((response) => {
+          console.log('RESPONSE IS...', response)
+          if (response.status === 204) {
+            setHelpfulnessCount(helpfulnessCount + 1);
+            setHelpfulnessClicked(true);
+          }
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
+  }
 
   return (
     <TileDiv>
@@ -95,9 +177,41 @@ export default function ReviewTile(props) {
         {props.review.summary}
       </ReviewSummary>
       {RenderDescription()}
-      <PhotoCarousel>
-        {listPhotos}
-      </PhotoCarousel>
+      {listPhotos.length > 0
+        ? <PhotoCarousel>
+          {listPhotos}
+        </PhotoCarousel>
+        : ''
+      }
+      {lightBoxDisplay
+        ? <LightBox onClick={closeImage}>
+          <img id="lightbox-img" src={imageToShow} onClick={closeImage}></img>
+        </LightBox>
+        : ''
+      }
+      {props.review.recommend
+        ? <Recommended>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          I recommend this product
+        </Recommended>
+        : ''
+      }
+      {props.review.response
+        ? <SellerResponse>
+          <h5>Response:</h5>
+          <p>{props.review.response}</p>
+        </SellerResponse>
+        : ''
+      }
+      <Helpfulness>
+        <span>Helpful? </span>
+        <a href="#" onClick={markAsHelpful}>Yes</a> ({helpfulnessCount})
+        <a href="#" onClick={() => setHelpfulnessClicked(true)}>No</a>
+      </Helpfulness>
+
+
 
     </TileDiv>
   )
