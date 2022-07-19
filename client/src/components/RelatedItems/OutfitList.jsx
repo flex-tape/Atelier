@@ -5,7 +5,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import OutfitCard from './OutfitCard.jsx'
 import { BsPlus } from 'react-icons/bs';
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
+import { FaAngleDoubleRight, FaAngleDoubleLeft} from 'react-icons/fa';
+import { AiFillStar, AiOutlineStar} from 'react-icons/Ai';
 
 const OutfitCarousel = styled.div`
 display: flex;
@@ -120,8 +121,9 @@ export default function OutfitList ({ setID }) {
 
   return (
     <div>
-      <div onClick={seeChange}>
-        Hello
+      <div position='relative'>
+        <div><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /></div>
+        <div><AiOutlineStar /><AiOutlineStar /><AiOutlineStar /><AiOutlineStar /><AiOutlineStar /></div>
       </div>
       <OutfitCarousel>
       {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
