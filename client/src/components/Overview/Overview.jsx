@@ -9,8 +9,12 @@ const axios = require('axios');
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%,
-  width: 100%
+  height: 100%;
+  width: 100%;
+
+  h4 {
+    text-transform: uppercase;
+  }
 `
 const SubContainer1 = styled.div`
   flex: 2 200px;
@@ -21,6 +25,10 @@ const Description = styled.div`
   flex: 1 100px;
   border: 1px dotted;
   margin: 5px;
+
+  p {
+    opacity: 70%;
+  }
 `
 const SubContainer2 = styled.div`
   flex: 2 200px;
@@ -40,17 +48,21 @@ const Product = styled.div`
   flex: 1 200px;
   border: 1px dotted;
   margin: 5px;
-  padding-left: 29px;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-transform: uppercase;
 `
 const Selector = styled.div`
   flex: 1 200px;
   border: 1px dotted;
   margin: 5px;
-`
-const AddtoCart = styled.div`
-  flex: 1 200px;
-  border: 1px dotted;
-  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-transform: uppercase;
+
 `
 
 export default function Overview (props) {
@@ -104,22 +116,22 @@ export default function Overview (props) {
             </Image>
             <SubContainer2>
               <Product>
-                <h1>{productInfo.name}</h1>
-                <div>{productInfo.category}</div>
+                <div>
+                  <div>{productInfo.category}</div>
+                  <h1>{productInfo.name}</h1>
+                </div>
                 {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
                 {productStyle.sale_price === null ? null : <div>${productStyle.sale_price}</div>}
               </Product>
               <Selector>
-                <StyleList styleName={productStyle.name} setStyleID={props.setStyleID} setProductStyle={setProductStyle} styleID={props.styleID} styleInfo={styleInfo}/>
+              <StyleList styleName={productStyle.name} setStyleID={props.setStyleID} setProductStyle={setProductStyle} styleID={props.styleID} styleInfo={styleInfo}/>
               </Selector>
-              <AddtoCart>
-                <StyleCart styleID={props.styleID} cart={cart} setCart={setCart} productStyle={productStyle}/>
-              </AddtoCart>
+              <StyleCart styleID={props.styleID} cart={cart} setCart={setCart} productStyle={productStyle}/>
             </SubContainer2>
           </SubContainer1>
           <Description>
             <h4>{productInfo.slogan}</h4>
-            <div>{productInfo.description}</div>
+            <p>{productInfo.description}</p>
           </Description>
       </Container>}
     </>

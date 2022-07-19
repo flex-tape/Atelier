@@ -26,6 +26,9 @@ const Content = styled.div`
   width: 1200px;
   background-color: #fff;
   object-fit: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 const Header = styled.div`
 
@@ -34,10 +37,70 @@ const Body = styled.img`
   max-height: 750px;
   cursor: cell;
 `
+const Container2 = styled.div`
+  background-color: #fff;
+  display: flex;
+  align-items: all;
+  z-index: 1;
+`
+
+const ZoomArea = styled.figure`
+  width: 1200px;
+  height: 800px;
+  overflow: hidden;
+  border: 1px #fff;
+  position: relative;
+`
+
+const ZoomImg = styled.img`
+  max-width: 100%;
+  min-width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  object-fit: contain;
+`
 
 export default function ExpandedModal (props) {
 
   const [zoomIn, setZoomIn] = useState(false);
+
+  const handleZoom = async (e) => {
+    e.preventDefault();
+    await setZoomIn(true);
+    var zoom_area = document.getElementById("zoom_area");
+    var zoom_img = document.getElementById("zoom_img");
+
+    zoom_area.addEventListener("mousemove", function(event) {
+
+      const Coordinates = {
+        X: event.clientX - zoom_area.offsetLeft,
+        Y: event.clientY - zoom_area.offsetTop
+      }
+
+      const ZoomCoord = Object.create(Coordinates);
+
+      const X = event.clientX - zoom_area.offsetLeft
+      const Y = event.clientY - zoom_area.offsetTop
+
+      const mWidth = zoom_area.offsetWidth
+      const mHeight = zoom_area.offsetHeight
+
+      ZoomCoord.X = ( ZoomCoord.X / mWidth ) * 100
+      ZoomCoord.Y = ( ZoomCoord.Y / mHeight ) * 100
+
+      console.log('clientx', ZoomCoord.X);
+      console.log('clienty', ZoomCoord.Y);
+      zoom_img.style.transform = 'translate(-'+ZoomCoord.X+'%, -'+ZoomCoord.Y+'%) scale(2.5)'
+    })
+
+    zoom_area.addEventListener("mouseleave", function() {
+      zoom_img.style.transform = 'translate(-50%,-50%) scale(1)'
+    })
+
+  }
 
   return (
     <>
@@ -46,12 +109,17 @@ export default function ExpandedModal (props) {
           <Header>
             <button onClick={()=> props.setShowModal(false)}>x</button>
           </Header>
-          <Body onClick={()=> setZoomIn(true)} src={props.productStyle.photos[props.currentIndex].url}/>
-          {zoomIn && <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/>}
+          <Body onClick={handleZoom} src={props.productStyle.photos[props.currentIndex].url}/>
+          {/* {zoomIn && <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/>} */}
           {/* <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/> */}
           <ExpandedCarousel currentIndex={props.currentIndex} setCurrentIndex={props.setCurrentIndex} productStyle={props.productStyle}/>
         </Content>
       </Container>}
+      {zoomIn && props.hasLoaded && <Container2>
+        <ZoomArea id="zoom_area">
+          <ZoomImg id="zoom_img" src={props.productStyle.photos[props.currentIndex].url}/>
+        </ZoomArea>
+      </Container2>}
     </>
   )
 }

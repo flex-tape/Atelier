@@ -30,7 +30,7 @@ const Content = styled.div`
 const Body = styled.div`
   max-height: 300px;
   align-self: center;
-  padding-left: 150px;
+  padding-left: 100px;
 `
 
   return (

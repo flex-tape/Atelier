@@ -5,30 +5,45 @@ import QuantityEntry from './QuantityEntry.jsx';
 import SizeModal from './SizeModal.jsx';
 const axios = require('axios');
 
-const Container = styled.fieldset`
+const Container = styled.div`
+  flex: 1 100px;
+  border: 1px dotted;
+  margin: 5px;
   display: flex;
-  flex-wrap: wrap;
-  border: 0;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 30px;
+
+  select {
+    padding: 12px 15px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-right: 12px;
+    background: none;
+    font-weight: bold;
+  }
+
+  button {
+    padding: 12px 15px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-right: 12px;
+    background: none;
+    font-weight: bold;
+  }
 `
 
 const Size = styled.select`
-
 `
 const OOS = styled.select`
-
 `
 const QuantityActive = styled.select`
-
 `
 const QuantityDisabled = styled.select`
-
 `
 const Add = styled.button`
-
 `
-
 const AddSize = styled.button`
-
 `
 
 export default function StyleCart (props) {
@@ -86,9 +101,8 @@ export default function StyleCart (props) {
 
 
   return (
-    <>
       <Container>
-
+        <div>
         {styleObj !== null && <Size value={selectSize} onChange={()=> setSelectSize(event.target.value)}>
           <option value ='SELECT SIZE'>SELECT SIZE</option>
           {Object.keys(styleObj).map((key) => (
@@ -108,7 +122,8 @@ export default function StyleCart (props) {
         {selectSize === 'SELECT SIZE' && <QuantityDisabled disabled>
           <option value='-'>-</option>
         </QuantityDisabled>}
-
+        </div>
+        <div>
         {styleObj !== null && selectSize !== 'SELECT SIZE' && <Add onClick={handleAPICart}>
           ADD TO CART +
         </Add>}
@@ -116,11 +131,11 @@ export default function StyleCart (props) {
         {styleObj !== null && selectSize === 'SELECT SIZE' && <AddSize onClick={()=> setSizeModal(true)}>
           ADD TO CART +
         </AddSize>}
+        </div>
 
         {sizeModal && <SizeModal setSizeModal={setSizeModal} />}
 
       </Container>
-    </>
   )
 }
 

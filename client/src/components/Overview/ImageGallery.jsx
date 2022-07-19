@@ -24,7 +24,7 @@ export default function ImageGallery (props) {
   return (
     <>
     {props.hasLoaded && <Container>
-      <MainImg onClick={()=> props.setShowModal(true)} src={props.productStyle.photos[props.currentIndex].url}/>
+      <MainImg id="test" onClick={()=> props.setShowModal(true)} src={props.productStyle.photos[props.currentIndex].url}/>
       <IGCarousel currentIndex={props.currentIndex} setCurrentIndex={props.setCurrentIndex} productStyle={props.productStyle}/>
     </Container>}
     </>

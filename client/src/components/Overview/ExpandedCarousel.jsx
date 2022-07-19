@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ExpandedCarouselEntry from './ExpandedCarouselEntry.jsx';
 
 const Container = styled.div`
+  align-self: center;
   display: flex;
   max-width: 750px;
   overflow: hidden;

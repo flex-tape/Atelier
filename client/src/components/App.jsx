@@ -4,8 +4,13 @@ import Overview from './Overview/Overview.jsx';
 import QandA from './QandA/QandA.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
+import styled from 'styled-components';
 const axios = require('axios');
 export const IDContext = React.createContext()
+
+const Container = styled.div`
+  font-family: Arial, sans-serif;
+`
 
 export default function App() {
   const [productID, setProductID] = useState(40344);
@@ -31,13 +36,13 @@ export default function App() {
 
   return (
     <IDContext.Provider value={productID}>
-      <div>
+      <Container>
         <h1>ATELIER</h1>
         <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
         {/* <RatingsAndReviews productID={productID}/> */}
-      </div>
+      </Container>
     </IDContext.Provider>
   )
 }
