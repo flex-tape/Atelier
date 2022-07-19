@@ -11,6 +11,7 @@ const OutfitCarousel = styled.div`
 display: flex;
 max-width: 1300px;
 overflow: hidden;
+align-items: center;
 `
 
 const AddCard = styled.div`
@@ -21,13 +22,15 @@ display: block;
 align-items: center;
 border: 1px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
-margin-right: 50px;
+margin-right: 15px;
+margin-left: 15px;
 margin-bottom: 30px;
 `
 
 const AddProduct = styled.h2 `
 position: absolute;
 left: 65px
+
 `
 
 const PlusIcon = styled(BsPlus)`
@@ -40,6 +43,23 @@ width: 250px;
 margin: 10px;
 background-color: #f0ffff;
 `
+
+const RightArrow = styled(FaAngleDoubleRight)`
+height: 50px;
+width: 50px;
+`
+
+const LeftArrow = styled(FaAngleDoubleLeft)`
+height: 50px;
+width: 50px;
+`
+
+const HideArrow = styled(FaAngleDoubleLeft)`
+height: 50px;
+width: 50px;
+visibility: hidden;
+`
+
 
 
 export default function OutfitList ({ setID }) {
@@ -104,13 +124,13 @@ export default function OutfitList ({ setID }) {
         Hello
       </div>
       <OutfitCarousel>
+      {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
       {slicedOutfitList.map((item, index) => (
           <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList} addProductCache={addProductCache} addStyleCache={addStyleCache} productCache={productCache} styleCache={styleCache}/>
         ))}
+        {outfitLength[1] < outfitList.length ? <RightArrow onClick={() => moveOutfit('right')}/> : <HideArrow />}
       </OutfitCarousel>
-      {outfitLength[0] > 0 ? <FaAngleDoubleLeft onClick={() => moveOutfit('left')}/> : null}
-    {outfitLength[1] < outfitList.length ? <FaAngleDoubleRight onClick={() => moveOutfit('right')}/> : null}
     </div>
 
   )

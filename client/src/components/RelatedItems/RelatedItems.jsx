@@ -10,8 +10,11 @@ import OutfitList from './OutfitList.jsx'
 export const RelatedContext = React.createContext()
 
 const RelatedItemsContainer = styled.div`
-margin-left: 200px;
-margin-right: 200px;
+// margin-left: 200px;
+// margin-right: 200px;
+margin-left: auto;
+margin-right: auto;
+
 `
 
 const RelatedCarousel = styled.div`
@@ -32,8 +35,10 @@ export default function RelatedItems({ setID }) {
   const getRelatedItems = () => {
     axios.get('/productsrelated', {params: {product_id: productID}})
     .then((res) => {
-      // console.log('new response: ', res)
-      setRelatedItems(res.data);
+      let uniqueRelated = Array.from(new Set(res.data));
+      // console.log('new response: ', res.data)
+      // console.log('unique set: ', uniqueRelated)
+      setRelatedItems(uniqueRelated);
     })
   }
 
@@ -59,13 +64,13 @@ export default function RelatedItems({ setID }) {
     <RelatedItemsContainer>
       <div>
         <h3>Related Products</h3>
-          <RelatedListCarousel setID={setID} currentFeatures={currentFeatures}/>
+          <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} />
         {/* <button onClick={getRelatedItems}>Get Related</button> */}
 
       </div>
       <div>
         <h3>Your Outfit</h3>
-          <OutfitList setID={setID}/>
+          <OutfitList setID={setID} />
 
       </div>
     </RelatedItemsContainer>

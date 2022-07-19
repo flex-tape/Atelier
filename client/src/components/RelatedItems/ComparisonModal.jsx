@@ -24,6 +24,25 @@ const CompareDiv = styled.div`
   height: 550px;
 `
 
+const CurrentProduct = styled.th`
+text-align: center;
+`
+const Comparison = styled.th`
+padding-left: 30px;
+`
+
+const Features = styled.td`
+text-align: center;
+`
+// const RelatedFeature = styled.td `
+// padding-left: 50px;
+// `
+
+// const CurrentFeature = styled.td `
+// padding-left: 60px;
+// `
+
+
 const RemoveButton = styled(HiX)`
 float: right;
 height: 25px;
@@ -65,12 +84,12 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures, 
       <CompareTable>
         <thead>
           <tr>
-            <th colSpan={'3'}>Comparison<RemoveButton onClick={()=>toggleCompare()}></RemoveButton></th>
+            <Comparison colSpan={'3'}>Comparison<RemoveButton onClick={()=>toggleCompare()}></RemoveButton></Comparison>
           </tr>
         </thead>
         <thead>
           <tr>
-            <th>Current Product</th>
+            <CurrentProduct>Current Product</CurrentProduct>
             <th></th>
             <th>Related Product</th>
           </tr>
@@ -78,9 +97,9 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures, 
         <tbody>
           {allFeatures.map((feature, index) => (
             <tr key={index}>
-              {currentFeaturesObj[feature] ? <td>{currentFeaturesObj[feature]}</td>: <td></td>}
-              <td>{feature}</td>
-              {relatedFeaturesObj[feature] ? <td>{relatedFeaturesObj[feature]}</td>: <td></td>}
+              {currentFeaturesObj[feature] ? <Features>{currentFeaturesObj[feature]}</Features>: <td></td>}
+              <Features>{feature}</Features>
+              {relatedFeaturesObj[feature] ? <Features>{relatedFeaturesObj[feature]}</Features>: <td></td>}
             </tr>
             ))}
           {/* <tr>
