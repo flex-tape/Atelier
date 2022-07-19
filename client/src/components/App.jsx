@@ -25,10 +25,10 @@ export default function App() {
     <IDContext.Provider value={productID}>
       <div >
         <h1>HELLO, WORLD!</h1>
-        {/* <Overview setProductID={setProductID} productID={productID}/>
-        <RelatedItems setID={setID} productID={productID}/> */}
+        <Overview setProductID={setProductID} productID={productID}/>
+        <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
-        {/* <RatingsAndReviews productID={productID}/> */}
+        <RatingsAndReviews productID={productID}/>
       </div>
     </IDContext.Provider>
   )

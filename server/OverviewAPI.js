@@ -51,12 +51,13 @@ exports.productInfo = (req, res) => {
   }
   axios.get(url, options)
     .then((response) => {
-      console.log('getOne', response.data);
+      // console.log(response);
       res.status(200).send(response.data)
-  })
-  .catch((err) => {
-    res.status(400).send(err);
-  })
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send(err);
+    })
 }
 
 exports.postCart = (req, res) => {
