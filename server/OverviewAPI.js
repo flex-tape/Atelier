@@ -41,12 +41,8 @@ exports.productInfo = (req, res) => {
     })
 }
 
-<<<<<<< HEAD
 exports.productStyles = (req, res) => {
   console.log(req.query.product_id)
-=======
-exports.productInfo = (req, res) => {
->>>>>>> main
   const product_id = req.params.product_id;
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product_id}`;
   let options = {

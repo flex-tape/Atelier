@@ -35,11 +35,6 @@ const UnorderedList = styled.ul`
 `;
 
 
-<<<<<<< HEAD
-  const listReviewTiles = reviews.map((review, key) =>
-    <ReviewTile key={key} review={review} />
-  )
-=======
 export default function ReviewsList(props) {
 
   const listReviewTiles = props.reviews.map((review, index) => {
@@ -47,7 +42,6 @@ export default function ReviewsList(props) {
       return <li><ReviewTile review={review} /></li>
     }
   });
->>>>>>> main
 
   return (
     <>

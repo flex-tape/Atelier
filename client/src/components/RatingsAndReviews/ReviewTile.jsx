@@ -134,13 +134,8 @@ export default function ReviewTile(props) {
     )
   }
 
-<<<<<<< HEAD
-  const listPhotos = props.review.photos.map((photo, key) =>
-    <img key={key} src={photo.url}></img>
-=======
   const listPhotos = props.review.photos.map((photo) =>
     <img src={photo.url} onClick={() => showImage(photo.url)}></img>
->>>>>>> main
   )
 
   const showImage = (image) => {
