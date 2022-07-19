@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import OutfitCard from './OutfitCard.jsx'
 import { BsPlus } from 'react-icons/bs';
 import { FaAngleDoubleRight, FaAngleDoubleLeft} from 'react-icons/fa';
-import { AiFillStar, AiOutlineStar} from 'react-icons/Ai';
+import { IoIosStar, IoIosStarOutline} from 'react-icons/io';
 
 const OutfitCarousel = styled.div`
 display: flex;
@@ -60,7 +60,26 @@ height: 50px;
 width: 50px;
 visibility: hidden;
 `
+const FilledStars = styled.div`
+width: 65%;
+overflow: hidden;
+position: absolute;
+`
 
+const StarRatings = styled.div`
+position: relative;
+display: inline-block;
+`
+
+const FilledStar = styled(IoIosStar)`
+height: 25px;
+width: 25px;
+`
+
+const BlankStar = styled(IoIosStarOutline)`
+height: 25px;
+width: 25px;
+`
 
 
 export default function OutfitList ({ setID }) {
@@ -121,10 +140,10 @@ export default function OutfitList ({ setID }) {
 
   return (
     <div>
-      <div position='relative'>
-        <div><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /></div>
-        <div><AiOutlineStar /><AiOutlineStar /><AiOutlineStar /><AiOutlineStar /><AiOutlineStar /></div>
-      </div>
+      <StarRatings>
+        <FilledStars><FilledStar /></FilledStars>
+        <div><BlankStar /></div>
+      </StarRatings>
       <OutfitCarousel>
       {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
