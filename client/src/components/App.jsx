@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useContext, useEffect } from 'react';
-// import ReactDOM from 'react-dom';
+import React, { useState, useEffect, useContext } from 'react';
 import Overview from './Overview/Overview.jsx';
-// import QandA from './QandA/QandA.jsx';
+import QandA from './QandA/QandA.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 const axios = require('axios');
@@ -36,7 +35,7 @@ export default function App() {
         <h1>ATELIER</h1>
         <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
-        {/* <QandA productID={productID}/> */}
+        <QandA productID={productID}/>
         <RatingsAndReviews productID={productID}/>
       </div>
     </IDContext.Provider>
