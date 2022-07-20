@@ -20,9 +20,12 @@ const RatingsBarList = styled.ul`
   padding-left: 0;
 
   & li {
+    box-sizing: border-box;
     display: flex;
-    margin: 8px 0;
+    padding: 8px 0;
     align-items: center;
+    border-radius: 3px;
+    gap: 8px;
   }
 
   & li:hover {
@@ -82,6 +85,8 @@ export default function RatingsBox(props) {
     })
   }
 
+
+
   return (
     <>
       <div><h3>RATINGS & REVIEWS</h3></div>
@@ -94,6 +99,11 @@ export default function RatingsBox(props) {
       <div>
         <h4>RATINGS BREAKDOWN</h4>
       </div>
+      {props.starsFilter.length > 0
+        ? (<div>Filters are enabled (<a href="#" onClick={() => props.setStarsFilter([])}>undo</a>)</div>
+        )
+        : null
+      }
       <RatingsBarContainer>
         <RatingsBarList>
           {props.hasLoaded && createRatingsBreakdown(props.metadata.ratings)}
