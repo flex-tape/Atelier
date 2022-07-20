@@ -6,6 +6,14 @@ import RelatedCard from './RelatedCard.jsx'
 import RelatedListCarousel from './RelatedListCarousel.jsx'
 import styled from 'styled-components';
 import OutfitList from './OutfitList.jsx'
+// import { createGlobalStyle } from 'styled-components';
+
+// const GlobalStyle = createGlobalStyle`
+// body {
+//   font-family: 'Source Sans Pro', sans-serif;
+// }
+// `
+
 
 export const RelatedContext = React.createContext()
 
@@ -62,6 +70,7 @@ export default function RelatedItems({ setID }) {
   return (
     <RelatedContext.Provider value={relatedItems}>
     <RelatedItemsContainer>
+      {/* <GlobalStyle /> */}
       <div>
         <h3>Related Products</h3>
           <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} />

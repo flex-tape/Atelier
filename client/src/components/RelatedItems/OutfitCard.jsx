@@ -56,13 +56,37 @@ margin-bottom: 30px;
 border-radius: 10px;
 `
 
+const ProductCategory = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px;
+`
+
+const ProductPrice = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px;
+`
+
+
+const ProductName = styled.div`
+  font-weight: 900;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 5px;
+`
+
 const StrikePrice = styled.div`
+float: left;
 text-decoration: line-through;
 text-decoration-thickness: 0.15rem;
+font-family: 'Source Sans Pro', sans-serif;
+color: gray;
+margin: 5px;
 `
 
 const SalesPrice = styled.div`
 color: red;
+font-family: 'Source Sans Pro', sans-serif;
 `
 
 export default function OutfitCard({id, setID, removeFromList, addProductCache, addStyleCache, productCache, styleCache}) {
@@ -138,10 +162,10 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
     {hasLoaded && <OutfitCardDiv>
               <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage><RemoveButton onClick={() => removeFromList(id)}></RemoveButton>
               {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
-              <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
-              <div >{relatedProductInfo.name}</div>
+              <div onClick={() => setID(id)}><ProductCategory>{relatedProductInfo.category}</ProductCategory>
+              <ProductName >{relatedProductInfo.name}</ProductName>
               {relatedStyleInfo.sale_price !== null ?
-              <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
+              <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
               <div>Star rating goes here</div></div>
             </OutfitCardDiv>}
     </div>
