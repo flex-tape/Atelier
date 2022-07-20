@@ -8,14 +8,15 @@ import { HiX } from 'react-icons/hi';
 const CompareTable = styled.table`
   position: absolute;
   z-index: 2;
-  top: 880px;
-  left: 600px;
-  width: 500px;
-  height: 500px;
+  top: 950px;
+  left: 510px;
+  width: 700px;
+  height: 540px;
   overflow: auto;
-  background-color: #f0ffff;
-  border: 1px solid lightgray;
+  background-color: rgba(245,245,245, .95);
+  border: 2px solid lightgray;
   box-shadow: 7px 7px 7px lightgray;
+  border-radius: 10px;
 `
 const CompareDiv = styled.div`
   left: 400px;
@@ -24,7 +25,50 @@ const CompareDiv = styled.div`
   height: 550px;
 `
 
+const ProductHeader = styled.th`
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+`
+const Comparison = styled.th`
+  padding-left: 35px;
+  font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+`
+
+const Features = styled.td`
+text-align: center;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 18px;
+`
+
+const RelatedFeatures = styled.td`
+width: 250px;
+text-align: center;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 18px;
+`
+
+const CurrentFeatures = styled.td`
+width: 250px;
+text-align: center;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 18px;
+`
+// const RelatedFeature = styled.td `
+// padding-left: 50px;
+// `
+
+// const CurrentFeature = styled.td `
+// padding-left: 60px;
+// `
+
+
 const RemoveButton = styled(HiX)`
+margin-top: 7px;
+margin-right: 7px;
 float: right;
 height: 25px;
 width: 25px;
@@ -65,22 +109,22 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures, 
       <CompareTable>
         <thead>
           <tr>
-            <th colSpan={'3'}>Comparison<RemoveButton onClick={()=>toggleCompare()}></RemoveButton></th>
+            <Comparison colSpan={'3'}>Comparison<RemoveButton onClick={()=>toggleCompare()}></RemoveButton></Comparison>
           </tr>
         </thead>
         <thead>
           <tr>
-            <th>Current Product</th>
+            <ProductHeader>Current Product</ProductHeader>
             <th></th>
-            <th>Related Product</th>
+            <ProductHeader>Related Product</ProductHeader>
           </tr>
         </thead>
         <tbody>
           {allFeatures.map((feature, index) => (
             <tr key={index}>
-              {currentFeaturesObj[feature] ? <td>{currentFeaturesObj[feature]}</td>: <td></td>}
-              <td>{feature}</td>
-              {relatedFeaturesObj[feature] ? <td>{relatedFeaturesObj[feature]}</td>: <td></td>}
+              {currentFeaturesObj[feature] ? <CurrentFeatures>{currentFeaturesObj[feature]}</CurrentFeatures>: <td></td>}
+              <Features>{feature}</Features>
+              {relatedFeaturesObj[feature] ? <RelatedFeatures>{relatedFeaturesObj[feature]}</RelatedFeatures>: <td></td>}
             </tr>
             ))}
           {/* <tr>

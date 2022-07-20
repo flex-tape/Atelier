@@ -22,6 +22,15 @@ z-index: 1;
 border: 1.5px solid white;
 border-radius: 10px;
 `
+
+const RightArrow = styled(FaAngleDoubleRight)`
+margin-bottom: 15px;
+`
+
+const LeftArrow = styled(FaAngleDoubleLeft)`
+margin-bottom: 15px;
+`
+
 const HideArrow = styled(FaAngleDoubleLeft)`
 visibility: hidden;
 `
@@ -33,6 +42,7 @@ visibility: hidden;
 const Container = styled.div`
 display: flex;
 position: absolute;
+align-items: center;
 // max-width: 225px;
 `
 
@@ -50,11 +60,11 @@ export default function ThumbnailList ({ id, setRelatedStyleInfo, thumbnailPhoto
 
   return (
     <Container>
-      {thumbnailLength[0] > 0 ? <FaAngleDoubleLeft onClick={() => moveCarousel('left')}/> : <HideArrow />}
+      {thumbnailLength[0] > 0 ? <LeftArrow onClick={() => moveCarousel('left')}/> : <HideArrow />}
       {slicedThumbnail.map((photo, index) => (
         <ThumbnailImage key={index} src={photo.thumbnail_url} onClick={() => setRelatedStyleInfo({...relatedStyleInfo, image: photo.thumbnail_url})}/>
       ))}
-      {thumbnailLength[1] < thumbnailPhotos.length ? <FaAngleDoubleRight onClick={() => moveCarousel('right')}/> : <HideArrow />}
+      {thumbnailLength[1] < thumbnailPhotos.length ? <RightArrow onClick={() => moveCarousel('right')}/> : <HideArrow />}
     </Container>
   )
 }

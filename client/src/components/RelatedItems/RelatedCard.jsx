@@ -17,12 +17,37 @@ z-index: 1
 top: 0;
 left: 0;
 height: 280px;
-width: 225px;
+width: 250px;
 object-fit: contain;
-margin: 10px 1px 10px 10px;
+margin: 7px 10px 10px 10px;
+// margin-top: 5px;
+// margin-bottom: 10px;
 max-width: 100%;
-background-color: #f0ffff;
+// background-color: #f0ffff;
+background-color: #e6faff;
+border-radius: 10px;
 `
+
+const ProductCategory = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px;
+`
+
+const ProductPrice = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px;
+`
+
+
+const ProductName = styled.div`
+  font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  margin: 5px;
+`
+
 const PhotosContainer = styled.div`
 position: relative;
 display: flex;
@@ -37,8 +62,9 @@ top: 880px;
 `
 
 const StarButton = styled(GiStaryu)`
-position: relative;
-float: right;
+position: absolute;
+top: 7px;
+right: 10px;
 height: 25px;
 width: 25px;
 `
@@ -49,26 +75,32 @@ height: 400px;
 width: 270px;
 display: block;
 align-items: center;
-border: 1px solid lightgray;
+border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
-margin-right: 50px;
-margin-bottom: 30px;
+margin-right: 15px;
+margin-left: 15px;
+// margin-bottom: 30px;
+border-radius: 10px;
 `
 
 const StrikePrice = styled.div`
 float: left;
 text-decoration: line-through;
 text-decoration-thickness: 0.15rem;
+font-family: 'Source Sans Pro', sans-serif;
+color: gray;
+margin: 5px;
 `
 
 const SalesPrice = styled.div`
 color: red;
+font-family: 'Source Sans Pro', sans-serif;
 `
 
 export default function RelatedCard({id, setID, currentFeatures}) {
   const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
   const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
-  const [hoverStatus, setHoverStatus] = useState(true);
+  const [hoverStatus, setHoverStatus] = useState(false);
   const [compareProducts, setCompareProducts] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
@@ -133,20 +165,19 @@ export default function RelatedCard({id, setID, currentFeatures}) {
       <div>
       {compareProducts ? <div><ComparisonModal id={id} relatedFeatures={relatedProductInfo.features} currentFeatures={currentFeatures} toggleCompare={toggleCompare}/></div> : null}
       {hasLoaded && <RelatedItemsCard>
-        <StarButton onClick={() => toggleCompare('true')}></StarButton>
-        <PhotosContainer onMouseEnter={onHover} /*onMouseLeave={offHover}*/><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage>
+        {/* <StarButton onClick={() => toggleCompare('true')}></StarButton> */}
+        <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage><StarButton onClick={() => toggleCompare('true')}></StarButton>
         {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
-        <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
-        <div >{relatedProductInfo.name}</div>
+        <div onClick={() => setID(id)}><ProductCategory>{relatedProductInfo.category}</ProductCategory>
+        <ProductName>{relatedProductInfo.name}</ProductName>
         {relatedStyleInfo.sale_price !== null ?
-        <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
+        <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
         <div>Star rating goes here</div></div>
       </RelatedItemsCard>}
-    </div>
+      </div>
     </CompareContext.Provider>
   )
 }
-
 
 // const getRelatedInfo = async () => {
   //   let productLevelInfo = await axios.get(`/products/${item}`)

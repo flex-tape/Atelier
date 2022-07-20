@@ -19,7 +19,6 @@ export default function SizeModal (props) {
 const Header = styled.div`
   align-self: flex-start;
 `
-
 const Content = styled.div`
   width: 600px;
   height: 300px;
@@ -30,7 +29,7 @@ const Content = styled.div`
 const Body = styled.div`
   max-height: 300px;
   align-self: center;
-  padding-left: 150px;
+  padding-left: 100px;
 `
 
   return (

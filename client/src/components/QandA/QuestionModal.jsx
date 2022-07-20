@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(200, 200, 200);
+  background-color: rgba(200, 200, 200, 0.9);
   position: fixed;
   top: 0;
   left: 0;
@@ -15,26 +15,29 @@ const ModalBackground = styled.div`
   z-index: 1;
 `
 const ModalContainer = styled.div`
-  width: 500px;
-  height: 500px;
-  border-radius: 12px;
+  width: 510px;
+  height: 440px;
+  border-radius: 8px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
+  position: relative;
 `
 const Title = styled.div`
   text-align: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(210, 210, 210);
   margin-bottom: 15px;
 `
 const QuestionBody = styled.textarea`
+  font-family: inherit;
   width: 100%;
   height: 150px;
   padding: 10px 10px;
   box-sizing: border-box;
-  border: 1px solid black;
+  border-color: rgba(200, 200, 200);
+  border-radius: 3px;
 `
 const Entries = styled.div`
   display: flex;
@@ -49,26 +52,49 @@ const EntryDiv = styled.div`
 `
 const EntryInput = styled.input`
   width: 97%;
+  border: solid rgba(200, 200, 200);
+  border-radius: 3px;
+  font-size: 14px;
 `
 const Authentication = styled.label`
   font-size: 10px;
   font-style: italic;
+  opacity: 0.9;
 `
 const Label = styled.label`
   display: inline-block;
   margin-bottom: 4px;
+  opacity: 0.8;
+  font-size: 14px;
 `
 const QuestionContainer = styled.div`
   margin-bottom: 10px;
 `
-const Button = styled.button`
-  padding: 12px 15px;
-  box-sizing: border-box;
-  border: 1px solid black;
-  margin-right: 12px;
-  background: none;
-  font-weight: bold;
-  margin-top: 15px;
+const Submit = styled.button`
+  position: absolute;
+  padding: 8px 10px;
+  bottom: 15px;
+  right: 10px;
+  background: rgba(51, 204, 255);
+  color: rgba(250, 250, 250);
+  border-radius: 4px;
+  border: solid rgba(210, 210, 210);
+`
+const Close = styled.button`
+  position: absolute;
+  padding: 8px 10px;
+  bottom: 15px;
+  right: 135px;
+  border-radius: 4px;
+  border: solid rgba(210, 210, 210);
+`
+const Header = styled.label`
+  font-size: 18px;
+`
+const Subtitle = styled.p`
+  font-size: 15px;
+  opacity: 0.8;
+  margin-bottom: 5px;
 `
 
 export default function QuestionModal(props) {
@@ -113,13 +139,10 @@ export default function QuestionModal(props) {
   return(
     <ModalBackground>
       <ModalContainer>
-        <div>
-          <button onClick={() => props.setOpenModal(false)}>X</button>
-        </div>
         <form onSubmit={handleSubmit}>
           <Title>
-            <h3>Ask Your Question</h3>
-            About the {props.productName} here
+            <Header>Ask Your Question</Header><br/>
+            <Subtitle>About the {props.productName} here</Subtitle>
           </Title>
           <QuestionContainer>
             <Label>What is your question?</Label>
@@ -133,11 +156,12 @@ export default function QuestionModal(props) {
             <EntryDiv>
               <Label>Email</Label>
               <EntryInput type='email' placeholder='Example: jack@email.com' value={email} onChange={handleEmailChange} maxLength='60' required />
-              <Authentication>*For authentication purposes, you will not be emailed.</Authentication>
+              <Authentication>For authentication purposes, you will not be emailed.</Authentication>
             </EntryDiv>
           </Entries>
           <div>
-            <Button type='submit'>SUBMIT QUESTION</Button>
+            <Close onClick={() => props.setOpenModal(false)}>Close</Close>
+            <Submit type='submit'>Submit Question</Submit>
           </div>
         </form>
       </ModalContainer>
