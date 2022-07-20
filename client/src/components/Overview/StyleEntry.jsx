@@ -6,6 +6,11 @@ const Image = styled.div`
   margin: 15px;
   width: 70px;
   height: 70px;
+
+  img {
+    width: 75;
+    height: 75;
+  }
 `
 export default function StyleEntry (props) {
 
