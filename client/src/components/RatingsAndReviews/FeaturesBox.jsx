@@ -6,12 +6,12 @@ const FeaturesBarContainer = styled.ul`
   width: 100%;
   list-style-type: none;
   padding-left: 0;
-  margin-top: 20px;
+  margin-top: 0px;
 `;
 
 const FeaturesListItem = styled.li`
-  margin: 20px 0;
-  font-size: 0.8em;
+  margin: 13px 0;
+  font-size: 11px;
 `;
 
 export default function FeaturesBox(props) {

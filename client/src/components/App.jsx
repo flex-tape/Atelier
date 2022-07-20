@@ -32,12 +32,12 @@ export default function App() {
 
   return (
     <IDContext.Provider value={productID}>
-      <div>
+      <div id="master-container">
         <h1>ATELIER</h1>
         <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
-        {/* <RatingsAndReviews productID={productID}/> */}
+        <RatingsAndReviews productID={productID}/>
       </div>
     </IDContext.Provider>
   )

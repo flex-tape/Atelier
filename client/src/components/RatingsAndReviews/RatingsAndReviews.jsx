@@ -7,25 +7,30 @@ import RatingsBox from './RatingsBox.jsx';
 
 const Container = styled.div`
   display: flex;
-  margin: auto;
+  // margin: auto;
   height: 1300px;
-  border: 1px dotted;
+  // border: 1px dotted;
+  // width: 70%
+  // margin: auto;
 `;
 
 const RatingsContainer = styled.section`
-  flex: 1;
+  flex: 1.25;
   display: flex;
   flex-direction: column;
-  border: 1px dotted;
+  // border: 1px dotted;
   margin: 5px;
-  padding: 20px;
+  // padding: 25px;
+  padding-right: 10px;
 `
 
 const ReviewsContainer = styled.main`
-  flex: 2;
-  border: 1px dotted;
-  margin: 5px;
-  padding: 15px;
+  flex: 2.75;
+  // border: 1px dotted;
+  // margin: 5px;
+  // padding: 15px;
+  margin-left: 20px;
+  padding-left: 10px;
 `
 
 export default function RatingsAndReviews(props) {
@@ -99,7 +104,7 @@ export default function RatingsAndReviews(props) {
   }
 
   return (
-    <div>
+    <div className="ratings-and-reviews">
       {hasLoaded &&
         <Container id="ratings-reviews-container">
           <RatingsContainer id="ratings-container">
