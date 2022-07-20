@@ -10,10 +10,10 @@ import OutfitList from './OutfitList.jsx'
 export const RelatedContext = React.createContext()
 
 const RelatedItemsContainer = styled.div`
-// margin-left: 200px;
-// margin-right: 200px;
-margin-left: auto;
-margin-right: auto;
+margin-left: 200px;
+margin-right: 200px;
+// margin-left: auto;
+// margin-right: auto;
 
 `
 
@@ -65,13 +65,10 @@ export default function RelatedItems({ setID }) {
       <div>
         <h3>Related Products</h3>
           <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} />
-        {/* <button onClick={getRelatedItems}>Get Related</button> */}
-
       </div>
       <div>
         <h3>Your Outfit</h3>
           <OutfitList setID={setID} />
-
       </div>
     </RelatedItemsContainer>
     </RelatedContext.Provider>

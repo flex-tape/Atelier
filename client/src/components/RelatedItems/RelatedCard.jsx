@@ -17,13 +17,14 @@ z-index: 1
 top: 0;
 left: 0;
 height: 280px;
-width: 260px;
+width: 250px;
 object-fit: contain;
-// margin: 10px 5px 10px 5px;
-margin-top: 5px;
-margin-bottom: 10px;
+margin: 7px 10px 10px 10px;
+// margin-top: 5px;
+// margin-bottom: 10px;
 max-width: 100%;
-background-color: #f0ffff;
+// background-color: #f0ffff;
+background-color: #e6faff;
 `
 const PhotosContainer = styled.div`
 position: relative;
@@ -40,8 +41,8 @@ top: 880px;
 
 const StarButton = styled(GiStaryu)`
 position: absolute;
-top: 6px;
-right: 6px;
+top: 7px;
+right: 10px;
 height: 25px;
 width: 25px;
 `
@@ -52,11 +53,12 @@ height: 400px;
 width: 270px;
 display: block;
 align-items: center;
-border: 1px solid lightgray;
+border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 // margin-bottom: 30px;
+border-radius: 10px;
 `
 
 const StrikePrice = styled.div`
@@ -141,7 +143,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage><StarButton onClick={() => toggleCompare('true')}></StarButton>
         {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
         <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
-        <div >{relatedProductInfo.name}</div>
+        <div>{relatedProductInfo.name}</div>
         {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>

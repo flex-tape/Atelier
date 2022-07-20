@@ -8,14 +8,15 @@ import { HiX } from 'react-icons/hi';
 const CompareTable = styled.table`
   position: absolute;
   z-index: 2;
-  top: 880px;
-  left: 600px;
-  width: 500px;
-  height: 500px;
+  top: 850px;
+  left: 510px;
+  width: 700px;
+  height: 540px;
   overflow: auto;
-  background-color: #f0ffff;
-  border: 1px solid lightgray;
+  background-color: rgb(249, 249, 249);
+  border: 2px solid lightgray;
   box-shadow: 7px 7px 7px lightgray;
+  border-radius: 10px;
 `
 const CompareDiv = styled.div`
   left: 400px;
@@ -28,7 +29,7 @@ const CurrentProduct = styled.th`
 text-align: center;
 `
 const Comparison = styled.th`
-padding-left: 30px;
+padding-left: 35px;
 `
 
 const Features = styled.td`
@@ -44,6 +45,8 @@ text-align: center;
 
 
 const RemoveButton = styled(HiX)`
+margin-top: 7px;
+margin-right: 7px;
 float: right;
 height: 25px;
 width: 25px;

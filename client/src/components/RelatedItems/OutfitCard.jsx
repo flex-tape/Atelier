@@ -17,13 +17,14 @@ z-index: 1
 top: 0;
 left: 0;
 height: 280px;
-width: 260px;
+width: 250px;
 object-fit: contain;
-// margin: 10px 5px 10px 5px;
-margin-top: 5px;
-margin-bottom: 10px;
+margin: 7px 10px 10px 10px;
+// margin-top: 5px;
+// margin-bottom: 10px;
 max-width: 100%;
-background-color: #f0ffff;
+// background-color: #f0ffff;
+background-color: #e6faff;
 `
 
 const PhotosContainer = styled.div`
@@ -35,8 +36,8 @@ justify-content: space-around;
 
 const RemoveButton = styled(HiX)`
 position: absolute;
-top: 6px;
-right: 6px;
+top: 7px;
+right: 10px;
 height: 25px;
 width: 25px;
 `
@@ -47,11 +48,12 @@ height: 400px;
 width: 270px;
 display: block;
 align-items: center;
-border: 1px solid lightgray;
+border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 margin-bottom: 30px;
+border-radius: 10px;
 `
 
 const StrikePrice = styled.div`

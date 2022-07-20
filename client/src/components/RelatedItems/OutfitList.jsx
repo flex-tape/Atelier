@@ -21,11 +21,12 @@ height: 400px;
 width: 270px;
 display: block;
 align-items: center;
-border: 1px solid lightgray;
+border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 margin-bottom: 30px;
+border-radius: 10px;
 `
 
 const AddProduct = styled.h2 `
@@ -140,10 +141,10 @@ export default function OutfitList ({ setID }) {
 
   return (
     <div>
-      <StarRatings>
+      {/* <StarRatings>
         <FilledStars><FilledStar /></FilledStars>
         <div><BlankStar /></div>
-      </StarRatings>
+      </StarRatings> */}
       <OutfitCarousel>
       {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
