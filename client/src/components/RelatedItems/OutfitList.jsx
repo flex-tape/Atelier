@@ -5,12 +5,14 @@ import axios from 'axios';
 import styled from 'styled-components';
 import OutfitCard from './OutfitCard.jsx'
 import { BsPlus } from 'react-icons/bs';
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
+import { FaAngleDoubleRight, FaAngleDoubleLeft} from 'react-icons/fa';
+import { IoIosStar, IoIosStarOutline} from 'react-icons/io';
 
 const OutfitCarousel = styled.div`
 display: flex;
 max-width: 1300px;
 overflow: hidden;
+align-items: center;
 `
 
 const AddCard = styled.div`
@@ -19,15 +21,20 @@ height: 400px;
 width: 270px;
 display: block;
 align-items: center;
-border: 1px solid lightgray;
+border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
-margin-right: 50px;
+margin-right: 15px;
+margin-left: 15px;
 margin-bottom: 30px;
+border-radius: 10px;
 `
 
-const AddProduct = styled.h2 `
+const AddProduct = styled.h1 `
 position: absolute;
-left: 65px
+left: 60px;
+font-family: 'Source Sans Pro', sans-serif;
+font-weight: 500;
+
 `
 
 const PlusIcon = styled(BsPlus)`
@@ -38,7 +45,44 @@ const PlusIcon = styled(BsPlus)`
 height: 250px;
 width: 250px;
 margin: 10px;
-background-color: #f0ffff;
+background-color: #e6faff;
+border-radius: 10px;
+`
+
+const RightArrow = styled(FaAngleDoubleRight)`
+height: 50px;
+width: 50px;
+`
+
+const LeftArrow = styled(FaAngleDoubleLeft)`
+height: 50px;
+width: 50px;
+`
+
+const HideArrow = styled(FaAngleDoubleLeft)`
+height: 50px;
+width: 50px;
+visibility: hidden;
+`
+const FilledStars = styled.div`
+width: 65%;
+overflow: hidden;
+position: absolute;
+`
+
+const StarRatings = styled.div`
+position: relative;
+display: inline-block;
+`
+
+const FilledStar = styled(IoIosStar)`
+height: 25px;
+width: 25px;
+`
+
+const BlankStar = styled(IoIosStarOutline)`
+height: 25px;
+width: 25px;
 `
 
 
@@ -100,17 +144,18 @@ export default function OutfitList ({ setID }) {
 
   return (
     <div>
-      <div onClick={seeChange}>
-        Hello
-      </div>
+      {/* <StarRatings>
+        <FilledStars><FilledStar /></FilledStars>
+        <div><BlankStar /></div>
+      </StarRatings> */}
       <OutfitCarousel>
+      {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
       {slicedOutfitList.map((item, index) => (
           <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList} addProductCache={addProductCache} addStyleCache={addStyleCache} productCache={productCache} styleCache={styleCache}/>
         ))}
+        {outfitLength[1] < outfitList.length ? <RightArrow onClick={() => moveOutfit('right')}/> : <HideArrow />}
       </OutfitCarousel>
-      {outfitLength[0] > 0 ? <FaAngleDoubleLeft onClick={() => moveOutfit('left')}/> : null}
-    {outfitLength[1] < outfitList.length ? <FaAngleDoubleRight onClick={() => moveOutfit('right')}/> : null}
     </div>
 
   )
