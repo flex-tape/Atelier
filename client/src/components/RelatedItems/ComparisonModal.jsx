@@ -13,7 +13,7 @@ const CompareTable = styled.table`
   width: 700px;
   height: 540px;
   overflow: auto;
-  background-color: rgb(249, 249, 249);
+  background-color: rgba(245,245,245, .95);
   border: 2px solid lightgray;
   box-shadow: 7px 7px 7px lightgray;
   border-radius: 10px;
@@ -33,6 +33,16 @@ padding-left: 35px;
 `
 
 const Features = styled.td`
+text-align: center;
+`
+
+const RelatedFeatures = styled.td`
+width: 250px;
+text-align: center;
+`
+
+const CurrentFeatures = styled.td`
+width: 250px;
 text-align: center;
 `
 // const RelatedFeature = styled.td `
@@ -100,9 +110,9 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures, 
         <tbody>
           {allFeatures.map((feature, index) => (
             <tr key={index}>
-              {currentFeaturesObj[feature] ? <Features>{currentFeaturesObj[feature]}</Features>: <td></td>}
+              {currentFeaturesObj[feature] ? <CurrentFeatures>{currentFeaturesObj[feature]}</CurrentFeatures>: <td></td>}
               <Features>{feature}</Features>
-              {relatedFeaturesObj[feature] ? <Features>{relatedFeaturesObj[feature]}</Features>: <td></td>}
+              {relatedFeaturesObj[feature] ? <RelatedFeatures>{relatedFeaturesObj[feature]}</RelatedFeatures>: <td></td>}
             </tr>
             ))}
           {/* <tr>

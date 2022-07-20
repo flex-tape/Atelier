@@ -43,7 +43,8 @@ const PlusIcon = styled(BsPlus)`
 height: 250px;
 width: 250px;
 margin: 10px;
-background-color: #f0ffff;
+background-color: #e6faff;
+border-radius: 10px;
 `
 
 const RightArrow = styled(FaAngleDoubleRight)`

@@ -25,6 +25,7 @@ margin: 7px 10px 10px 10px;
 max-width: 100%;
 // background-color: #f0ffff;
 background-color: #e6faff;
+border-radius: 10px;
 `
 const PhotosContainer = styled.div`
 position: relative;
