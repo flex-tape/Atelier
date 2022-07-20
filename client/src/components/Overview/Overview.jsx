@@ -7,10 +7,12 @@ import StyleCart from './StyleCart.jsx';
 const axios = require('axios');
 
 const Container = styled.div`
+  border: 2px solid lightgray;
+  box-shadow: 7px 7px 7px lightgray;
+  margin-right: 200px;
+  margin-left: 200px;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
 
   h4 {
     text-transform: uppercase;
@@ -22,31 +24,24 @@ const SubContainer1 = styled.div`
   flex-direction: row;
 `
 const Description = styled.div`
+  border-top: 2px solid lightgray;
+  margin-left: 10px;
   flex: 1 100px;
-  border: 1px dotted;
-  margin: 5px;
 
   p {
     opacity: 70%;
   }
 `
 const SubContainer2 = styled.div`
+  border-left: 2px solid lightgray;
   flex: 2 200px;
   display: flex;
   flex-direction: column;
   min-width: 500px;
   max-width: 500px;
 `
-const Image = styled.div`
-  display: flex;
-  justify-content: center;
-  flex: 3 200px;
-  border: 1px dotted;
-  margin: 5px;
-`
 const Product = styled.div`
   flex: 1 200px;
-  border: 1px dotted;
   margin: 5px;
   padding-left: 30px;
   display: flex;
@@ -55,25 +50,22 @@ const Product = styled.div`
   text-transform: uppercase;
 `
 const Socials = styled.div`
-
-button {
-    padding: 12px 15px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    margin-right: 12px;
-    background: none;
-    font-weight: bold;
-  }
+  button {
+      padding: 12px 15px;
+      box-sizing: border-box;
+      border: 1px solid black;
+      margin-right: 12px;
+      background: none;
+      font-weight: bold;
+    }
 `
 const Selector = styled.div`
   flex: 1 200px;
-  border: 1px dotted;
   margin: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   text-transform: uppercase;
-
 `
 
 export default function Overview (props) {
@@ -84,9 +76,6 @@ export default function Overview (props) {
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cart, setCart] = useState([]);
-  // const [productID, setProductID] = useState(props.productID);
-  // const [styleID, setStyleID] = useState(240500);
-  //240500//240510
 
   useEffect(() => {
     axios.get(`/products/${props.productID}`)
@@ -122,9 +111,9 @@ export default function Overview (props) {
       {hasLoaded && <Container>
         {showModal && <ExpandedModal setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>}
           <SubContainer1>
-            <Image>
-                <ImageGallery setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
-            </Image>
+            {/* <Image> */}
+            <ImageGallery setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
+            {/* </Image> */}
             <SubContainer2>
               <Product>
                 <div>

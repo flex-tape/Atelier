@@ -7,7 +7,6 @@ const axios = require('axios');
 
 const Container = styled.div`
   flex: 1 125px;
-  border: 1px dotted;
   margin: 5px;
   display: flex;
   flex-direction: column;
@@ -44,6 +43,8 @@ const QuantityDisabled = styled.select`
 const Add = styled.button`
 `
 const AddSize = styled.button`
+`
+const AddDisabled = styled.button`
 `
 
 export default function StyleCart (props) {
@@ -102,15 +103,16 @@ export default function StyleCart (props) {
 
   return (
       <Container>
+
         <div>
-        {styleObj !== null && <Size value={selectSize} onChange={()=> setSelectSize(event.target.value)}>
+        {styleObj[null] === undefined && <Size value={selectSize} onChange={()=> setSelectSize(event.target.value)}>
           <option value ='SELECT SIZE'>SELECT SIZE</option>
           {Object.keys(styleObj).map((key) => (
             <SizeEntry key={key} index={key} value={styleObj[key]}/>
           ))}
         </Size>}
 
-        {styleObj === null && <OOS disabled>
+        {styleObj[null] !== undefined && <OOS disabled>
           <option value='-'>OUT OF STOCK</option>
         </OOS>}
 
@@ -123,14 +125,19 @@ export default function StyleCart (props) {
           <option value='-'>-</option>
         </QuantityDisabled>}
         </div>
+
         <div>
-        {styleObj !== null && selectSize !== 'SELECT SIZE' && <Add onClick={handleAPICart}>
+        {styleObj[null] === undefined && selectSize !== 'SELECT SIZE' && <Add onClick={handleAPICart}>
           ADD TO CART +
         </Add>}
 
-        {styleObj !== null && selectSize === 'SELECT SIZE' && <AddSize onClick={()=> setSizeModal(true)}>
+        {styleObj[null] === undefined && selectSize === 'SELECT SIZE' && <AddSize onClick={()=> setSizeModal(true)}>
           ADD TO CART +
         </AddSize>}
+
+        {styleObj[null] !== undefined && <AddDisabled disabled>
+          ADD TO CART +
+        </AddDisabled>}
         </div>
 
         {sizeModal && <SizeModal setSizeModal={setSizeModal} />}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ExpandedCarousel from './ExpandedCarousel.jsx';
 
@@ -22,6 +22,7 @@ const Container = styled.div`
 
 `
 const Content = styled.div`
+  border: 2px solid lightgray;
   width: 1200px;
   background-color: #fff;
   object-fit: contain;
@@ -30,7 +31,6 @@ const Content = styled.div`
   justify-content: center;
 `
 const Header = styled.div`
-
 `
 const Body = styled.img`
   max-height: 600px;
@@ -43,16 +43,13 @@ const ZoomContainer = styled.div`
   align-items: all;
   z-index: 1;
 `
-
 const ZoomArea = styled.figure`
   width: 1200px;
   height: 900px;
   overflow: hidden;
-  border: 1px #fff;
+  border: 2px solid lightgray;
   position: relative;
-
 `
-
 const ZoomImg = styled.img`
   max-width: 100%;
   min-width: 100%;

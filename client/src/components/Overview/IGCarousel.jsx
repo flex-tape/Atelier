@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import IGCarouselEntry from './IGCarouselEntry.jsx';
 
 const Container = styled.div`
+  align-self: flex-start;
   display: flex;
-  max-width: 600px;
+  flex-direction: column;
+  max-width: 100px;
+  min-height: 688px;
   overflow: hidden;
-  border: 1px dotted;
 `
-
 const InvButton = styled.button`
   visibility: hidden;
 `
@@ -18,6 +19,8 @@ export default function IGCarousel (props) {
   const [carouselArray, setCarouselArray] = useState([0, 7]);
 
   const slicedArray = props.productStyle.photos.slice(carouselArray[0], carouselArray[1]);
+
+  const stock = props.productStyle.photos[0].thumbnail_url;
 
   const handleCarousel = (direction) => {
     if (direction === 'left') {
@@ -31,11 +34,11 @@ export default function IGCarousel (props) {
 
   return (
     <Container>
-      {carouselArray[0] > 0 ? <button onClick={() => handleCarousel('left')}>←</button> : <InvButton>→</InvButton>}
-      {slicedArray.map((photo, index) => (
+      {carouselArray[0] > 0 ? <button onClick={() => handleCarousel('left')}>↑</button> : <InvButton>↑</InvButton>}
+      {stock !== null && slicedArray.map((photo, index) => (
         <IGCarouselEntry photoArray={props.productStyle.photos} currentIndex={props.currentIndex} key={index} setCurrentIndex={props.setCurrentIndex} photo={photo} />
       ))}
-      {carouselArray[1] < props.productStyle.photos.length ? <button onClick={() => handleCarousel('right')}>→</button> : <InvButton>→</InvButton>}
+      {carouselArray[1] < props.productStyle.photos.length ? <button onClick={() => handleCarousel('right')}>↓</button> : <InvButton>↓</InvButton>}
     </Container>
   )
 }

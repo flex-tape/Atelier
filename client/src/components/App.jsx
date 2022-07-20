@@ -11,6 +11,9 @@ export const IDContext = React.createContext()
 const Container = styled.div`
   font-family: Arial, sans-serif;
 `
+const Logo = styled.h1`
+  margin-left: 200px;
+`
 
 export default function App() {
   const [productID, setProductID] = useState(40344);
@@ -37,7 +40,7 @@ export default function App() {
   return (
     <IDContext.Provider value={productID}>
       <Container>
-        <h1>ATELIER</h1>
+        <Logo>ATELIER</Logo>
         <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
