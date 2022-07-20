@@ -6,7 +6,7 @@ import SizeModal from './SizeModal.jsx';
 const axios = require('axios');
 
 const Container = styled.div`
-  flex: 1 100px;
+  flex: 1 125px;
   border: 1px dotted;
   margin: 5px;
   display: flex;

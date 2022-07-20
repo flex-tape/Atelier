@@ -54,6 +54,17 @@ const Product = styled.div`
   justify-content: space-evenly;
   text-transform: uppercase;
 `
+const Socials = styled.div`
+
+button {
+    padding: 12px 15px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-right: 12px;
+    background: none;
+    font-weight: bold;
+  }
+`
 const Selector = styled.div`
   flex: 1 200px;
   border: 1px dotted;
@@ -122,6 +133,11 @@ export default function Overview (props) {
                 </div>
                 {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
                 {productStyle.sale_price === null ? null : <div>${productStyle.sale_price}</div>}
+                <Socials>
+                  <button>FACEBOOK</button>
+                  <button>TWITTER</button>
+                  <button>PINTEREST</button>
+                </Socials>
               </Product>
               <Selector>
               <StyleList styleName={productStyle.name} setStyleID={props.setStyleID} setProductStyle={setProductStyle} styleID={props.styleID} styleInfo={styleInfo}/>

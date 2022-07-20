@@ -8,6 +8,9 @@ const Container = styled.div`
   max-width: 750px;
   overflow: hidden;
 `
+const InvButton = styled.button`
+  visibility: hidden;
+`
 
 export default function ExpandedCarousel (props) {
 
@@ -27,11 +30,11 @@ export default function ExpandedCarousel (props) {
 
   return (
     <Container>
-      {carouselArray[0] > 0 ? <button onClick={() => handleCarousel('left')}>←</button> : null}
+      {carouselArray[0] > 0 ? <button onClick={() => handleCarousel('left')}>←</button> : <InvButton>←</InvButton>}
       {slicedArray.map((photo, index) => (
         <ExpandedCarouselEntry photoArray={props.productStyle.photos} currentIndex={props.currentIndex} key={index} setCurrentIndex={props.setCurrentIndex} photo={photo} />
       ))}
-      {carouselArray[1] < props.productStyle.photos.length ? <button onClick={() => handleCarousel('right')}>→</button> : null}
+      {carouselArray[1] < props.productStyle.photos.length ? <button onClick={() => handleCarousel('right')}>→</button> : <InvButton>→</InvButton>}
     </Container>
   )
 }

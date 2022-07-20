@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ExpandedCarousel from './ExpandedCarousel.jsx';
-import ExpandedZoomIn from './ExpandedZoomIn.jsx';
 
 const Container = styled.div`
   width: 100%;
@@ -34,22 +33,24 @@ const Header = styled.div`
 
 `
 const Body = styled.img`
-  max-height: 750px;
+  max-height: 600px;
   cursor: cell;
 `
-const Container2 = styled.div`
+const ZoomContainer = styled.div`
   background-color: #fff;
   display: flex;
+  justify-content: center;
   align-items: all;
   z-index: 1;
 `
 
 const ZoomArea = styled.figure`
   width: 1200px;
-  height: 800px;
+  height: 900px;
   overflow: hidden;
   border: 1px #fff;
   position: relative;
+
 `
 
 const ZoomImg = styled.img`
@@ -115,11 +116,11 @@ export default function ExpandedModal (props) {
           <ExpandedCarousel currentIndex={props.currentIndex} setCurrentIndex={props.setCurrentIndex} productStyle={props.productStyle}/>
         </Content>
       </Container>}
-      {zoomIn && props.hasLoaded && <Container2>
-        <ZoomArea id="zoom_area">
+      {zoomIn && props.hasLoaded && <ZoomContainer>
+        <ZoomArea onClick={()=> setZoomIn(false)} id="zoom_area">
           <ZoomImg id="zoom_img" src={props.productStyle.photos[props.currentIndex].url}/>
         </ZoomArea>
-      </Container2>}
+      </ZoomContainer>}
     </>
   )
 }
