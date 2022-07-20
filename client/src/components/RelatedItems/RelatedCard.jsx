@@ -141,7 +141,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage><StarButton onClick={() => toggleCompare('true')}></StarButton>
         {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
         <div onClick={() => setID(id)}><div>{relatedProductInfo.category}</div>
-        <div data-testid="name">{relatedProductInfo.name}</div>
+        <div>{relatedProductInfo.name}</div>
         {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <div>{relatedStyleInfo.default_price}</div>}
         <div>Star rating goes here</div></div>
