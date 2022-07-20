@@ -16,6 +16,7 @@ const Logo = styled.h1`
 `
 
 export default function App() {
+
   const [productID, setProductID] = useState(40344);
   const [styleID, setStyleID] = useState(240500);
 
@@ -44,7 +45,7 @@ export default function App() {
         <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
-        {/* <RatingsAndReviews productID={productID}/> */}
+        <RatingsAndReviews productID={productID}/>
       </Container>
     </IDContext.Provider>
   )

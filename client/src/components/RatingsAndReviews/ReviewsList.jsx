@@ -38,7 +38,10 @@ const UnorderedList = styled.ul`
 export default function ReviewsList(props) {
 
   const listReviewTiles = props.reviews.map((review, index) => {
-    if (index < props.reviewDisplayCount) {
+    if (index < props.reviewDisplayCount && props.starsFilter.indexOf(String(review.rating)) !== -1) {
+      return <li><ReviewTile review={review} /></li>
+    }
+    if (index < props.reviewDisplayCount && props.starsFilter.length === 0) {
       return <li><ReviewTile review={review} /></li>
     }
   });
@@ -59,7 +62,7 @@ export default function ReviewsList(props) {
       </UnorderedList>
 
       <ButtonContainer>
-        {props.reviewDisplayCount < 2 || props.reviewDisplayCount >= props.reviewTotal
+        {props.reviews.length <= 2 || props.reviewDisplayCount >= props.reviews.length
           ? null
           : <MoreReviewsButton onClick={props.getMoreReviews} > MORE REVIEWS </MoreReviewsButton>
         }
