@@ -70,8 +70,9 @@ const ProductPrice = styled.div`
 
 
 const ProductName = styled.div`
-  font-weight: 900;
+  font-weight: 600;
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
   margin: 5px;
 `
 

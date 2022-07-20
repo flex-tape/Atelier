@@ -19,7 +19,7 @@ export const RelatedContext = React.createContext()
 
 const Headers = styled.h2`
 font-family: 'Source Sans Pro', sans-serif;
-font-weight: 500;
+font-weight: 700;
 `
 
 const RelatedItemsContainer = styled.div`
