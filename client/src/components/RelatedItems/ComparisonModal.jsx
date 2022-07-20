@@ -8,12 +8,12 @@ import { HiX } from 'react-icons/hi';
 const CompareTable = styled.table`
   position: absolute;
   z-index: 2;
-  top: 250px;
+  top: 150px;
   left: 510px;
-  width: 700px;
+  width: 800px;
   height: 540px;
   overflow: auto;
-  background-color: rgb(249, 249, 249);
+  background-color: rgba(245,245,245, .95);
   border: 2px solid lightgray;
   box-shadow: 7px 7px 7px lightgray;
   border-radius: 10px;

@@ -10,10 +10,10 @@ import OutfitList from './OutfitList.jsx'
 export const RelatedContext = React.createContext()
 
 const RelatedItemsContainer = styled.div`
-// margin-left: 200px;
-// margin-right: 200px;
-margin-left: auto;
-margin-right: auto;
+margin-left: 200px;
+margin-right: 200px;
+// margin-left: auto;
+// margin-right: auto;
 
 `
 
