@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const RatingsBarText = styled.div`
@@ -27,10 +27,40 @@ const UnfilledPortion = styled.div`
   background-color: silver;
 `;
 
+const StarRatingItem = styled.li`
+  background-color: ${props => props.itemClicked ? 'orange' : 'white'}
+`;
+
 
 export default function RatingsBar(props) {
+  let [itemClicked, setItemClicked] = useState(false);
+
+  const filterHandler = async (e) => {
+    if (props.starsFilter.indexOf(props.starValue) === -1) {
+      let newState = props.starsFilter.slice();
+      newState.push(e.currentTarget.id);
+      await props.setStarsFilter(newState);
+      // console.log(props.starsFilter)
+    } else {
+      // let foundIndex = props.starsFilter.indexOf(e.currentTarget.id);
+      // let newState = props.starsFilter.slice();
+      // console.log('foundindex is..', foundIndex)
+      let newState = props.starsFilter.filter( (el) => {
+        return el !== e.currentTarget.id;
+      })
+
+      await props.setStarsFilter(newState);
+    }
+  }
+
+  const clickHandler = (e) => {
+    e.preventDefault();
+    setItemClicked(!itemClicked);
+    filterHandler(e);
+  }
+
   return (
-    <li>
+    <StarRatingItem id={props.starValue} onClick={clickHandler} itemClicked={itemClicked}>
       <RatingsBarText>
         {props.starValue} stars
       </RatingsBarText>
@@ -40,6 +70,7 @@ export default function RatingsBar(props) {
         <UnfilledPortion percentFalse={props.ratingsPercentRemainder}>
         </UnfilledPortion>
       </ParentBar>
-    </li>
+      {props.starsFilter}
+    </StarRatingItem>
   )
 }

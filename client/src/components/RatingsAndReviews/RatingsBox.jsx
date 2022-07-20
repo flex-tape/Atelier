@@ -77,9 +77,8 @@ export default function RatingsBox(props) {
     let sortedKeys = Object.keys(ratingsObj).sort((a, b) => b - a);
     return sortedKeys.map((key) => {
       let ratingsPercent = Math.round((parseInt(ratingsObj[key]) / props.reviewTotal) * 100);
-      console.log('RATINGS PERCENT1 IS...', ratingsPercent)
       let ratingsPercentRemainder = 100 - ratingsPercent;
-      return <RatingsBar starValue={key} ratingsPercent={ratingsPercent} ratingsPercentRemainder={ratingsPercentRemainder} ></RatingsBar>
+      return <RatingsBar starValue={key} ratingsPercent={ratingsPercent} ratingsPercentRemainder={ratingsPercentRemainder} starsFilter={props.starsFilter} setStarsFilter={props.setStarsFilter} ></RatingsBar>
     })
   }
 

@@ -200,7 +200,7 @@ export default function ReviewTile(props) {
     <TileDiv>
 
       <StarsAndUserInfoBar>
-        <div>star rating</div>
+        <div>{props.review.rating}</div>
         <div>{props.review.reviewer_name}, {date}</div>
       </StarsAndUserInfoBar>
       <ReviewSummary>
@@ -242,10 +242,7 @@ export default function ReviewTile(props) {
         <HelpfulnessDivider> | </HelpfulnessDivider>
         <a href="#" onClick={markAsReported}>Report</a>
 
-
       </Helpfulness>
-
-
 
     </TileDiv>
   )
