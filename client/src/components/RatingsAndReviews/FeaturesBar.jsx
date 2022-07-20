@@ -14,7 +14,7 @@ height: 8px;
 justify-content: space-between;
 `;
 
-const FeaturesNameSegment = styled.div`
+const FeaturesNameSegment = styled.span`
 // display: flex;
 height: 8px;
 // justify-content: space-between;

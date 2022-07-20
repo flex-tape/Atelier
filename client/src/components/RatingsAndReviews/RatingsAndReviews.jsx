@@ -106,9 +106,9 @@ export default function RatingsAndReviews(props) {
             <RatingsBox metadata={reviewMetadata} hasLoaded={hasLoaded} reviewTotal={reviewTotal} starsFilter={starsFilter} setStarsFilter={setStarsFilter} ></RatingsBox>
             <FeaturesBox metadata={reviewMetadata}></FeaturesBox>
           </RatingsContainer>
-          {/* <ReviewsContainer id="reviews-container">
+          <ReviewsContainer id="reviews-container">
             <ReviewsList id="reviews-container" reviews={reviews} reviewDisplayCount={reviewDisplayCount} reviewTotal={reviewTotal} productID={props.productID} sortCategory={sortCategory} sortHandler={sortHandler} getMoreReviews={getMoreReviews} starsFilter={starsFilter} />
-          </ReviewsContainer> */}
+          </ReviewsContainer>
         </Container>
       }
     </div>
