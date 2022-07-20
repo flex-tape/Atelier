@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(200, 200, 200);
+  background-color: rgba(200, 200, 200, 0.9);
   position: fixed;
   top: 0;
   left: 0;
@@ -30,6 +30,7 @@ const Thumbnail = styled.img`
   margin-right: 2px;
 `
 const Title = styled.div`
+  display: inline;
   text-align: center;
   border-bottom: 1px solid black;
   margin-bottom: 15px;
@@ -74,6 +75,12 @@ const Button = styled.button`
   background: none;
   font-weight: bold;
   margin-top: 15px;
+`
+const X = styled.button`
+  background: red;
+  float: right;
+  width: 25px;
+  height: 25px;
 `
 
 export default function AnswerModal(props) {
@@ -161,11 +168,9 @@ export default function AnswerModal(props) {
   return(
     <ModalBackground>
       <ModalContainer>
-        <div>
-          <button onClick={() => props.setOpenAnswerModal(false)}>X</button>
-        </div>
         <form onSubmit={handleFormSubmit}>
           <Title>
+            <X onClick={() => props.setOpenAnswerModal(false)}>X</X>
             <h3>Submit Your Answer</h3>
             About {props.productName}: {props.question_body}
           </Title>
