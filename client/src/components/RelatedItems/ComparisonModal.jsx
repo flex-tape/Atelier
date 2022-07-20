@@ -25,25 +25,37 @@ const CompareDiv = styled.div`
   height: 550px;
 `
 
-const CurrentProduct = styled.th`
-text-align: center;
+const ProductHeader = styled.th`
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
 `
 const Comparison = styled.th`
-padding-left: 35px;
+  padding-left: 35px;
+  font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
 `
 
 const Features = styled.td`
 text-align: center;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 18px;
 `
 
 const RelatedFeatures = styled.td`
 width: 250px;
 text-align: center;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 18px;
 `
 
 const CurrentFeatures = styled.td`
 width: 250px;
 text-align: center;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 18px;
 `
 // const RelatedFeature = styled.td `
 // padding-left: 50px;
@@ -102,9 +114,9 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures, 
         </thead>
         <thead>
           <tr>
-            <CurrentProduct>Current Product</CurrentProduct>
+            <ProductHeader>Current Product</ProductHeader>
             <th></th>
-            <th>Related Product</th>
+            <ProductHeader>Related Product</ProductHeader>
           </tr>
         </thead>
         <tbody>
