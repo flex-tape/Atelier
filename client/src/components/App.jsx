@@ -37,7 +37,7 @@ export default function App() {
         <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
-        {/* <RatingsAndReviews productID={productID}/> */}
+        <RatingsAndReviews productID={productID}/>
       </div>
     </IDContext.Provider>
   )

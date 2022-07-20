@@ -6,12 +6,28 @@ import RelatedCard from './RelatedCard.jsx'
 import RelatedListCarousel from './RelatedListCarousel.jsx'
 import styled from 'styled-components';
 import OutfitList from './OutfitList.jsx'
+// import { createGlobalStyle } from 'styled-components';
+
+// const GlobalStyle = createGlobalStyle`
+// body {
+//   font-family: 'Source Sans Pro', sans-serif;
+// }
+// `
+
 
 export const RelatedContext = React.createContext()
+
+const Headers = styled.h2`
+font-family: 'Source Sans Pro', sans-serif;
+font-weight: 700;
+`
 
 const RelatedItemsContainer = styled.div`
 margin-left: 200px;
 margin-right: 200px;
+// margin-left: auto;
+// margin-right: auto;
+
 `
 
 const RelatedCarousel = styled.div`
@@ -32,8 +48,10 @@ export default function RelatedItems({ setID }) {
   const getRelatedItems = () => {
     axios.get('/productsrelated', {params: {product_id: productID}})
     .then((res) => {
-      // console.log('new response: ', res)
-      setRelatedItems(res.data);
+      let uniqueRelated = Array.from(new Set(res.data));
+      // console.log('new response: ', res.data)
+      // console.log('unique set: ', uniqueRelated)
+      setRelatedItems(uniqueRelated);
     })
   }
 
@@ -57,16 +75,14 @@ export default function RelatedItems({ setID }) {
   return (
     <RelatedContext.Provider value={relatedItems}>
     <RelatedItemsContainer>
+      {/* <GlobalStyle /> */}
       <div>
-        <h3>Related Products</h3>
-          <RelatedListCarousel setID={setID} currentFeatures={currentFeatures}/>
-        {/* <button onClick={getRelatedItems}>Get Related</button> */}
-
+        <Headers>Related Products</Headers>
+          <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} />
       </div>
       <div>
-        <h3>Your Outfit</h3>
-          <OutfitList setID={setID}/>
-
+        <Headers>Your Outfit</Headers>
+          <OutfitList setID={setID} />
       </div>
     </RelatedItemsContainer>
     </RelatedContext.Provider>

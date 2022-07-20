@@ -3,24 +3,41 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ComparisonModal from './ComparisonModal.jsx'
+import ThumbnailList from './ThumbnailList.jsx'
 import { IDContext } from '../App.jsx';
 import { HiX } from 'react-icons/hi';
 
 
 const PrimaryImage = styled.img`
-// display: flex;
+display: flex;
 // justify-content: center;
 // align-items: center;
-// position: absolute;
+position: relative;
+z-index: 1
+top: 0;
+left: 0;
 height: 280px;
 width: 250px;
 object-fit: contain;
-margin: 10px;
-background-color: #f0ffff;
+margin: 7px 10px 10px 10px;
+// margin-top: 5px;
+// margin-bottom: 10px;
+max-width: 100%;
+background-color: #e6faff;
+border-radius: 10px;
+`
+
+const PhotosContainer = styled.div`
+position: relative;
+display: flex;
+align-items: flex-end;
+justify-content: space-around;
 `
 
 const RemoveButton = styled(HiX)`
-float: right;
+position: absolute;
+top: 7px;
+right: 10px;
 height: 25px;
 width: 25px;
 `
@@ -31,45 +48,72 @@ height: 400px;
 width: 270px;
 display: block;
 align-items: center;
-border: 1px solid lightgray;
+border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
-margin-right: 50px;
+margin-right: 15px;
+margin-left: 15px;
 margin-bottom: 30px;
+border-radius: 10px;
+`
+
+const ProductCategory = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px;
+`
+
+const ProductPrice = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px;
+`
+
+
+const ProductName = styled.div`
+  font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  margin: 5px;
 `
 
 const StrikePrice = styled.div`
+float: left;
 text-decoration: line-through;
 text-decoration-thickness: 0.15rem;
+font-family: 'Source Sans Pro', sans-serif;
+color: gray;
+margin: 5px;
 `
 
 const SalesPrice = styled.div`
 color: red;
+font-family: 'Source Sans Pro', sans-serif;
 `
 
 export default function OutfitCard({id, setID, removeFromList, addProductCache, addStyleCache, productCache, styleCache}) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [outfitProductInfo, setOutfitProductInfo] = useState({});
-  const [outfitStyleInfo, setOutfitStyleInfo] = useState({});
+  // const [outfitProductInfo, setOutfitProductInfo] = useState({});
+  // const [outfitStyleInfo, setOutfitStyleInfo] = useState({});
+  const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
+  const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
+  const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
 
 
   let productID = id;
 
   const getOutfitInfo = () => {
     if (styleCache[productID]) {
-      setOutfitProductInfo(productCache[productID])
-      setOutfitStyleInfo(styleCache[productID])
+      setRelatedProductInfo(productCache[productID])
+      setRelatedStyleInfo(styleCache[productID])
       console.log('cache: ', productCache[productID])
-
-        setHasLoaded(true)
-
+      setHasLoaded(true)
     } else {
       axios.get(`/products/${productID}`)
       .then((res) => {
       let outfitLevelInfo = {name: res.data.name, category: res.data.category}
-      setOutfitProductInfo(outfitLevelInfo);
+      setRelatedProductInfo(outfitLevelInfo);
       addProductCache(productID, outfitLevelInfo);
-      console.log('is this adding??')
       })
       .catch(() => {
         console.log('GET request failed for outfitInfo')
@@ -81,9 +125,10 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
         primaryPhoto = 'https://images.unsplash.com/photo-1535639818669-c059d2f038e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
       } else {
         primaryPhoto = res.data.results[0].photos[0].url;
+        setThumbnailPhotos(res.data.results[0].photos)
       }
       let styleInfo = {default_price: res.data.results[0].original_price, sale_price: res.data.results[0].sale_price, image: primaryPhoto}
-      setOutfitStyleInfo(styleInfo);
+      setRelatedStyleInfo(styleInfo);
       addStyleCache(productID, styleInfo);
       })
       .then(() => {
@@ -111,18 +156,18 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
   }, [id])
 
   const showInfo = () => {
-    console.log('product info: ', outfitProductInfo)
+    console.log('product info: ', relatedProductInfo)
   }
   return (
     <div>
     {hasLoaded && <OutfitCardDiv>
-              <RemoveButton onClick={() => removeFromList(id)}></RemoveButton>
-              <PrimaryImage src={outfitStyleInfo.image} onMouseEnter={onHover} onMouseLeave={offHover} onClick={() => setID(id)}></PrimaryImage>
-              {hoverStatus ? <div>Thumbnail photos go here</div> : <div onClick={() => setID(id)}><div>{outfitProductInfo.category}</div>
-              <div >{outfitProductInfo.name}</div>
-              {outfitStyleInfo.sale_price !== null ?
-              <div><StrikePrice>{outfitStyleInfo.default_price}</StrikePrice><SalesPrice>{outfitStyleInfo.sale_price}</SalesPrice></div> : <div>{outfitStyleInfo.default_price}</div>}
-              <div>Star rating goes here</div></div>}
+              <PhotosContainer onMouseEnter={onHover} onMouseLeave={offHover}><PrimaryImage src={relatedStyleInfo.image} onClick={() => setID(id)}></PrimaryImage><RemoveButton onClick={() => removeFromList(id)}></RemoveButton>
+              {hoverStatus ? <ThumbnailList id={id} setRelatedStyleInfo={setRelatedStyleInfo} thumbnailPhotos={thumbnailPhotos} relatedStyleInfo={relatedStyleInfo}/> : null}</PhotosContainer>
+              <div onClick={() => setID(id)}><ProductCategory>{relatedProductInfo.category}</ProductCategory>
+              <ProductName >{relatedProductInfo.name}</ProductName>
+              {relatedStyleInfo.sale_price !== null ?
+              <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
+              <div>Star rating goes here</div></div>
             </OutfitCardDiv>}
     </div>
   )
