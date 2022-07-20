@@ -40,22 +40,13 @@ export default function App() {
 
   return (
     <IDContext.Provider value={productID}>
-<<<<<<< HEAD
-      <div id="master-container">
-        <h1>ATELIER</h1>
-=======
       <Container>
         <Logo>ATELIER</Logo>
->>>>>>> main
         <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
         <RatingsAndReviews productID={productID}/>
-<<<<<<< HEAD
-      </div>
-=======
       </Container>
->>>>>>> main
     </IDContext.Provider>
   )
 }
