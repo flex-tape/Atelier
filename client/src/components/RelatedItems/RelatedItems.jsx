@@ -17,6 +17,11 @@ import OutfitList from './OutfitList.jsx'
 
 export const RelatedContext = React.createContext()
 
+const Headers = styled.h2`
+font-family: 'Source Sans Pro', sans-serif;
+font-weight: 500;
+`
+
 const RelatedItemsContainer = styled.div`
 margin-left: 200px;
 margin-right: 200px;
@@ -72,11 +77,11 @@ export default function RelatedItems({ setID }) {
     <RelatedItemsContainer>
       {/* <GlobalStyle /> */}
       <div>
-        <h3>Related Products</h3>
+        <Headers>Related Products</Headers>
           <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} />
       </div>
       <div>
-        <h3>Your Outfit</h3>
+        <Headers>Your Outfit</Headers>
           <OutfitList setID={setID} />
       </div>
     </RelatedItemsContainer>

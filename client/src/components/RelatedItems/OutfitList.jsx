@@ -29,9 +29,11 @@ margin-bottom: 30px;
 border-radius: 10px;
 `
 
-const AddProduct = styled.h2 `
+const AddProduct = styled.h1 `
 position: absolute;
-left: 65px
+left: 60px;
+font-family: 'Source Sans Pro', sans-serif;
+font-weight: 500;
 
 `
 
