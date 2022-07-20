@@ -4,13 +4,13 @@ import styled from 'styled-components';
 const Image = styled.div`
   object-fit: cover;
   margin: 10px;
-  width: 80px;
+  height: 70px;
+  box-shadow: 7px 7px 7px lightgray;
 
   img {
-    width: 80;
+    height: 70;
   }
 `
-
 
 export default function IGCarouselEntry (props) {
 
@@ -22,5 +22,3 @@ export default function IGCarouselEntry (props) {
     </Image>
   )
 }
-
-{/* <img src={props.productStyle.photos[0].url}/> */}
