@@ -20,7 +20,7 @@ exports.getQuestions = (req, res) => {
     params: {
       product_id: Number(req.query.product_id),
       page: Number(req.query.page) || 1,
-      count: Number(req.query.count) || 10
+      count: Number(req.query.count) || 100
     }
   }
   axios.get(url, questionOptions)
@@ -30,7 +30,7 @@ exports.getQuestions = (req, res) => {
 
 exports.getAnswers = (req, res) => {
   let page = req.query.page || 1;
-  let count = req.query.count || 5;
+  let count = req.query.count || 100;
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${req.params.question_id}/answers?page=${page}&count=${count}`;
   axios.get(url, options)
     .then((response) => { res.status(201).send(response.data.results); })
