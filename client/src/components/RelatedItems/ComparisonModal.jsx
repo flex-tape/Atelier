@@ -10,7 +10,7 @@ const CompareTable = styled.table`
   z-index: 2;
   left: 500px;
   top: 170px;
-  width: 500px;
+  width: 700px;
   height: 500px;
   overflow: auto;
   background-color: #f0ffff;
