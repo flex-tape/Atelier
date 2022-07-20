@@ -102,10 +102,22 @@ const Helpfulness = styled.div`
   padding-top: 10px;
   font-size: 0.95em;
 
+  & a:nth-child(2) {
+    margin-left: 4px;
+  }
+
   & a:nth-child(3) {
     margin-left: 4px;
   }
+
 `;
+
+const HelpfulnessDivider = styled.span`
+  margin-left: 12px;
+  margin-right: 12px;
+  font-size: 16px;
+  vertical-align: bottom;
+`
 
 export default function ReviewTile(props) {
   let [isReadMore, setIsReadMore] = useState(false);
@@ -113,6 +125,7 @@ export default function ReviewTile(props) {
   let [imageToShow, setImageToShow] = useState('');
   let [helpfulnessCount, setHelpfulnessCount] = useState(props.review.helpfulness);
   let [helpfulnessClicked, setHelpfulnessClicked] = useState(false);
+  let [reportedClicked, setReportedClicked] = useState(false);
 
   let date = dateHandler(props.review.date)
 
@@ -166,11 +179,28 @@ export default function ReviewTile(props) {
     }
   }
 
+  const markAsReported = (e) => {
+    e.preventDefault();
+    // checks if item has already been marked as helpful
+    if (!reportedClicked) {
+      axios.put(`/reviews/${props.review.review_id}/report`)
+        .then((response) => {
+          console.log('RESPONSE IS...', response)
+          if (response.status === 204) {
+            setReportedClicked(true);
+          }
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
+  }
+
   return (
     <TileDiv>
 
       <StarsAndUserInfoBar>
-        <div>star rating</div>
+        <div>{props.review.rating}</div>
         <div>{props.review.reviewer_name}, {date}</div>
       </StarsAndUserInfoBar>
       <ReviewSummary>
@@ -208,10 +238,11 @@ export default function ReviewTile(props) {
       <Helpfulness>
         <span>Helpful? </span>
         <a href="#" onClick={markAsHelpful}>Yes</a> ({helpfulnessCount})
-        <a href="#" onClick={() => setHelpfulnessClicked(true)}>No</a>
+        {/* <a href="#" onClick={() => setHelpfulnessClicked(true)}>No</a> */}
+        <HelpfulnessDivider> | </HelpfulnessDivider>
+        <a href="#" onClick={markAsReported}>Report</a>
+
       </Helpfulness>
-
-
 
     </TileDiv>
   )
