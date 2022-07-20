@@ -70,7 +70,6 @@ export default function RatingsBar(props) {
         <UnfilledPortion percentFalse={props.ratingsPercentRemainder}>
         </UnfilledPortion>
       </ParentBar>
-      {props.starsFilter}
     </StarRatingItem>
   )
 }

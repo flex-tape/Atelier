@@ -6,8 +6,9 @@ import RatingsBar from './RatingsBar.jsx';
 const RatingsBarContainer = styled.div`
   // display: flex;
   margin: 14px 0;
-  height: 8px;
+  // height: 8px;
   width: 100%;
+  // margin-bottom: 30px;
 `;
 
 const RecommendedContainer = styled.div`
@@ -85,10 +86,8 @@ export default function RatingsBox(props) {
     })
   }
 
-
-
   return (
-    <>
+    <div>
       <div><h3>RATINGS & REVIEWS</h3></div>
       <div>
         {reviewAvg}
@@ -99,16 +98,17 @@ export default function RatingsBox(props) {
       <div>
         <h4>RATINGS BREAKDOWN</h4>
       </div>
-      {props.starsFilter.length > 0
-        ? (<div>Filters are enabled (<a href="#" onClick={() => props.setStarsFilter([])}>undo</a>)</div>
-        )
-        : null
-      }
+
       <RatingsBarContainer>
         <RatingsBarList>
           {props.hasLoaded && createRatingsBreakdown(props.metadata.ratings)}
         </RatingsBarList>
+        {props.starsFilter.length > 0
+        ? (<div>Filters are enabled (<a href="#" onClick={() => props.setStarsFilter([])}>remove</a>)</div>
+        )
+        : null
+      }
       </RatingsBarContainer>
-    </>
+    </div>
   )
 }

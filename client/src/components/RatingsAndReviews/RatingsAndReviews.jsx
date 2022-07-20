@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import ReviewsList from './ReviewsList.jsx';
+import FeaturesBox from './FeaturesBox.jsx';
 import RatingsBox from './RatingsBox.jsx';
 
 const Container = styled.div`
@@ -13,6 +14,8 @@ const Container = styled.div`
 
 const RatingsContainer = styled.section`
   flex: 1;
+  display: flex;
+  flex-direction: column;
   border: 1px dotted;
   margin: 5px;
   padding: 20px;
@@ -100,11 +103,12 @@ export default function RatingsAndReviews(props) {
       {hasLoaded &&
         <Container id="ratings-reviews-container">
           <RatingsContainer id="ratings-container">
-            <RatingsBox metadata={reviewMetadata} hasLoaded={hasLoaded} reviewTotal={reviewTotal} starsFilter={starsFilter} setStarsFilter={setStarsFilter} />
+            <RatingsBox metadata={reviewMetadata} hasLoaded={hasLoaded} reviewTotal={reviewTotal} starsFilter={starsFilter} setStarsFilter={setStarsFilter} ></RatingsBox>
+            <FeaturesBox metadata={reviewMetadata}></FeaturesBox>
           </RatingsContainer>
-          <ReviewsContainer id="reviews-container">
+          {/* <ReviewsContainer id="reviews-container">
             <ReviewsList id="reviews-container" reviews={reviews} reviewDisplayCount={reviewDisplayCount} reviewTotal={reviewTotal} productID={props.productID} sortCategory={sortCategory} sortHandler={sortHandler} getMoreReviews={getMoreReviews} starsFilter={starsFilter} />
-          </ReviewsContainer>
+          </ReviewsContainer> */}
         </Container>
       }
     </div>
