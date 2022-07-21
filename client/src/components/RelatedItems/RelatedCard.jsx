@@ -26,7 +26,8 @@ margin: 7px 10px 10px 10px;
 // margin-bottom: 10px;
 max-width: 100%;
 // background-color: #f0ffff;
-background-color: #e6faff;
+// background-color: #e6faff;
+background-color: #ffebcd;
 border-radius: 10px;
 `
 
@@ -81,7 +82,7 @@ border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
-// margin-bottom: 30px;
+margin-bottom: 30px;
 border-radius: 10px;
 `
 

@@ -148,10 +148,10 @@ export default function OutfitList ({ setID }) {
 
   return (
     <div>
-      <StarRatings>
+      {/* <StarRatings>
         <FilledStars><FilledStar /></FilledStars>
         <div><BlankStar /></div>
-      </StarRatings>
+      </StarRatings> */}
       <OutfitCarousel>
       {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>

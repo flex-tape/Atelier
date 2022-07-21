@@ -77,11 +77,11 @@ export default function RelatedItems({ setID }) {
     <RelatedItemsContainer>
       {/* <GlobalStyle /> */}
       <div>
-        <Headers>Related Products</Headers>
+        <Headers>RELATED PRODUCTS</Headers>
           <RelatedListCarousel setID={setID} currentFeatures={currentFeatures} />
       </div>
       <div>
-        <Headers>Your Outfit</Headers>
+        <Headers>YOUR OUTFIT</Headers>
           <OutfitList setID={setID} />
       </div>
     </RelatedItemsContainer>
