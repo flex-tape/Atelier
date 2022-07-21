@@ -76,7 +76,6 @@ export default function App() {
   return (
 
     <IDContext.Provider value={productID}>
-<<<<<<< HEAD
       {pageLoaded &&
         <Container id="master-container">
           {reviewAvg}
@@ -87,15 +86,6 @@ export default function App() {
           <RatingsAndReviews productID={productID}/>
         </Container>
       }
-=======
-      <Container id="master-container">
-        <Logo>ATELIER</Logo>
-        <Overview reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
-        <RelatedItems setID={setID} productID={productID}/>
-        <QandA productID={productID}/>
-        <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
-      </Container>
->>>>>>> main
     </IDContext.Provider>
   )
 }
