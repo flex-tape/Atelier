@@ -33,21 +33,14 @@ background-color: #e6faff;
 const ProductCategory = styled.div`
   font-family: 'Source Sans Pro', sans-serif;
   color: gray;
-  margin: 5px;
+  margin: 5px 10px 5px 8px;
 `
-
-const ProductPrice = styled.div`
-  font-family: 'Source Sans Pro', sans-serif;
-  color: gray;
-  margin: 5px;
-`
-
 
 const ProductName = styled.div`
   font-weight: 600;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 18px;
-  margin: 5px;
+  margin: 5px 10px 5px 8px;
 `
 
 const PhotosContainer = styled.div`
@@ -86,18 +79,25 @@ margin-bottom: 30px;
 // border-radius: 10px;
 `
 
+const ProductPrice = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px 10px 2px 8px;
+`
+
 const StrikePrice = styled.div`
 float: left;
 text-decoration: line-through;
 text-decoration-thickness: 0.15rem;
 font-family: 'Source Sans Pro', sans-serif;
 color: gray;
-margin: 5px;
+margin: 5px 3px 2px 8px;
 `
 
 const SalesPrice = styled.div`
 color: red;
 font-family: 'Source Sans Pro', sans-serif;
+margin: 5px 10px 2px 8px;
 `
 
 export default function RelatedCard({id, setID, currentFeatures}) {
