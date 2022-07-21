@@ -71,12 +71,13 @@ const Selector = styled.div`
   text-transform: uppercase;
 `
 const Reviews = styled.div`
+  margin-left: -6px;
   max-height: 11px;
   display: flex;
 `
 const Link = styled.div`
-  margin-top: 10px;
-  margin-left: 155px;
+  margin-top: 7px;
+  margin-left: 110px;
   font-size: 11px;
   cursor: pointer;
 `
