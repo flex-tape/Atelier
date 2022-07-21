@@ -15,22 +15,26 @@ const Container = styled.div`
 `;
 
 const RatingsContainer = styled.section`
-  flex: 1.25;
+  flex: 1;
   display: flex;
   flex-direction: column;
   // border: 1px dotted;
-  margin: 5px;
+  // margin: 5px;
   // padding: 25px;
   padding-right: 10px;
+  h4 {
+    margin-bottom: 5px;
+  }
 `
 
 const ReviewsContainer = styled.main`
-  flex: 2.75;
+  flex: 3;
   // border: 1px dotted;
   // margin: 5px;
   // padding: 15px;
-  margin-left: 20px;
+  margin-left: 30px;
   padding-left: 10px;
+  margin-top: 30px;
 `
 
 export default function RatingsAndReviews(props) {
@@ -50,12 +54,8 @@ export default function RatingsAndReviews(props) {
     let reviewCount = countReviews(res.data.ratings);
     await setReviewTotal(reviewCount);
 
-    await props.setReviewAvg(getReviewAvg(reviewMetadata.ratings))
-    console.log('META IS...', reviewMetadata.ratings)
-
     let res2 = await axios.get('/reviews', { params: { product_id: props.productID, count: reviewCount, sort: sortCategory } });
     let final = res2.data.results;
-    // await setReviews(final);
 
     return final;
   }
@@ -101,32 +101,34 @@ export default function RatingsAndReviews(props) {
     setSortCategory(event.target.value);
   }
 
-  const getReviewAvg = (ratingsObj) => {
-    let counter = 0;
-    let sum = 0;
+  // const getReviewAvg = (ratingsObj) => {
+  //   let counter = 0;
+  //   let sum = 0;
 
-    for (let key in ratingsObj) {
-      if (Object.hasOwn(ratingsObj, key)) {
-        sum += parseInt(ratingsObj[key]) * parseInt(key)
-        counter += parseInt(ratingsObj[key])
-      }
-    }
-    let roundedAvg = (sum / counter).toFixed(2);
-    console.log('ROUNDED AVG IS...', typeof(roundedAvg))
+  //   for (let key in ratingsObj) {
+  //     if (Object.hasOwn(ratingsObj, key)) {
+  //       sum += parseInt(ratingsObj[key]) * parseInt(key)
+  //       counter += parseInt(ratingsObj[key])
+  //     }
+  //   }
+  //   let roundedAvg = (sum / counter).toFixed(2);
+  //   console.log('ROUNDED AVG IS...', typeof(roundedAvg))
 
-    return parseInt(roundedAvg);
-  }
+  //   let final = parseFloat(roundedAvg);
+  //   console.log('FINAL IS..', final)
+  // }
 
   return (
     <div className="ratings-and-reviews">
       {hasLoaded &&
         <Container ref={props.reference} id="ratings-reviews-container">
           <RatingsContainer id="ratings-container">
+            {props.reviewAvg}
             <RatingsBox metadata={reviewMetadata} hasLoaded={hasLoaded} reviewTotal={reviewTotal} starsFilter={starsFilter} setStarsFilter={setStarsFilter} ></RatingsBox>
             <FeaturesBox metadata={reviewMetadata}></FeaturesBox>
           </RatingsContainer>
           <ReviewsContainer id="reviews-container">
-            <ReviewsList id="reviews-container" reviews={reviews} reviewDisplayCount={reviewDisplayCount} reviewTotal={reviewTotal} productID={props.productID} sortCategory={sortCategory} sortHandler={sortHandler} getMoreReviews={getMoreReviews} starsFilter={starsFilter} />
+            <ReviewsList id="reviews-container" reviews={reviews} reviewDisplayCount={reviewDisplayCount} reviewTotal={reviewTotal} productID={props.productID} sortCategory={sortCategory} sortHandler={sortHandler} getMoreReviews={getMoreReviews} starsFilter={starsFilter} metadata={reviewMetadata} />
           </ReviewsContainer>
         </Container>
       }
