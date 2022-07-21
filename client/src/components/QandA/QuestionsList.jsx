@@ -6,7 +6,7 @@ import QuestionModal from './QuestionModal.jsx';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  padding: 12px 15px;
+  padding: 18px 21px;
   box-sizing: border-box;
   border: 1px solid black;
   margin-right: 12px;
@@ -19,7 +19,7 @@ const QuestionsListContainer = styled.div`
 `
 
 export default function QuestionsList(props) {
-  const [productID, setProductID] = useState(props.productID);
+  //const [productID, setProductID] = useState(props.productID);
   const [productName, setProductName] = useState('');
   const [questionsList, setQuestionsList] = useState([]);
   const [fullList, setFullList] = useState([]);
@@ -28,7 +28,7 @@ export default function QuestionsList(props) {
   let [moreQuestions, setMoreQuestions] = useState(true);
 
   useEffect(() => {
-    axios.get('/qa/questions', {params: {product_id: productID}})
+    axios.get('/qa/questions', {params: {product_id: props.productID}})
       .then((response) => {
         let sortedQuestions = response.data.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
         setQuestionsList(sortedQuestions.slice(0, 4));
@@ -38,15 +38,15 @@ export default function QuestionsList(props) {
         }
       })
       .catch(err => console.log(err));
-  }, [])
+  }, [props.productID])
 
   useEffect(() => {
-    axios.get(`/products/${productID}`)
+    axios.get(`/products/${props.productID}`)
       .then((response) => {
         setProductName(response.data.name);
       })
       .catch(err => console.log(err));
-  })
+  }, [props.productID])
 
   let handleMoreClick = (e) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ export default function QuestionsList(props) {
         {moreQuestions && <Button onClick={handleMoreClick}>SHOW MORE QUESTIONS</Button>}
         <Button onClick ={handleAddClick}>ADD A QUESTION +</Button>
       </div>
-      {openModal && <QuestionModal setMoreQuestions={setMoreQuestions} setQuestionsList={setQuestionsList} setFullList={setFullList} productID={productID} productName={productName} setOpenModal={setOpenModal}/>}
+      {openModal && <QuestionModal setMoreQuestions={setMoreQuestions} setQuestionsList={setQuestionsList} setFullList={setFullList} productID={props.productID} productName={productName} setOpenModal={setOpenModal}/>}
     </div>
   );
 }

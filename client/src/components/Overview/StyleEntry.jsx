@@ -4,15 +4,20 @@ import styled from 'styled-components';
 const Image = styled.div`
   object-fit: cover;
   margin: 15px;
-  width: 70px;
-  height: 70px;
+  cursor: pointer;
 
   img {
-    width: 75;
-    height: 75;
+    border-radius: 50%;
+    width: 70;
+    height: 70;
   }
 `
 export default function StyleEntry (props) {
+
+  var img = props.style.photos[0].thumbnail_url;
+  if (img === null) {
+    img = "https://baeclothing.in/wp-content/uploads/2020/05/placeholder-3-2.jpg";
+  }
 
   const handleClick = () => {
     props.setStyleID(props.style.style_id);
@@ -22,11 +27,7 @@ export default function StyleEntry (props) {
 
   return (
     <Image onClick={handleClick}>
-      {props.style.style_id === props.styleID ? <img border="2px solid #000000" width="75" height="75" src={`${props.style.photos[0].thumbnail_url}`}/> : <img width="75" height="75" src={`${props.style.photos[0].thumbnail_url}`}/>}
+      {props.style.style_id === props.styleID ? <img border="2px solid #000000" width="75" height="75" src={`${img}`}/> : <img width="75" height="75" src={`${img}`}/>}
     </Image>
   )
 }
-
-  // flex: 1 0 21%;
-  // margin: 5px;
-  // height: 50px;

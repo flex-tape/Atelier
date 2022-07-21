@@ -18,7 +18,7 @@ const StarsAndUserInfoBar = styled.div`
 
 const ReviewSummary = styled.h4`
   box-sizing: border-box;
-  width: 960px;
+  // width: 960px;
   font-size: 18px;
   margin-bottom: 20px;
 `;

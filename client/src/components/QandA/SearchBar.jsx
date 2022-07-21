@@ -7,7 +7,7 @@ const Form = styled.form`
 `
 const Input = styled.input`
   width: 100%;
-  padding: 12px 15px;
+  padding: 18px 15px;
   box-sizing: border-box;
   border: 1px solid black;
 `
