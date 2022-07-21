@@ -93,6 +93,7 @@ export default function OutfitList ({ setID }) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [productCache, setProductCache] = useState({});
   const [styleCache, setStyleCache] = useState({});
+  const [reviewCache, setReviewCache] = useState({});
   // store axios data in here.if exists dont do fetch, if it doesnt then ddo fetch
   // set cache function in outfitlist. take in card info as paramater. pass into outfict card
 
@@ -114,9 +115,7 @@ export default function OutfitList ({ setID }) {
   }
 
   const addProductCache = (id, obj) => {
-
       setProductCache({...productCache, [id]: obj});
-
   }
 
   const addStyleCache = (id, obj) => {
@@ -124,6 +123,10 @@ export default function OutfitList ({ setID }) {
       setStyleCache({...styleCache, [id]: obj});
     }
   }
+
+  const addReviewCache = (id, data) => {
+    setReviewCache({...reviewCache, [id]: data});
+}
 
   const seeChange = () => {
     console.log('styleCache: ', styleCache)
@@ -153,7 +156,7 @@ export default function OutfitList ({ setID }) {
       {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
       {slicedOutfitList.map((item, index) => (
-          <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList} addProductCache={addProductCache} addStyleCache={addStyleCache} productCache={productCache} styleCache={styleCache}/>
+          <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList} addProductCache={addProductCache} addStyleCache={addStyleCache} addReviewCache={addReviewCache} productCache={productCache} styleCache={styleCache} reviewCache={reviewCache}/>
         ))}
         {outfitLength[1] < outfitList.length ? <RightArrow onClick={() => moveOutfit('right')}/> : <HideArrow />}
       </OutfitCarousel>
