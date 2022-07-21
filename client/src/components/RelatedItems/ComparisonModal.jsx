@@ -8,8 +8,8 @@ import { HiX } from 'react-icons/hi';
 const CompareTable = styled.table`
   position: absolute;
   z-index: 2;
-  top: 950px;
-  left: 510px;
+  top: 900px;
+  left: 570px;
   width: 700px;
   height: 540px;
   overflow: auto;
