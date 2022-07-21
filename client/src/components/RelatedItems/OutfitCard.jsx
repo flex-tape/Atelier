@@ -6,6 +6,7 @@ import ComparisonModal from './ComparisonModal.jsx'
 import ThumbnailList from './ThumbnailList.jsx'
 import { IDContext } from '../App.jsx';
 import { HiX } from 'react-icons/hi';
+import  AverageStars from '../AverageStars.jsx';
 
 
 const PrimaryImage = styled.img`
@@ -98,7 +99,7 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
   const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
   const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
   const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
-
+  const [dummyRating, setDummyRating] = useState(3.15);
 
   let productID = id;
 
@@ -166,8 +167,11 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
               <div onClick={() => setID(id)}><ProductCategory>{relatedProductInfo.category}</ProductCategory>
               <ProductName >{relatedProductInfo.name}</ProductName>
               {relatedStyleInfo.sale_price !== null ?
-              <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
-              <div>Star rating goes here</div></div>
+              <div>
+                <StrikePrice>{relatedStyleInfo.default_price}</StrikePrice>
+                <SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
+                <AverageStars rating={dummyRating} />
+              </div>
             </OutfitCardDiv>}
     </div>
   )

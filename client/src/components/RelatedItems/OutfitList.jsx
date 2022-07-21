@@ -10,16 +10,17 @@ import { IoIosStar, IoIosStarOutline} from 'react-icons/io';
 
 const OutfitCarousel = styled.div`
 display: flex;
-max-width: 1300px;
-overflow: hidden;
+width: 1300px;
+// overflow: hidden;
 align-items: center;
 `
 
 const AddCard = styled.div`
-position: relative;
+// position: relative;
 height: 400px;
 width: 270px;
-display: block;
+display: flex;
+flex-direction: column;
 align-items: center;
 border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
@@ -30,7 +31,7 @@ border-radius: 10px;
 `
 
 const AddProduct = styled.h1 `
-position: absolute;
+// position: absolute;
 left: 60px;
 font-family: 'Source Sans Pro', sans-serif;
 font-weight: 500;
@@ -144,10 +145,10 @@ export default function OutfitList ({ setID }) {
 
   return (
     <div>
-      {/* <StarRatings>
+      <StarRatings>
         <FilledStars><FilledStar /></FilledStars>
         <div><BlankStar /></div>
-      </StarRatings> */}
+      </StarRatings>
       <OutfitCarousel>
       {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>

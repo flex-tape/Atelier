@@ -30,12 +30,13 @@ const ProductHeader = styled.th`
   font-weight: 600;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 18px;
+  border-bottom: solid;
 `
 const Comparison = styled.th`
-  padding-left: 35px;
+  padding-left: 37px;
   font-weight: 600;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px;
+  font-size: 22px;
 `
 
 const Features = styled.td`

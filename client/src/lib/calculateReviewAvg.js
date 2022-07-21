@@ -45,6 +45,12 @@ export default function calculateReviewAvg (ratingsObj) {
     starSummary: [starWholeNumber, starDecimal] // e.g. [3, 0]
   }
 
+  const partialStar = (value) => {
+
+  }
+
+  let starPercentage = 20 * (starWholeNumber + starDecimal)
+
   return obj;
   // result can be used as an argument to another function that renders the star elements, or it can also be a part of this function
 }
