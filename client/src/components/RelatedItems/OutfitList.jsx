@@ -23,7 +23,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 border: 2px solid lightgray;
-box-shadow: 7px 7px 7px #ffe6feb5;
+box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 margin-bottom: 30px;
