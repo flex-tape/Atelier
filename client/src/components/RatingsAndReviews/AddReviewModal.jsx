@@ -26,13 +26,14 @@ const ModalContainer = styled.div`
   flex-direction: column;
   padding: 25px;
   position: relative;
+  overflow: auto;
 `;
 
 const Submit = styled.button`
-  position: absolute;
+  // position: absolute;
   padding: 8px 10px;
-  bottom: 15px;
-  right: 10px;
+  // bottom: 15px;
+  // right: 10px;
   background: rgba(51, 204, 255);
   color: rgba(250, 250, 250);
   border-radius: 4px;
@@ -40,10 +41,10 @@ const Submit = styled.button`
 `;
 
 const Close = styled.button`
-  position: absolute;
+  // position: absolute;
   padding: 8px 10px;
-  bottom: 15px;
-  right: 125px;
+  // bottom: 15px;
+  // right: 125px;
   border-radius: 4px;
   border: solid rgba(210, 210, 210);
 `;
@@ -64,6 +65,10 @@ const Header = styled.label`
   font-size: 18px;
 `
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: end;
+`
 
 
 
@@ -125,10 +130,10 @@ export default function AddReviewModal(props) {
               Minimum characters left: {50 - reviewBody.length}
             </div>
           </div>
-          <div>
+          <ButtonContainer>
             <Close onClick={props.addReviewClickHandler}>Close</Close>
             <Submit type='submit'>Submit Answer</Submit>
-          </div>
+          </ButtonContainer>
         </form>
       </ModalContainer>
     </ModalBackground>
