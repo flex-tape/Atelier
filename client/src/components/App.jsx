@@ -12,13 +12,14 @@ const Container = styled.div`
   font-family: Arial, sans-serif;
 `
 const Logo = styled.h1`
-  margin-left: 200px;
+  // margin-left: 200px;
 `
 
 export default function App() {
 
   const [productID, setProductID] = useState(40344);
   const [styleID, setStyleID] = useState(240500);
+  const [reviewAvg, setReviewAvg] = useState(0);
 
   // const [productID, setProductID] = useState(() => { return 40344; }); best practice but probably doesn't matter here
   // const [productStyles, setProductStyle] = useState([]); // might not need this here, because to get product styles, all you need is product_id
@@ -44,12 +45,12 @@ export default function App() {
 
   return (
     <IDContext.Provider value={productID}>
-      <Container>
+      <Container id="master-container">
         <Logo>ATELIER</Logo>
         <Overview reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
-        <RatingsAndReviews reference={el2} productID={productID}/>
+        <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
       </Container>
     </IDContext.Provider>
   )

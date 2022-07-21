@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(200, 200, 200);
+  background-color: rgba(200, 200, 200, 0.9);
   position: fixed;
   top: 0;
   left: 0;
@@ -15,14 +15,15 @@ const ModalBackground = styled.div`
   z-index: 1;
 `
 const ModalContainer = styled.div`
-  width: 500px;
-  height: 550px;
-  border-radius: 12px;
+  width: 510px;
+  height: 500px;
+  border-radius: 8px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
+  position: relative;
 `
 const Thumbnail = styled.img`
   width: 100px;
@@ -31,19 +32,22 @@ const Thumbnail = styled.img`
 `
 const Title = styled.div`
   text-align: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(210, 210, 210);
   margin-bottom: 15px;
 `
 const AnswerBody = styled.textarea`
+  font-family: inherit;
   width: 100%;
   height: 150px;
   padding: 10px 10px;
   box-sizing: border-box;
-  border: 1px solid black;
+  border-color: rgba(200, 200, 200);
+  border-radius: 3px;
 `
 const Entries = styled.div`
   display: flex;
   width: 100%;
+  margin-bottom: 10px;
 `
 const EntryDivLeft = styled.div`
   flex: 1;
@@ -54,26 +58,51 @@ const EntryDiv = styled.div`
 `
 const EntryInput = styled.input`
   width: 97%;
+  border: solid rgba(200, 200, 200);
+  border-radius: 3px;
+  font-size: 14px;
 `
 const Authentication = styled.label`
   font-size: 10px;
   font-style: italic;
+  opacity: 0.9;
 `
 const Label = styled.label`
   display: inline-block;
   margin-bottom: 4px;
+  opacity: 0.8;
+  font-size: 14px;
 `
 const AnswerContainer = styled.div`
   margin-bottom: 10px;
 `
-const Button = styled.button`
-  padding: 12px 15px;
-  box-sizing: border-box;
-  border: 1px solid black;
-  margin-right: 12px;
-  background: none;
-  font-weight: bold;
-  margin-top: 15px;
+const ButtonContainer = styled.div`
+`
+const Submit = styled.button`
+  position: absolute;
+  padding: 8px 10px;
+  bottom: 15px;
+  right: 10px;
+  background: rgba(51, 204, 255);
+  color: rgba(250, 250, 250);
+  border-radius: 4px;
+  border: solid rgba(210, 210, 210);
+`
+const Close = styled.button`
+  position: absolute;
+  padding: 8px 10px;
+  bottom: 15px;
+  right: 125px;
+  border-radius: 4px;
+  border: solid rgba(210, 210, 210);
+`
+const Header = styled.label`
+  font-size: 18px;
+`
+const Subtitle = styled.p`
+  font-size: 15px;
+  opacity: 0.8;
+  margin-bottom: 5px;
 `
 
 export default function AnswerModal(props) {
@@ -161,13 +190,10 @@ export default function AnswerModal(props) {
   return(
     <ModalBackground>
       <ModalContainer>
-        <div>
-          <button onClick={() => props.setOpenAnswerModal(false)}>X</button>
-        </div>
         <form onSubmit={handleFormSubmit}>
           <Title>
-            <h3>Submit Your Answer</h3>
-            About {props.productName}: {props.question_body}
+            <Header>Submit Your Answer</Header><br/>
+            <Subtitle>About {props.productName}: {props.question_body}</Subtitle>
           </Title>
           <AnswerContainer>
             <Label>What is your answer?</Label>
@@ -179,18 +205,19 @@ export default function AnswerModal(props) {
               <EntryInput type='text' placeholder='Example: jack543!' value={username} onChange={handleUsernameChange} maxLength='60' required />
             </EntryDivLeft>
             <EntryDiv>
-              <Label>What is your email?</Label>
+              <Label>Email</Label>
               <EntryInput type='email' placeholder='Example: jack@email.com' value={email} onChange={handleEmailChange} maxLength='60' required />
               <Authentication>For authentication purposes, you will not be emailed.</Authentication>
             </EntryDiv>
           </Entries>
           <div>
             <input type='file' onChange={handleFileInputChange} value={fileInputState}/>
-            {(previewSource.length > 0 && previewSource.length <= 5) && <button onClick={handleSubmitFile}>Upload Image</button>}
+            {(previewSource.length > 0 && previewSource.length <= 4) && <button onClick={handleSubmitFile}>Upload Image</button>}
           </div>
-          {previewSource && (previewSource.map((image, key) => <Thumbnail src={image} key={key} width='100' height='100' />))}
+          {previewSource && (previewSource.map((image, key) => <Thumbnail src={image} key={key} width='95' height='95' />))}
           <div>
-            <Button type='submit'>SUBMIT ANSWER</Button>
+            <Close onClick={() => props.setOpenAnswerModal(false)}>Close</Close>
+            <Submit type='submit'>Submit Answer</Submit>
           </div>
         </form>
       </ModalContainer>
