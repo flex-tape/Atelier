@@ -6,6 +6,7 @@ import ComparisonModal from './ComparisonModal.jsx'
 import ThumbnailList from './ThumbnailList.jsx'
 import { GiStaryu } from 'react-icons/gi';
 import AverageStars from '../AverageStars.jsx';
+import calculateReviewAvg from '../../lib/calculateReviewAvg.js';
 
 export const CompareContext = React.createContext()
 
@@ -106,6 +107,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
   const [dummyRating, setDummyRating] = useState(3.15);
+  const [averageRating, setAverageRating] = useState('');
 
 
   const getRelatedInfo = () => {
@@ -139,12 +141,26 @@ export default function RelatedCard({id, setID, currentFeatures}) {
     })
   }
 
+  const getAveragereview = () => {
+    axios.get('/reviews/meta', { params: { product_id: id } })
+      .then((response) => {
+        console.log('review ratings: ', response.data.ratings)
+        console.log('average ratings: ', calculateReviewAvg(response.data.ratings))
+        setAverageRating(calculateReviewAvg(response.data.ratings));
+      })
+      .catch((err) => {
+        console.log('GET request failed for getAveragereview')
+      })
+  }
+
   useEffect(() => {
     getRelatedInfo();
+    getAveragereview();
   }, [])
 
   useEffect(() => {
     getRelatedInfo();
+    getAveragereview();
   }, [id])
 
   let onHover = () => {
@@ -174,7 +190,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <ProductName>{relatedProductInfo.name}</ProductName>
         {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
-        <AverageStars rating={dummyRating} /></div>
+        <AverageStars rating={averageRating} /></div>
       </RelatedItemsCard>}
       </div>
     </CompareContext.Provider>

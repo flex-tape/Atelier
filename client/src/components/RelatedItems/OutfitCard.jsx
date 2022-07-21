@@ -7,7 +7,7 @@ import ThumbnailList from './ThumbnailList.jsx'
 import { IDContext } from '../App.jsx';
 import { HiX } from 'react-icons/hi';
 import  AverageStars from '../AverageStars.jsx';
-
+import calculateReviewAvg from '../../lib/calculateReviewAvg.js';
 
 const PrimaryImage = styled.img`
 display: flex;
