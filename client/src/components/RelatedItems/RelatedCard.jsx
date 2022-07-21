@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ComparisonModal from './ComparisonModal.jsx'
 import ThumbnailList from './ThumbnailList.jsx'
 import { GiStaryu } from 'react-icons/gi';
+import AverageStars from '../AverageStars.jsx';
 
 export const CompareContext = React.createContext()
 
@@ -104,6 +105,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
   const [compareProducts, setCompareProducts] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
+  const [dummyRating, setDummyRating] = useState(3.15);
 
 
   const getRelatedInfo = () => {
@@ -172,7 +174,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <ProductName>{relatedProductInfo.name}</ProductName>
         {relatedStyleInfo.sale_price !== null ?
         <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
-        <div>Star rating goes here</div></div>
+        <AverageStars rating={dummyRating} /></div>
       </RelatedItemsCard>}
       </div>
     </CompareContext.Provider>
