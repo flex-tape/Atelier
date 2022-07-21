@@ -12,7 +12,12 @@ const Container = styled.div`
   font-family: Arial, sans-serif;
 `
 const Logo = styled.h1`
-  // margin-left: 200px;
+// width: 85%;
+// margin: auto;
+margin-left: 120px;
+margin-right: 120px;
+padding-left: 168px;
+background-image: linear-gradient(to right, #ffe6fe , #00fbff6b);
 `
 
 export default function App() {
@@ -45,8 +50,8 @@ export default function App() {
 
   return (
     <IDContext.Provider value={productID}>
+      <Logo>HEVANIS</Logo>
       <Container id="master-container">
-        <Logo>ATELIER</Logo>
         <Overview reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
         <RelatedItems setID={setID} productID={productID}/>
         <QandA productID={productID}/>
