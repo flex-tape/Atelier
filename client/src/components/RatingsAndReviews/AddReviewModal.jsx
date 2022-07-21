@@ -16,8 +16,8 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 510px;
-  height: 500px;
+  width: 650px;
+  height: 650px;
   border-radius: 8px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -53,7 +53,7 @@ const Subtitle = styled.p`
   margin-bottom: 5px;
 `
 
-const Title = styled.div`
+const Title = styled.h3`
   text-align: center;
   border-bottom: 1px solid rgba(210, 210, 210);
   margin-bottom: 15px;
@@ -63,32 +63,128 @@ const Header = styled.label`
   font-size: 18px;
 `
 
+const Descriptions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1em;
+  width: 90%;
+`
+
+const SingleDes = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  font-size: 0.8em;
+`
+
+const Characteristics = styled.div`
+  font-color: inherit;
+  font-size: 1em;
+  padding-bottom: 0.5em;
+  width: 10%;
+`
+
+
 export default function AddReviewModal(props) {
+
+  const [reviewSummary, setReviewSummary] = useState('');
+  const [reviewBody, setReviewBody] = useState('');
+
+  const inputHandler = (e) => {
+    if (e.target.id === "review-summary") {
+      setReviewSummary(e.target.value)
+    }
+    if (e.target.id === "review-body") {
+      setReviewBody(e.target.value)
+    }
+  }
+
+  props.metadata.characteristics
+
+  const descriptionMap = {
+    'Size': [
+      'A size too small',
+      '½ a size too small',
+      'Perfect',
+      '½ a size too big',
+      'A size too wide'
+    ],
+    'Width': [
+      'Too narrow',
+      'Slightly narrow',
+      'Perfect',
+      'Slightly wide',
+      'Too wide'
+    ],
+    'Comfort': [
+      'Uncomfortable',
+      'Slightly uncomfortable',
+      'Ok',
+      'Comfortable',
+      'Perfect'
+    ],
+    'Quality': [
+      'Poor',
+      'Below average',
+      'What I expected',
+      'Pretty great',
+      'Perfect'
+    ],
+    'Length': [
+      'Runs Short',
+      'Runs slightly short',
+      'Perfect',
+      'Runs slightly long',
+      'Runs long'
+    ],
+    'Fit': [
+      'Runs tight',
+      'Runs slightly tight',
+      'Perfect',
+      'Runs slightly long',
+      'Runs long']
+  }
 
   return (
     <ModalBackground>
       <ModalContainer>
-        <Title>
-          <Header>Write Your Review</Header><br />
-          <Subtitle>About the {props.productName}</Subtitle>
-        </Title>
-
-        <fieldset>
-          Do you recommend this product?
+        <form>
+          <Title>
+            <Header>Write Your Review</Header><br />
+            <Subtitle>About the {props.productName}</Subtitle>
+          </Title>
           <div>
-            <input type="radio" id="yes" value="Yes"></input>
-              <label htmlFor="yes">Yes</label>
+            <fieldset>
+              Do you recommend this product?
+              <div>
+                <input type="radio" id="yes" value="Yes"></input>
+                <label htmlFor="yes">Yes</label>
+              </div>
+              <div>
+                <input type="radio" id="no" value="No"></input>
+                <label htmlFor="no">No</label>
+              </div>
+            </fieldset>
           </div>
           <div>
-            <input type="radio" id="no" value="No"></input>
-              <label htmlFor="no">No</label>
-          </div>
-        </fieldset>
+            <h4>Characteristics</h4>
 
-        <div>
-          <Close onClick={props.addReviewClickHandler}>Close</Close>
-          <Submit type='submit'>Submit Answer</Submit>
-        </div>
+          </div>
+          <div>
+            <h4><label htmlFor="review-summary">Add a headline</label></h4>
+            <input type="text" id="review-summary" name="review-summary" value={reviewSummary} onChange={inputHandler} placeholder="Best purchase ever!" size="61" maxLength="60" />
+            <h4><label htmlFor="review-body">Add a written review</label></h4>
+            <textarea id="review-body" name="review-body" rows="15" cols="61" value={reviewBody} onChange={inputHandler} placeholder="Why did you like the product or not?" maxLength="1000" />
+            <div>
+              Minimum characters left: {50 - reviewBody.length}
+            </div>
+          </div>
+          <div>
+            <Close onClick={props.addReviewClickHandler}>Close</Close>
+            <Submit type='submit'>Submit Answer</Submit>
+          </div>
+        </form>
       </ModalContainer>
     </ModalBackground>
   )

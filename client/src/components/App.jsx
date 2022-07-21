@@ -76,9 +76,9 @@ export default function App() {
         <Container id="master-container">
           {reviewAvg}
           <Logo>ATELIER</Logo>
-          <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID} />
+          {/* <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID} />
           <RelatedItems setID={setID} productID={productID} />
-          <QandA productID={productID} />
+          <QandA productID={productID} /> */}
           <RatingsAndReviews productID={productID}/>
         </Container>
       }
