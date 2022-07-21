@@ -11,8 +11,6 @@ const axios = require('axios');
 const Container = styled.div`
   border: 2px solid lightgray;
   box-shadow: 7px 7px 7px lightgray;
-  // margin-right: 200px;
-  // margin-left: 200px;
   display: flex;
   flex-direction: column;
 
@@ -53,6 +51,7 @@ const Product = styled.div`
 `
 const Socials = styled.div`
   a {
+      color: black;
       padding: 12px 15px;
       box-sizing: border-box;
       border: 1px solid black;
