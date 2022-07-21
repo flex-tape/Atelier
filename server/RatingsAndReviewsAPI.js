@@ -8,7 +8,7 @@ let options = {
 }
 
 exports.listReviews = (req, res) => {
-  console.log(req.query)
+  // console.log(req.query)
   let listReviewOptions = {
     ...options,
     params: {
@@ -38,7 +38,7 @@ exports.getReviewMetadata = (req, res) => {
 }
 
 exports.addReview = (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/`;
   axios.post(url, req.body, options)
     .then((result) => res.status(201).send(result.data))
