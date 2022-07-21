@@ -5,7 +5,9 @@ import dateHandler from '../../lib/dateHandler.js'
 
 const TileDiv = styled.div`
   color: black;
-  padding: 30px 0;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  padding-right: 10px;
 `;
 
 const StarsAndUserInfoBar = styled.div`
@@ -14,6 +16,7 @@ const StarsAndUserInfoBar = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
   padding-right: 5px;
+  font-size: 14px;
 `;
 
 const ReviewSummary = styled.h4`
@@ -21,11 +24,16 @@ const ReviewSummary = styled.h4`
   // width: 960px;
   font-size: 18px;
   margin-bottom: 20px;
+  margin-top: 12px;
 `;
 
 const ReviewBody = styled.div`
   box-sizing: border-box;
   text-align: left;
+  p {
+    margin: 0;
+  }
+  margin-bottom: 14px;
 `;
 
 const ExpandReviewsButton = styled.button`
@@ -37,6 +45,7 @@ const ExpandReviewsButton = styled.button`
   color: rgb(19, 107, 234);
   display: inline-block;
   cursor: pointer;
+  margin-top: 16px;
 
   &:hover {
     text-decoration: underline;
@@ -48,8 +57,8 @@ const ExpandReviewsButton = styled.button`
 const PhotoCarousel = styled.div`
   display: flex;
   box-sizing: border-box;
-  margin-top: 16px;
-  margin-bottom: 12px;
+  // margin-top: 12px;
+  // margin-bottom: 12px;
   gap: 8px;
 
   img {
@@ -81,7 +90,7 @@ const LightBox = styled.div`
 const Recommended = styled.div`
   display: flex;
   box-sizing: border-box;
-  margin-top: 8px;
+  margin-top: 22px;
   margin-bottom: 8px;
   font-size: 0.95em;
   svg {
@@ -99,8 +108,8 @@ const SellerResponse = styled.div`
 
 const Helpfulness = styled.div`
   box-sizing: border-box;
-  padding-top: 10px;
-  font-size: 0.95em;
+  padding-top: 6px;
+  font-size: 13px;
 
   & a:nth-child(2) {
     margin-left: 4px;

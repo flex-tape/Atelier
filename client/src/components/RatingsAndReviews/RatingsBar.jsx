@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const RatingsBarText = styled.div`
-  flex: 15%;
+  flex: 20%;
   // height: 10px;
   // vertical-align: middle;
   // align-self: center;
@@ -11,7 +11,7 @@ const RatingsBarText = styled.div`
 `;
 
 const ParentBar = styled.div`
-  flex: 85%;
+  flex: 80%;
   display: flex;
   height: 8px;
   width: 100%;

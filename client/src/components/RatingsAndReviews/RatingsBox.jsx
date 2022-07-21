@@ -9,6 +9,7 @@ const RatingsBarContainer = styled.div`
   // height: 8px;
   width: 100%;
   // margin-bottom: 30px;
+
 `;
 
 const RecommendedContainer = styled.div`
@@ -20,14 +21,14 @@ const RecommendedContainer = styled.div`
 const RatingsBarList = styled.ul`
   list-style-type: none;
   padding-left: 0;
-
+  margin-top: 8px;
   & li {
     box-sizing: border-box;
     display: flex;
     padding: 4px 0;
     align-items: center;
     border-radius: 3px;
-    gap: 8px;
+    gap: 0px;
   }
 
   & li:hover {
@@ -35,7 +36,7 @@ const RatingsBarList = styled.ul`
   }
 `
 
-const SectionHeading = styled.h3`
+const SectionHeading = styled.h2`
   margin-top: 0;
 `;
 
