@@ -50,6 +50,9 @@ export default function RatingsAndReviews(props) {
     let reviewCount = countReviews(res.data.ratings);
     await setReviewTotal(reviewCount);
 
+    await props.setReviewAvg(getReviewAvg(reviewMetadata.ratings))
+    console.log('META IS...', reviewMetadata.ratings)
+
     let res2 = await axios.get('/reviews', { params: { product_id: props.productID, count: reviewCount, sort: sortCategory } });
     let final = res2.data.results;
     // await setReviews(final);
@@ -69,11 +72,6 @@ export default function RatingsAndReviews(props) {
 
     if (starsFilter.length > 0) {
       let filteredReviews = loadedReviews.filter( (review) => {
-        // return starsFilter.forEach( (star) => {
-        //   if (review.rating >= Number(star)) {
-        //     return true;
-        //   }
-        // })
         return starsFilter.includes(String(review.rating))
       })
 
@@ -101,6 +99,22 @@ export default function RatingsAndReviews(props) {
 
   const sortHandler = (event) => {
     setSortCategory(event.target.value);
+  }
+
+  const getReviewAvg = (ratingsObj) => {
+    let counter = 0;
+    let sum = 0;
+
+    for (let key in ratingsObj) {
+      if (Object.hasOwn(ratingsObj, key)) {
+        sum += parseInt(ratingsObj[key]) * parseInt(key)
+        counter += parseInt(ratingsObj[key])
+      }
+    }
+    let roundedAvg = (sum / counter).toFixed(2);
+    console.log('ROUNDED AVG IS...', typeof(roundedAvg))
+
+    return parseInt(roundedAvg);
   }
 
   return (

@@ -23,16 +23,8 @@ font-weight: 700;
 `
 
 const RelatedItemsContainer = styled.div`
-<<<<<<< HEAD
 // margin-left: 200px;
 // margin-right: 200px;
-=======
-margin-left: 200px;
-margin-right: 200px;
-// margin-left: auto;
-// margin-right: auto;
-
->>>>>>> main
 `
 
 const RelatedCarousel = styled.div`

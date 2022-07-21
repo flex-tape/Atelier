@@ -26,10 +26,11 @@ export default function FeaturesBox(props) {
   }
 
   let labels = Object.keys(props.metadata.characteristics);
-  console.log(labels);
 
-  const generateFeatureBars = labels.map( (label) => {
-    return <FeaturesListItem><FeaturesBar labelDescs={labelDescs[label]} labelName={label} sliderValue={props.metadata.characteristics[label].value}></FeaturesBar></FeaturesListItem>
+  const generateFeatureBars = labels.map((label) => {
+    return (
+      <FeaturesListItem><FeaturesBar labelDescs={labelDescs[label]} labelName={label} sliderValue={props.metadata.characteristics[label].value}></FeaturesBar></FeaturesListItem>
+    )
   })
 
   return (
