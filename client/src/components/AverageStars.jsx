@@ -7,6 +7,7 @@ const StarRatings = styled.div`
   display: inline-block;
   position: relative;
   margin-bottom: 30px;
+  margin-left: 6px;
 `
 
 const RatingStar = styled.div`
