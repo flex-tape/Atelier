@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const RatingsBarText = styled.div`
-  flex: 10%;
+  flex: 15%;
   // height: 10px;
   // vertical-align: middle;
   // align-self: center;
   text-decoration: underline;
+  font-size: 14px;
 `;
 
 const ParentBar = styled.div`
-  flex: 90%;
+  flex: 85%;
   display: flex;
-  height: 7px;
+  height: 8px;
   width: 100%;
   // background-color: silver;
 `;
@@ -70,7 +71,6 @@ export default function RatingsBar(props) {
         <UnfilledPortion percentFalse={props.ratingsPercentRemainder}>
         </UnfilledPortion>
       </ParentBar>
-      {props.starsFilter}
     </StarRatingItem>
   )
 }

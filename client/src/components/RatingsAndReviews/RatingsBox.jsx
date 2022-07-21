@@ -6,13 +6,15 @@ import RatingsBar from './RatingsBar.jsx';
 const RatingsBarContainer = styled.div`
   // display: flex;
   margin: 14px 0;
-  height: 8px;
+  // height: 8px;
   width: 100%;
+  // margin-bottom: 30px;
 `;
 
 const RecommendedContainer = styled.div`
   margin-bottom: 5px;
   margin-top: 10px;
+  font-size: 14px;
 `;
 
 const RatingsBarList = styled.ul`
@@ -22,7 +24,7 @@ const RatingsBarList = styled.ul`
   & li {
     box-sizing: border-box;
     display: flex;
-    padding: 8px 0;
+    padding: 4px 0;
     align-items: center;
     border-radius: 3px;
     gap: 8px;
@@ -32,6 +34,10 @@ const RatingsBarList = styled.ul`
     background-color: orange;
   }
 `
+
+const SectionHeading = styled.h3`
+  margin-top: 0;
+`;
 
 export default function RatingsBox(props) {
 
@@ -85,11 +91,9 @@ export default function RatingsBox(props) {
     })
   }
 
-
-
   return (
-    <>
-      <div><h3>RATINGS & REVIEWS</h3></div>
+    <div>
+      <div><SectionHeading>RATINGS & REVIEWS</SectionHeading></div>
       <div>
         {reviewAvg}
       </div>
@@ -99,16 +103,17 @@ export default function RatingsBox(props) {
       <div>
         <h4>RATINGS BREAKDOWN</h4>
       </div>
-      {props.starsFilter.length > 0
-        ? (<div>Filters are enabled (<a href="#" onClick={() => props.setStarsFilter([])}>undo</a>)</div>
-        )
-        : null
-      }
+
       <RatingsBarContainer>
         <RatingsBarList>
           {props.hasLoaded && createRatingsBreakdown(props.metadata.ratings)}
         </RatingsBarList>
+        {props.starsFilter.length > 0
+        ? (<div>Filters are enabled (<a href="#" onClick={() => props.setStarsFilter([])}>remove</a>)</div>
+        )
+        : null
+      }
       </RatingsBarContainer>
-    </>
+    </div>
   )
 }

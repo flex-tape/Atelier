@@ -9,8 +9,8 @@ const axios = require('axios');
 const Container = styled.div`
   border: 2px solid lightgray;
   box-shadow: 7px 7px 7px lightgray;
-  margin-right: 200px;
-  margin-left: 200px;
+  // margin-right: 200px;
+  // margin-left: 200px;
   display: flex;
   flex-direction: column;
 
