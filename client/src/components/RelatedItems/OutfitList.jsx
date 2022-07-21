@@ -10,16 +10,17 @@ import { IoIosStar, IoIosStarOutline} from 'react-icons/io';
 
 const OutfitCarousel = styled.div`
 display: flex;
-max-width: 1300px;
-overflow: hidden;
+width: 1300px;
+// overflow: hidden;
 align-items: center;
 `
 
 const AddCard = styled.div`
-position: relative;
+// position: relative;
 height: 400px;
 width: 270px;
-display: block;
+display: flex;
+flex-direction: column;
 align-items: center;
 border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
@@ -30,7 +31,7 @@ border-radius: 10px;
 `
 
 const AddProduct = styled.h1 `
-position: absolute;
+// position: absolute;
 left: 60px;
 font-family: 'Source Sans Pro', sans-serif;
 font-weight: 500;
@@ -92,6 +93,7 @@ export default function OutfitList ({ setID }) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [productCache, setProductCache] = useState({});
   const [styleCache, setStyleCache] = useState({});
+  const [reviewCache, setReviewCache] = useState({});
   // store axios data in here.if exists dont do fetch, if it doesnt then ddo fetch
   // set cache function in outfitlist. take in card info as paramater. pass into outfict card
 
@@ -101,21 +103,19 @@ export default function OutfitList ({ setID }) {
   const addToList = (id) => {
     if (outfitList.indexOf(id) === -1) {
       setOutfitList([...outfitList, id]);
-      console.log(outfitList);
+      // console.log(outfitList);
     }
   }
 
   const removeFromList = (id) => {
     const newList = outfitList.filter((item) => item !== id);
     setOutfitList([...newList])
-    console.log('outfitlist: ', outfitList)
-    console.log(`REMOVED ${id}`)
+    // console.log('outfitlist: ', outfitList)
+    // console.log(`REMOVED ${id}`)
   }
 
   const addProductCache = (id, obj) => {
-
       setProductCache({...productCache, [id]: obj});
-
   }
 
   const addStyleCache = (id, obj) => {
@@ -124,20 +124,19 @@ export default function OutfitList ({ setID }) {
     }
   }
 
-  const seeChange = () => {
-    console.log('styleCache: ', styleCache)
-    console.log('productCache: ', productCache);
-  }
+  const addReviewCache = (id, data) => {
+    setReviewCache({...reviewCache, [id]: data});
+}
 
   const moveOutfit = (arrow) => {
     if (arrow === 'left') {
       setOutfitLength([outfitLength[0] - 1, outfitLength[1] - 1])
       slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1])
-      console.log(outfitLength)
+      // console.log(outfitLength)
     } else {
       setOutfitLength([outfitLength[0] + 1, outfitLength[1] + 1])
       slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1])
-      console.log(outfitLength)
+      // console.log(outfitLength)
     }
   }
 
@@ -152,7 +151,7 @@ export default function OutfitList ({ setID }) {
       {outfitLength[0] > 0 ? <LeftArrow onClick={() => moveOutfit('left')}/> : <HideArrow />}
       <AddCard onClick={() => addToList(productID)}><PlusIcon /><div><AddProduct>Add to Fit!</AddProduct></div></AddCard>
       {slicedOutfitList.map((item, index) => (
-          <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList} addProductCache={addProductCache} addStyleCache={addStyleCache} productCache={productCache} styleCache={styleCache}/>
+          <OutfitCard id={item} key={index} setID={setID} removeFromList={removeFromList} addProductCache={addProductCache} addStyleCache={addStyleCache} addReviewCache={addReviewCache} productCache={productCache} styleCache={styleCache} reviewCache={reviewCache}/>
         ))}
         {outfitLength[1] < outfitList.length ? <RightArrow onClick={() => moveOutfit('right')}/> : <HideArrow />}
       </OutfitCarousel>

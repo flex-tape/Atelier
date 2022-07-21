@@ -20,31 +20,39 @@ export default function calculateReviewAvg (ratingsObj) {
   }
 
   let roundedAvg = (sum / counter).toFixed(2);
-  // will take the avg sum / counter, which can be up to 3 decimals (i.e. 3.125)
-  // and round to 2 decimals (i.e. 3.13) stored as a string
-  let numArray = roundedAvg.split('.');
-  // this rounded average will be evaluated by splitting the string representing an integer and a decimal (3.13 -> ["3", "13"])
-  let starWholeNumber = parseInt(numArray[0]); // 3
-  let starDecimal;
-
-  let parsedDecimal = numArray[1]; // "13"
-
-  if (parsedDecimal >= 0 && parsedDecimal <= 13) {
-    starDecimal = 0;
-  } else if (parsedDecimal >= 13 && parsedDecimal <= 38) {
-    starDecimal = .25;
-  } else if (parsedDecimal >= 38 && parsedDecimal <= 63) {
-    starDecimal = 0.5;
-  } else if (parsedDecimal >= 63 && parsedDecimal <= 88) {
-    starDecimal = 0.75;
-  } else if (parsedDecimal >= 88 && parsedDecimal <= 100) {
-    starDecimal = 1;
-  }
-  let obj = {
-    ratingSummary: (sum / counter).toFixed(1), // e.g. "3.1"
-    starSummary: [starWholeNumber, starDecimal] // e.g. [3, 0]
-  }
-
-  return obj;
-  // result can be used as an argument to another function that renders the star elements, or it can also be a part of this function
+  return roundedAvg;
 }
+
+  // // will take the avg sum / counter, which can be up to 3 decimals (i.e. 3.125)
+  // // and round to 2 decimals (i.e. 3.13) stored as a string
+  // let numArray = roundedAvg.split('.');
+  // // this rounded average will be evaluated by splitting the string representing an integer and a decimal (3.13 -> ["3", "13"])
+  // let starWholeNumber = parseInt(numArray[0]); // 3
+  // let starDecimal;
+
+  // let parsedDecimal = numArray[1]; // "13"
+
+  // if (parsedDecimal >= 0 && parsedDecimal <= 13) {
+  //   starDecimal = 0;
+  // } else if (parsedDecimal >= 13 && parsedDecimal <= 38) {
+  //   starDecimal = .25;
+  // } else if (parsedDecimal >= 38 && parsedDecimal <= 63) {
+  //   starDecimal = 0.5;
+  // } else if (parsedDecimal >= 63 && parsedDecimal <= 88) {
+  //   starDecimal = 0.75;
+  // } else if (parsedDecimal >= 88 && parsedDecimal <= 100) {
+  //   starDecimal = 1;
+  // }
+  // let obj = {
+  //   ratingSummary: (sum / counter).toFixed(1), // e.g. "3.1"
+  //   starSummary: [starWholeNumber, starDecimal] // e.g. [3, 0]
+  // }
+
+  // const partialStar = (value) => {
+
+  // }
+
+  // let starPercentage = 20 * (starWholeNumber + starDecimal)
+
+  // return obj;
+  // result can be used as an argument to another function that renders the star elements, or it can also be a part of this function
