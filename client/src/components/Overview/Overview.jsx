@@ -4,6 +4,8 @@ import StyleList from './StyleList.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ExpandedModal from './ExpandedModal.jsx';
 import StyleCart from './StyleCart.jsx';
+import { FaFacebookF, FaPinterestP } from 'react-icons/fa';
+import { FiTwitter } from 'react-icons/fi';
 const axios = require('axios');
 
 const Container = styled.div`
@@ -50,13 +52,14 @@ const Product = styled.div`
   text-transform: uppercase;
 `
 const Socials = styled.div`
-  button {
+  a {
       padding: 12px 15px;
       box-sizing: border-box;
       border: 1px solid black;
       margin-right: 12px;
       background: none;
       font-weight: bold;
+      font-size: 14px;
     }
 `
 const Selector = styled.div`
@@ -111,9 +114,7 @@ export default function Overview (props) {
       {hasLoaded && <Container>
         {showModal && <ExpandedModal setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>}
           <SubContainer1>
-            {/* <Image> */}
             <ImageGallery setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
-            {/* </Image> */}
             <SubContainer2>
               <Product>
                 <div>
@@ -123,9 +124,9 @@ export default function Overview (props) {
                 {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
                 {productStyle.sale_price === null ? null : <div>${productStyle.sale_price}</div>}
                 <Socials>
-                  <button>FACEBOOK</button>
-                  <button>TWITTER</button>
-                  <button>PINTEREST</button>
+                  <a href="http://www.facebook.com/share.php?u=https://www2.hm.com/en_us/index.html" target="_blank" rel="noopener noreferrer"><FaFacebookF/> FACEBOOK</a>
+                  <a href="https://twitter.com/intent/tweet" target="_blank" rel="noopener noreferrer"><FiTwitter/> TWITTER</a>
+                  <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer"><FaPinterestP/> PINTEREST</a>
                 </Socials>
               </Product>
               <Selector>

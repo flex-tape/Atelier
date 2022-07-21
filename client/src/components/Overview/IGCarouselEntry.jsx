@@ -22,3 +22,4 @@ export default function IGCarouselEntry (props) {
     </Image>
   )
 }
+
