@@ -6,7 +6,8 @@ import ComparisonModal from './ComparisonModal.jsx'
 import ThumbnailList from './ThumbnailList.jsx'
 import { IDContext } from '../App.jsx';
 import { HiX } from 'react-icons/hi';
-
+import  AverageStars from '../AverageStars.jsx';
+import calculateReviewAvg from '../../lib/calculateReviewAvg.js';
 
 const PrimaryImage = styled.img`
 display: flex;
@@ -53,7 +54,7 @@ box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 margin-bottom: 30px;
-border-radius: 10px;
+// border-radius: 10px;
 `
 
 const ProductCategory = styled.div`
@@ -90,7 +91,7 @@ color: red;
 font-family: 'Source Sans Pro', sans-serif;
 `
 
-export default function OutfitCard({id, setID, removeFromList, addProductCache, addStyleCache, productCache, styleCache}) {
+export default function OutfitCard({id, setID, removeFromList, addProductCache, addStyleCache, addReviewCache, productCache, styleCache, reviewCache}) {
   const [hoverStatus, setHoverStatus] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   // const [outfitProductInfo, setOutfitProductInfo] = useState({});
@@ -98,7 +99,8 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
   const [relatedProductInfo, setRelatedProductInfo] = useState([]); // name, category, features, default price
   const [relatedStyleInfo, setRelatedStyleInfo] = useState([]); // sale price, photos
   const [thumbnailPhotos, setThumbnailPhotos] = useState([]);
-
+  const [dummyRating, setDummyRating] = useState(3.15);
+  const [averageRating, setAverageRating] = useState('');
 
   let productID = id;
 
@@ -106,7 +108,9 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
     if (styleCache[productID]) {
       setRelatedProductInfo(productCache[productID])
       setRelatedStyleInfo(styleCache[productID])
-      console.log('cache: ', productCache[productID])
+      setAverageRating(reviewCache[productID])
+      // console.log('review cache: ', reviewCache)
+      // console.log('product cache: ', productCache)
       setHasLoaded(true)
     } else {
       axios.get(`/products/${productID}`)
@@ -131,14 +135,38 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
       setRelatedStyleInfo(styleInfo);
       addStyleCache(productID, styleInfo);
       })
+      .catch((err) => {
+        console.log('GET request failed for outfitStyles')
+      })
+      axios.get('/reviews/meta', { params: { product_id: productID } })
+      .then((response) => {
+        // console.log('review ratings: ', response.data.ratings)
+        // console.log('average ratings: ', calculateReviewAvg(response.data.ratings))
+        let average = calculateReviewAvg(response.data.ratings)
+        setAverageRating(calculateReviewAvg(response.data.ratings));
+        addReviewCache(productID, average)
+      })
       .then(() => {
         setHasLoaded(true)
       })
       .catch((err) => {
-        console.log('GET request failed for outfitStyles')
+        console.log('GET request failed for getAveragereview')
       })
     }
   }
+
+  // const getAverageReview = () => {
+  //   axios.get('/reviews/meta', { params: { product_id: productID } })
+  //     .then((response) => {
+  //       console.log('review ratings: ', response.data.ratings)
+  //       console.log('average ratings: ', calculateReviewAvg(response.data.ratings))
+  //       setAverageRating(calculateReviewAvg(response.data.ratings));
+  //       addProductCache(productID, calculateReviewAvg(response.data.ratings))
+  //     })
+  //     .catch((err) => {
+  //       console.log('GET request failed for getAveragereview')
+  //     })
+  // }
 
   let onHover = () => {
     setHoverStatus(true);
@@ -153,11 +181,9 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
 
   useEffect (() => {
     getOutfitInfo();
+    // getAverageReview();
   }, [id])
 
-  const showInfo = () => {
-    console.log('product info: ', relatedProductInfo)
-  }
   return (
     <div>
     {hasLoaded && <OutfitCardDiv>
@@ -166,8 +192,10 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
               <div onClick={() => setID(id)}><ProductCategory>{relatedProductInfo.category}</ProductCategory>
               <ProductName >{relatedProductInfo.name}</ProductName>
               {relatedStyleInfo.sale_price !== null ?
-              <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
-              <div>Star rating goes here</div></div>
+              <div>
+                <StrikePrice>{relatedStyleInfo.default_price}</StrikePrice>
+                <SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
+                <AverageStars rating={averageRating} /></div>
             </OutfitCardDiv>}
     </div>
   )

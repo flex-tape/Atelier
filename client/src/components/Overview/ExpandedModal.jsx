@@ -42,6 +42,8 @@ const ZoomContainer = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
   align-items: all;
   z-index: 1;
 `

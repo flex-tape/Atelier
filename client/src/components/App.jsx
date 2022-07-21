@@ -5,19 +5,22 @@ import QandA from './QandA/QandA.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import styled from 'styled-components';
+import getReviewAvg from '../lib/getReviewAvg.js'
 const axios = require('axios');
 export const IDContext = React.createContext()
+
 
 const Container = styled.div`
   font-family: Arial, sans-serif;
 `
 const Logo = styled.h1`
-  margin-top: 0;
-  font-family: Arial,sans-serif;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  // background-color: #E4E4E4;
-  padding-left: 10px;
+  // width: 85%;
+  // margin: auto;
+  margin-left: 120px;
+  margin-right: 120px;
+  padding-left: 168px;
+  // background-image: linear-gradient(to right, #ffe6fe , #00fbff6b);
+  background-image: linear-gradient(to right,#575b5442,#e6feff);
 `
 
 export default function App() {
@@ -25,6 +28,8 @@ export default function App() {
   const [productID, setProductID] = useState(40344);
   const [styleID, setStyleID] = useState(240500);
   const [reviewAvg, setReviewAvg] = useState(0);
+  // const [reviewMetadata, setReviewMetadata] = useState({});
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   // const [productID, setProductID] = useState(() => { return 40344; }); best practice but probably doesn't matter here
   // const [productStyles, setProductStyle] = useState([]); // might not need this here, because to get product styles, all you need is product_id
@@ -37,8 +42,34 @@ export default function App() {
         setStyleID(response.data.results[0].style_id);
       })
       .catch((err) => {
+        console.error(err)
       })
+
+    axios.get('/reviews/meta', { params: { product_id: productID } })
+      .then((response) => {
+        setReviewAvg(getReviewAvg(response.data.ratings));
+      })
+
+    setPageLoaded(true);
+
   }, [productID])
+
+  // useEffect(() => {
+  //   axios.get('/reviews/meta', { params: { product_id: productID } })
+  //     .then( (response) => {
+  //       setReviewAvg(getReviewAvg(response.data.ratings));
+  //     })
+  // }, [productID])
+
+  // const loadMainPage = async () => {
+  //   let res1 = await axios.get(`/products/${productID}/styles`)
+
+  //   setStyleID(res1.data.results[0].style_id);
+
+  //   let res2 = await axios.get('/reviews/meta', { params: { product_id: productID } })
+  //   console.log(res2)
+  //   setReviewAvg(getReviewAvg(res2.data.ratings));
+  // }
 
   const setID = (id) => {
     setProductID(id);
@@ -49,14 +80,17 @@ export default function App() {
   const el2 = useRef();
 
   return (
+
     <IDContext.Provider value={productID}>
-      <Container id="master-container">
-        <Logo>HEVANIS</Logo>
-        <Overview reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
-        <RelatedItems setID={setID} productID={productID}/>
-        <QandA productID={productID}/>
-        <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
-      </Container>
+      <Logo>HEVANIS</Logo>
+      {pageLoaded &&
+          <Container id="master-container">
+            <Overview reviewAvg={reviewAvg} reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
+            <RelatedItems setID={setID} productID={productID}/>
+            <QandA productID={productID}/>
+            <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
+          </Container>
+      }
     </IDContext.Provider>
   )
 }

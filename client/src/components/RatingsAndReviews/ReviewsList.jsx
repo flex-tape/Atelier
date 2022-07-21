@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import ReviewTile from './ReviewTile.jsx'
+import AddReviewModal from './AddReviewModal.jsx'
+
 
 const MoreReviewsButton = styled.button`
   border: 1px solid;
@@ -15,6 +18,15 @@ const AddReviewButton = styled.button`
 
 const ButtonContainer = styled.div`
   display: inline-flex;
+
+  button {
+  padding: 12px 15px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  margin-right: 12px;
+  background: none;
+  font-weight: bold;
+  }
 `;
 
 const SortBar = styled.form`
@@ -32,10 +44,21 @@ const UnorderedList = styled.ul`
     // border-box: content-box;
     padding-top: 5px;
   }
+  font-size: 15px;
 `;
 
 
 export default function ReviewsList(props) {
+
+  let [showReviewModal, setShowReviewModal] = useState(false);
+  let [productName, setProductName] = useState('');
+
+  useEffect( () => {
+    axios.get(`/products/${props.productID}`)
+      .then( (response) => {
+        setProductName(response.data.name);
+      })
+  }, [])
 
   const listReviewTiles = props.reviews.map((review, index) => {
     if (index < props.reviewDisplayCount && props.starsFilter.indexOf(String(review.rating)) !== -1) {
@@ -46,16 +69,23 @@ export default function ReviewsList(props) {
     }
   });
 
+  const addReviewClickHandler = (e) => {
+    e.preventDefault();
+    setShowReviewModal(!showReviewModal);
+  }
+
   return (
     <>
-      <SortBar>
-        <label>{props.reviewTotal} reviews, sorted by </label>
-        <select id="sort-bar" value={props.sortCategory} onChange={props.sortHandler}>
-          <option value="relevant">relevance</option>
-          <option value="helpful">helpfulness</option>
-          <option value="newest">newest</option>
-        </select>
-      </SortBar>
+      <h3>
+        <SortBar>
+          <label>{props.reviewTotal} reviews, sorted by </label>
+          <select id="sort-bar" value={props.sortCategory} onChange={props.sortHandler}>
+            <option value="relevant">relevance</option>
+            <option value="helpful">helpfulness</option>
+            <option value="newest">newest</option>
+          </select>
+        </SortBar>
+      </h3>
 
       <UnorderedList>
         {listReviewTiles}
@@ -66,12 +96,10 @@ export default function ReviewsList(props) {
           ? null
           : <MoreReviewsButton onClick={props.getMoreReviews} > MORE REVIEWS </MoreReviewsButton>
         }
-        <AddReviewButton reviewCount={props.reviews.length} > ADD A REVIEW </AddReviewButton>
+        <AddReviewButton onClick={addReviewClickHandler}> ADD A REVIEW </AddReviewButton>
       </ButtonContainer>
+      {showReviewModal && <AddReviewModal addReviewClickHandler={addReviewClickHandler} metadata={props.metadata} productName={productName}></AddReviewModal>}
     </>
 
   )
 }
-
-
-// export default ReviewsList;

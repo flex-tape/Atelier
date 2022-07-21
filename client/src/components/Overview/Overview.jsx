@@ -4,6 +4,7 @@ import StyleList from './StyleList.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ExpandedModal from './ExpandedModal.jsx';
 import StyleCart from './StyleCart.jsx';
+import AverageStars from '../AverageStars.jsx';
 import { FaFacebookF, FaPinterestP } from 'react-icons/fa';
 import { FiTwitter } from 'react-icons/fi';
 const axios = require('axios');
@@ -70,6 +71,12 @@ const Selector = styled.div`
   text-transform: uppercase;
 `
 const Reviews = styled.div`
+  max-height: 11px;
+  display: flex;
+`
+const Link = styled.div`
+  margin-top: 10px;
+  margin-left: 155px;
   font-size: 11px;
   cursor: pointer;
 `
@@ -131,6 +138,8 @@ export default function Overview (props) {
     })
   }, [props.productID, props.styleID])
 
+  console.log('avg', props.reviewAvg);
+
 
   return (
     <>
@@ -140,7 +149,10 @@ export default function Overview (props) {
             <ImageGallery setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
             <SubContainer2>
               <Product ref={props.reference}>
-                <Reviews onClick={props.click}><u>Read all {reviews} reviews</u></Reviews>
+                <Reviews>
+                <AverageStars rating={props.reviewAvg}/>
+                <Link onClick={props.click}><u>Read all {reviews} reviews</u></Link>
+                </Reviews>
                 <div>
                   <div>{productInfo.category}</div>
                   <ProductName>{productInfo.name}</ProductName>
