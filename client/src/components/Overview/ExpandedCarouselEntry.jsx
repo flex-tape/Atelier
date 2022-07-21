@@ -1,15 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaCircle, FaHeart } from 'react-icons/fa';
+// import { FaCircle } from 'react-icons/fa';
+import { IoMdRemove, IoMdShirt } from 'react-icons/io';
 
 const Image = styled.div`
-  object-fit: cover;
   margin: 10px;
-  width: 80px;
-
-  img {
-    width: 80;
-  }
 `
 
 
@@ -19,7 +14,7 @@ export default function ExpandedCarouselEntry (props) {
 
   return (
     <Image onClick={() => props.setCurrentIndex(mappedIndex)}>
-    {props.currentIndex === mappedIndex ? <FaHeart /> : <FaCircle/>}
+    {props.currentIndex === mappedIndex ? <IoMdShirt/> : <IoMdRemove/>}
     </Image>
   )
 }

@@ -6,6 +6,7 @@ const Image = styled.div`
   margin: 10px;
   height: 70px;
   box-shadow: 7px 7px 7px lightgray;
+  cursor: e-resize;
 
   img {
     height: 70;
@@ -22,3 +23,4 @@ export default function IGCarouselEntry (props) {
     </Image>
   )
 }
+

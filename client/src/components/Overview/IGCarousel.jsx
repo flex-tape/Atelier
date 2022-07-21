@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import styled from 'styled-components';
 import IGCarouselEntry from './IGCarouselEntry.jsx';
+import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 
 const Container = styled.div`
   align-self: flex-start;
@@ -10,8 +11,11 @@ const Container = styled.div`
   min-height: 688px;
   overflow: hidden;
 `
-const InvButton = styled.button`
+const InvButton = styled(IoIosArrowUp)`
   visibility: hidden;
+`
+const Buttons = styled.div`
+  align-self: center;
 `
 
 export default function IGCarousel (props) {
@@ -34,11 +38,15 @@ export default function IGCarousel (props) {
 
   return (
     <Container>
-      {carouselArray[0] > 0 ? <button onClick={() => handleCarousel('left')}>↑</button> : <InvButton>↑</InvButton>}
+      <Buttons>
+        {carouselArray[0] > 0 ? <IoIosArrowUp onClick={() => handleCarousel('left')}/> : <InvButton/>}
+      </Buttons>
       {stock !== null && slicedArray.map((photo, index) => (
         <IGCarouselEntry photoArray={props.productStyle.photos} currentIndex={props.currentIndex} key={index} setCurrentIndex={props.setCurrentIndex} photo={photo} />
       ))}
-      {carouselArray[1] < props.productStyle.photos.length ? <button onClick={() => handleCarousel('right')}>↓</button> : <InvButton>↓</InvButton>}
+      <Buttons>
+        {carouselArray[1] < props.productStyle.photos.length ? <IoIosArrowDown onClick={() => handleCarousel('right')}/> : <InvButton/>}
+      </Buttons>
     </Container>
   )
 }

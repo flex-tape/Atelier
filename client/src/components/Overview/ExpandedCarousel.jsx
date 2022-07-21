@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ExpandedCarouselEntry from './ExpandedCarouselEntry.jsx';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const Container = styled.div`
   align-self: center;
   display: flex;
   max-width: 750px;
   overflow: hidden;
+  align-items: center;
 `
-const InvButton = styled.button`
+const RightArrow = styled(IoIosArrowForward)`
+  height: 25px;
+  width: 25px;
+`
+const LeftArrow = styled(IoIosArrowBack)`
+  height: 25px;
+  width: 25px;
+`
+const HideArrow = styled(IoIosArrowBack)`
+  height: 25px;
+  width: 25px;
   visibility: hidden;
 `
+
 
 export default function ExpandedCarousel (props) {
 
@@ -30,11 +43,11 @@ export default function ExpandedCarousel (props) {
 
   return (
     <Container>
-      {carouselArray[0] > 0 ? <button onClick={() => handleCarousel('left')}>←</button> : <InvButton>←</InvButton>}
+      {carouselArray[0] > 0 ? <LeftArrow onClick={() => handleCarousel('left')}/> : <HideArrow />}
       {slicedArray.map((photo, index) => (
         <ExpandedCarouselEntry photoArray={props.productStyle.photos} currentIndex={props.currentIndex} key={index} setCurrentIndex={props.setCurrentIndex} photo={photo} />
       ))}
-      {carouselArray[1] < props.productStyle.photos.length ? <button onClick={() => handleCarousel('right')}>→</button> : <InvButton>→</InvButton>}
+      {carouselArray[1] < props.productStyle.photos.length ? <RightArrow onClick={() => handleCarousel('right')}/> : <HideArrow />}
     </Container>
   )
 }

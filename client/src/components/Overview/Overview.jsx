@@ -4,6 +4,8 @@ import StyleList from './StyleList.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ExpandedModal from './ExpandedModal.jsx';
 import StyleCart from './StyleCart.jsx';
+import { FaFacebookF, FaPinterestP } from 'react-icons/fa';
+import { FiTwitter } from 'react-icons/fi';
 const axios = require('axios');
 
 const Container = styled.div`
@@ -42,21 +44,22 @@ const SubContainer2 = styled.div`
 `
 const Product = styled.div`
   flex: 1 200px;
-  margin: 5px;
+  margin-top: 25px;
   padding-left: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  row-gap: 25px;
   text-transform: uppercase;
 `
 const Socials = styled.div`
-  button {
+  a {
       padding: 12px 15px;
       box-sizing: border-box;
       border: 1px solid black;
       margin-right: 12px;
       background: none;
       font-weight: bold;
+      font-size: 14px;
     }
 `
 const Selector = styled.div`
@@ -67,6 +70,17 @@ const Selector = styled.div`
   justify-content: space-evenly;
   text-transform: uppercase;
 `
+const Reviews = styled.div`
+  font-size: 11px;
+  cursor: pointer;
+`
+const ProductName = styled.div`
+  font-size: 32px;
+  font-weight: bold;
+`
+const InvSale = styled.div`
+  visibility: hidden;
+`
 
 export default function Overview (props) {
   const [productInfo, setProductInfo] = useState({});
@@ -75,6 +89,7 @@ export default function Overview (props) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [reviews, setReviews] = useState(0);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -97,6 +112,17 @@ export default function Overview (props) {
     })
     .catch((err) => {
     })
+    axios.get('/reviews/meta', {params: { product_id: props.productID }})
+    .then((response) => {
+      return response.data.ratings;
+    })
+    .then((reviewObj) => {
+      var count = 0;
+      for (var key in reviewObj) {
+        count += parseInt(reviewObj[key]);
+      }
+      setReviews(count);
+    })
     axios.get('/cart')
     .then((response) => {
       setCart(response.data);
@@ -106,26 +132,28 @@ export default function Overview (props) {
     })
   }, [props.productID, props.styleID])
 
+
   return (
     <>
       {hasLoaded && <Container>
         {showModal && <ExpandedModal setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>}
           <SubContainer1>
-            {/* <Image> */}
             <ImageGallery setShowModal={setShowModal} hasLoaded={hasLoaded} productStyle={productStyle} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
-            {/* </Image> */}
             <SubContainer2>
-              <Product>
+              <Product ref={props.reference}>
+                <Reviews onClick={props.click}><u>Read all {reviews} reviews</u></Reviews>
                 <div>
                   <div>{productInfo.category}</div>
-                  <h1>{productInfo.name}</h1>
+                  <ProductName>{productInfo.name}</ProductName>
                 </div>
-                {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
-                {productStyle.sale_price === null ? null : <div>${productStyle.sale_price}</div>}
+                <div>
+                  {productStyle.sale_price === null ? <div>${productStyle.original_price}</div> : <div><s>${productStyle.original_price}</s></div>}
+                  {productStyle.sale_price === null ? <InvSale>${productStyle.original_price}</InvSale> : <div>${productStyle.sale_price}</div>}
+                </div>
                 <Socials>
-                  <button>FACEBOOK</button>
-                  <button>TWITTER</button>
-                  <button>PINTEREST</button>
+                  <a href="http://www.facebook.com/share.php?u=https://www2.hm.com/en_us/index.html" target="_blank" rel="noopener noreferrer"><FaFacebookF/> FACEBOOK</a>
+                  <a href="https://twitter.com/intent/tweet" target="_blank" rel="noopener noreferrer"><FiTwitter/> TWITTER</a>
+                  <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer"><FaPinterestP/> PINTEREST</a>
                 </Socials>
               </Product>
               <Selector>
