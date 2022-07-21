@@ -144,8 +144,8 @@ export default function RelatedCard({id, setID, currentFeatures}) {
   const getAveragereview = () => {
     axios.get('/reviews/meta', { params: { product_id: id } })
       .then((response) => {
-        console.log('review ratings: ', response.data.ratings)
-        console.log('average ratings: ', calculateReviewAvg(response.data.ratings))
+        // console.log('review ratings: ', response.data.ratings)
+        // console.log('average ratings: ', calculateReviewAvg(response.data.ratings))
         setAverageRating(calculateReviewAvg(response.data.ratings));
       })
       .catch((err) => {

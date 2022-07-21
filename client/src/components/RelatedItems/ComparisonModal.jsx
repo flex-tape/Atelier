@@ -99,9 +99,9 @@ export default function ComparisonModal ({id, relatedFeatures, currentFeatures, 
 
   useEffect (() => {
     setAllFeatures(featuresArray);
-    console.log('currentFeaturesObj: ', currentFeaturesObj)
-    console.log('relatedFeaturesObj: ', relatedFeaturesObj)
-    console.log('allFeatures: ', featuresArray)
+    // console.log('currentFeaturesObj: ', currentFeaturesObj)
+    // console.log('relatedFeaturesObj: ', relatedFeaturesObj)
+    // console.log('allFeatures: ', featuresArray)
   }, [])
 
 

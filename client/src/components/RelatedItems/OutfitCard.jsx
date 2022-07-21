@@ -109,8 +109,8 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
       setRelatedProductInfo(productCache[productID])
       setRelatedStyleInfo(styleCache[productID])
       setAverageRating(reviewCache[productID])
-      console.log('review cache: ', reviewCache)
-      console.log('product cache: ', productCache)
+      // console.log('review cache: ', reviewCache)
+      // console.log('product cache: ', productCache)
       setHasLoaded(true)
     } else {
       axios.get(`/products/${productID}`)
@@ -140,8 +140,8 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
       })
       axios.get('/reviews/meta', { params: { product_id: productID } })
       .then((response) => {
-        console.log('review ratings: ', response.data.ratings)
-        console.log('average ratings: ', calculateReviewAvg(response.data.ratings))
+        // console.log('review ratings: ', response.data.ratings)
+        // console.log('average ratings: ', calculateReviewAvg(response.data.ratings))
         let average = calculateReviewAvg(response.data.ratings)
         setAverageRating(calculateReviewAvg(response.data.ratings));
         addReviewCache(productID, average)
@@ -184,9 +184,6 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
     // getAverageReview();
   }, [id])
 
-  const showInfo = () => {
-    console.log('product info: ', relatedProductInfo)
-  }
   return (
     <div>
     {hasLoaded && <OutfitCardDiv>

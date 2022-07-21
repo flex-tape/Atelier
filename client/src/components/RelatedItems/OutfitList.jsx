@@ -103,15 +103,15 @@ export default function OutfitList ({ setID }) {
   const addToList = (id) => {
     if (outfitList.indexOf(id) === -1) {
       setOutfitList([...outfitList, id]);
-      console.log(outfitList);
+      // console.log(outfitList);
     }
   }
 
   const removeFromList = (id) => {
     const newList = outfitList.filter((item) => item !== id);
     setOutfitList([...newList])
-    console.log('outfitlist: ', outfitList)
-    console.log(`REMOVED ${id}`)
+    // console.log('outfitlist: ', outfitList)
+    // console.log(`REMOVED ${id}`)
   }
 
   const addProductCache = (id, obj) => {
@@ -128,20 +128,15 @@ export default function OutfitList ({ setID }) {
     setReviewCache({...reviewCache, [id]: data});
 }
 
-  const seeChange = () => {
-    console.log('styleCache: ', styleCache)
-    console.log('productCache: ', productCache);
-  }
-
   const moveOutfit = (arrow) => {
     if (arrow === 'left') {
       setOutfitLength([outfitLength[0] - 1, outfitLength[1] - 1])
       slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1])
-      console.log(outfitLength)
+      // console.log(outfitLength)
     } else {
       setOutfitLength([outfitLength[0] + 1, outfitLength[1] + 1])
       slicedOutfitList = outfitList.slice(outfitLength[0], outfitLength[1])
-      console.log(outfitLength)
+      // console.log(outfitLength)
     }
   }
 
