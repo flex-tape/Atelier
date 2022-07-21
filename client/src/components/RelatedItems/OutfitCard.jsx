@@ -54,7 +54,7 @@ box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 margin-bottom: 30px;
-border-radius: 10px;
+// border-radius: 10px;
 `
 
 const ProductCategory = styled.div`

@@ -27,7 +27,7 @@ box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 margin-bottom: 30px;
-border-radius: 10px;
+// border-radius: 10px;
 `
 
 const AddProduct = styled.h1 `
@@ -47,7 +47,7 @@ height: 250px;
 width: 250px;
 margin: 10px;
 background-color: #e6faff;
-border-radius: 10px;
+// border-radius: 10px;
 `
 
 const RightArrow = styled(FaAngleDoubleRight)`
