@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Image = styled.div`
   object-fit: cover;
   margin: 15px;
+  cursor: pointer;
 
   img {
     border-radius: 50%;

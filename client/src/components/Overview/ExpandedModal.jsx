@@ -40,6 +40,7 @@ const ZoomContainer = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: center;
+  position: fixed;
   align-items: all;
   z-index: 1;
 `
@@ -49,6 +50,7 @@ const ZoomArea = styled.figure`
   overflow: hidden;
   border: 2px solid lightgray;
   position: relative;
+  cursor: zoom-out;
 `
 const ZoomImg = styled.img`
   max-width: 100%;

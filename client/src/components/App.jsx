@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import Overview from './Overview/Overview.jsx';
 import QandA from './QandA/QandA.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
@@ -69,9 +69,14 @@ export default function App() {
     setProductID(id);
   }
 
+  const scrollToDiv = (ref) => window.scrollTo(0, ref.current.offsetTop);
+  const el1 = useRef();
+  const el2 = useRef();
+
   return (
 
     <IDContext.Provider value={productID}>
+<<<<<<< HEAD
       {pageLoaded &&
         <Container id="master-container">
           {reviewAvg}
@@ -82,6 +87,15 @@ export default function App() {
           <RatingsAndReviews productID={productID}/>
         </Container>
       }
+=======
+      <Container id="master-container">
+        <Logo>ATELIER</Logo>
+        <Overview reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
+        <RelatedItems setID={setID} productID={productID}/>
+        <QandA productID={productID}/>
+        <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
+      </Container>
+>>>>>>> main
     </IDContext.Provider>
   )
 }

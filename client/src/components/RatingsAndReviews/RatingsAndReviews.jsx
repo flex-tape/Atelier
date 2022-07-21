@@ -121,7 +121,7 @@ export default function RatingsAndReviews(props) {
   return (
     <div className="ratings-and-reviews">
       {hasLoaded &&
-        <Container id="ratings-reviews-container">
+        <Container ref={props.reference} id="ratings-reviews-container">
           <RatingsContainer id="ratings-container">
             {props.reviewAvg}
             <RatingsBox metadata={reviewMetadata} hasLoaded={hasLoaded} reviewTotal={reviewTotal} starsFilter={starsFilter} setStarsFilter={setStarsFilter} ></RatingsBox>

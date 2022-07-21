@@ -6,7 +6,7 @@ import QuestionModal from './QuestionModal.jsx';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  padding: 12px 15px;
+  padding: 18px 21px;
   box-sizing: border-box;
   border: 1px solid black;
   margin-right: 12px;
