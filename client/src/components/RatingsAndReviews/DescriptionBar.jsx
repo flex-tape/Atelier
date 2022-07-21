@@ -24,6 +24,9 @@ const Characteristics = styled.div`
 `
 
 export default function DescriptionBar(props) {
+  console.log(props.label)
+
+
   const descriptionMap = {
     'Size': [
       'A size too small',
@@ -68,10 +71,24 @@ export default function DescriptionBar(props) {
       'Runs long']
   }
 
+
+
   return (
     <>
       <Characteristics>
       </Characteristics>
+      <Descriptions>
+        {descriptionMap[props.label].map((desc, index) => {
+          if (index === 0 || index === 4) {
+            return (
+              <SingleDes>
+                <input type="radio" name={props.label} ></input>
+                <div>{desc}</div>
+              </SingleDes>
+            )
+          }
+        })}
+      </Descriptions>
     </>
   )
 }
