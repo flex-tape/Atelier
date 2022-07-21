@@ -3,8 +3,8 @@ import QuestionsList from './QuestionsList.jsx';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  margin-right: 200px;
-  margin-left: 200px;
+  // margin-right: 200px;
+  // margin-left: 200px;
   font-family: Arial, sans-serif;
 `
 const Title = styled.p`
