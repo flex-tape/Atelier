@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { FaCircle } from 'react-icons/fa';
 import { IoMdRemove, IoMdShirt } from 'react-icons/io';
 
 const Image = styled.div`

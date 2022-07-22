@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Image = styled.div`
   object-fit: cover;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
