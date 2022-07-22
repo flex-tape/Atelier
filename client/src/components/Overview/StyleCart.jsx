@@ -19,6 +19,7 @@ const Container = styled.div`
     border: 1px solid black;
     margin-right: 12px;
     background: none;
+    font: inherit;
     font-weight: bold;
   }
 
@@ -28,6 +29,7 @@ const Container = styled.div`
     border: 1px solid black;
     margin-right: 12px;
     background: none;
+    font: inherit;
     font-weight: bold;
   }
 `

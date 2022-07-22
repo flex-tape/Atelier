@@ -88,6 +88,7 @@ const Link = styled.div`
   opacity: 70%;
 `
 const ProductName = styled.div`
+  margin-left: -2px;
   font-size: 32px;
   font-weight: bold;
 `
