@@ -26,7 +26,7 @@ margin: 7px 10px 10px 10px;
 // margin-bottom: 10px;
 max-width: 100%;
 // background-color: #f0ffff;
-background-color: #e6faff;
+background-color: #e6feff;
 // border-radius: 10px;
 `
 
@@ -190,7 +190,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <div onClick={() => setID(id)}><ProductCategory>{relatedProductInfo.category}</ProductCategory>
         <ProductName>{relatedProductInfo.name}</ProductName>
         {relatedStyleInfo.sale_price !== null ?
-        <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
+        <div><StrikePrice>${relatedStyleInfo.default_price}</StrikePrice><SalesPrice>${relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>${relatedStyleInfo.default_price}</ProductPrice>}
         <AverageStars rating={averageRating} /></div>
       </RelatedItemsCard>}
       </div>

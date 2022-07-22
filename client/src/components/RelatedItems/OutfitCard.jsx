@@ -24,7 +24,7 @@ margin: 7px 10px 10px 10px;
 // margin-top: 5px;
 // margin-bottom: 10px;
 max-width: 100%;
-background-color: #e6faff;
+background-color: #e6feff;
 border-radius: 10px;
 `
 
@@ -50,6 +50,7 @@ width: 270px;
 display: block;
 align-items: center;
 border: 2px solid lightgray;
+// box-shadow: 7px 7px 7px #ffe6feb5;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
@@ -194,8 +195,8 @@ export default function OutfitCard({id, setID, removeFromList, addProductCache, 
               <ProductName >{relatedProductInfo.name}</ProductName>
               {relatedStyleInfo.sale_price !== null ?
               <div>
-                <StrikePrice>{relatedStyleInfo.default_price}</StrikePrice>
-                <SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
+                <StrikePrice>${relatedStyleInfo.default_price}</StrikePrice>
+                <SalesPrice>${relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>${relatedStyleInfo.default_price}</ProductPrice>}
                 <AverageStars rating={averageRating} /></div>
             </OutfitCardDiv>}
     </div>

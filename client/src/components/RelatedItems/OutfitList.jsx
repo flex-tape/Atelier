@@ -10,9 +10,10 @@ import { IoIosStar, IoIosStarOutline} from 'react-icons/io';
 
 const OutfitCarousel = styled.div`
 display: flex;
-width: 1300px;
+// width: 1300px;
 // overflow: hidden;
 align-items: center;
+// justify-content: space-between;
 `
 
 const AddCard = styled.div`
@@ -25,7 +26,7 @@ align-items: center;
 border: 2px solid lightgray;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
-margin-left: 15px;
+margin-left: 18px;
 margin-bottom: 30px;
 // border-radius: 10px;
 `
@@ -46,7 +47,7 @@ const PlusIcon = styled(BsPlus)`
 height: 250px;
 width: 250px;
 margin: 10px;
-background-color: #e6faff;
+background-color: #e6feff;
 // border-radius: 10px;
 `
 
