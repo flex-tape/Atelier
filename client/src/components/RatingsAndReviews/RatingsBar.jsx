@@ -20,7 +20,7 @@ const ParentBar = styled.div`
 
 const FilledPortion = styled.div`
   flex: ${(props) => String(props.percentTrue) + '%'};
-  background-color: #FFD700;
+  background-color: #28d549b3;
 `;
 
 const UnfilledPortion = styled.div`

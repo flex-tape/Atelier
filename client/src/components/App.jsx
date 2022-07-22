@@ -16,11 +16,14 @@ const Container = styled.div`
 const Logo = styled.h1`
 // width: 85%;
 // margin: auto;
+margin: 0px 120px 10px 120px;
 margin-left: 120px;
 margin-right: 120px;
 padding-left: 168px;
 // background-image: linear-gradient(to right, #ffe6fe , #00fbff6b);
 background-image: linear-gradient(to right,#575b5442,#e6feff);
+font-family: 'Bebas Neue';
+// font-weight: lighter;
 `
 
 export default function App() {
@@ -82,7 +85,7 @@ export default function App() {
   return (
 
     <IDContext.Provider value={productID}>
-      <Logo>HEVANIS</Logo>
+      <Logo id="logo">HEVANIS</Logo>
       {pageLoaded &&
         <Container id="master-container">
           <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID} />
