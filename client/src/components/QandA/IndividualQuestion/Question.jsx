@@ -23,7 +23,7 @@ const AnswerListContainer = styled.div`
   display: inline-block;
   font-size: 14px;
   opacity: 0.9;
-  max-height: 50vh;
+  max-height: 40vh;
   overflow: auto;
 `
 const Button = styled.button`

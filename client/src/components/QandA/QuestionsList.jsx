@@ -15,7 +15,7 @@ const Button = styled.button`
   font-weight: bold;
 `
 const QuestionsListContainer = styled.div`
-  max-height: 100vh;
+  max-height: 70vh;
   overflow: auto;
 `
 
