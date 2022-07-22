@@ -26,7 +26,7 @@ margin: 7px 10px 10px 10px;
 // margin-bottom: 10px;
 max-width: 100%;
 // background-color: #f0ffff;
-background-color: #e6feff;
+background-color: #e6feffa3;
 // border-radius: 10px;
 `
 
@@ -71,7 +71,7 @@ width: 270px;
 display: block;
 align-items: center;
 border: 2px solid lightgray;
-// box-shadow: 7px 7px 7px #ffe6feb5;
+// box-shadow: 7px 7px 7px ##e6feffa3;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
