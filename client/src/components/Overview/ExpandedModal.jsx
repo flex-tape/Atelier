@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ExpandedCarousel from './ExpandedCarousel.jsx';
+import { FaRegTimesCircle } from 'react-icons/fa';
 
 const Container = styled.div`
   width: 100%;
@@ -41,6 +42,8 @@ const ZoomContainer = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
   align-items: all;
   z-index: 1;
 `
@@ -60,7 +63,10 @@ const ZoomImg = styled.img`
   top: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  object-fit: contain;
+`
+
+const Exit = styled(FaRegTimesCircle)`
+  margin: 5px;
 `
 
 export default function ExpandedModal (props) {
@@ -107,7 +113,7 @@ export default function ExpandedModal (props) {
       {props.hasLoaded && <Container>
         <Content>
           <Header>
-            <button onClick={()=> props.setShowModal(false)}>x</button>
+            <Exit onClick={()=> props.setShowModal(false)}/>
           </Header>
           <Body onClick={handleZoom} src={props.productStyle.photos[props.currentIndex].url}/>
           {/* {zoomIn && <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/>} */}
