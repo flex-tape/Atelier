@@ -11,7 +11,7 @@ export const IDContext = React.createContext()
 
 
 const Container = styled.div`
-  font-family: Arial, sans-serif;
+//  font-family: Arial, sans-serif;
 `
 const Logo = styled.h1`
 // width: 85%;
