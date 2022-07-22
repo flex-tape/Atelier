@@ -7,6 +7,7 @@ const StarRatings = styled.div`
   display: inline-block;
   position: relative;
   margin-bottom: 30px;
+  margin-left: 6px;
 `
 
 const RatingStar = styled.div`
@@ -17,13 +18,18 @@ const RatingStar = styled.div`
 `
 // ${props => props.fill};
 const FilledStar = styled(IoIosStar)`
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
 `;
 
 const BlankStar = styled(IoIosStarOutline)`
+<<<<<<< HEAD
   height: 25px;
   width: 25px;
+=======
+  height: 20px;
+  width: 20px;
+>>>>>>> main
   color: black;
 `
 

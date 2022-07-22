@@ -3,13 +3,16 @@ import styled from 'styled-components';
 
 const Image = styled.div`
   object-fit: cover;
-  margin: 15px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
 
   img {
     border-radius: 50%;
-    width: 70;
-    height: 70;
+    width: 65;
+    height: 65;
   }
 `
 export default function StyleEntry (props) {

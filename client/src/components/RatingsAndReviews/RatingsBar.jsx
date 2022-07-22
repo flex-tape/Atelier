@@ -20,12 +20,12 @@ const ParentBar = styled.div`
 
 const FilledPortion = styled.div`
   flex: ${(props) => String(props.percentTrue) + '%'};
-  background-color: limegreen;
+  background-color: #28d549b3;
 `;
 
 const UnfilledPortion = styled.div`
   flex: ${(props) => String(props.percentFalse) + '%'};
-  background-color: silver;
+  background-color: rgb(211, 211, 211);
 `;
 
 const StarRatingItem = styled.li`

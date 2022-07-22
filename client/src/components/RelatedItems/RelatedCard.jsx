@@ -26,28 +26,21 @@ margin: 7px 10px 10px 10px;
 // margin-bottom: 10px;
 max-width: 100%;
 // background-color: #f0ffff;
-background-color: #e6faff;
+background-color: #e6feffa3;
 // border-radius: 10px;
 `
 
 const ProductCategory = styled.div`
   font-family: 'Source Sans Pro', sans-serif;
   color: gray;
-  margin: 5px;
+  margin: 5px 10px 5px 8px;
 `
-
-const ProductPrice = styled.div`
-  font-family: 'Source Sans Pro', sans-serif;
-  color: gray;
-  margin: 5px;
-`
-
 
 const ProductName = styled.div`
   font-weight: 600;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 18px;
-  margin: 5px;
+  margin: 5px 10px 5px 8px;
 `
 
 const PhotosContainer = styled.div`
@@ -78,12 +71,18 @@ width: 270px;
 display: block;
 align-items: center;
 border: 2px solid lightgray;
-// box-shadow: 7px 7px 7px #ffe6feb5;
+// box-shadow: 7px 7px 7px ##e6feffa3;
 box-shadow: 7px 7px 7px lightgray;
 margin-right: 15px;
 margin-left: 15px;
 margin-bottom: 30px;
 // border-radius: 10px;
+`
+
+const ProductPrice = styled.div`
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  margin: 5px 10px 2px 8px;
 `
 
 const StrikePrice = styled.div`
@@ -92,12 +91,13 @@ text-decoration: line-through;
 text-decoration-thickness: 0.15rem;
 font-family: 'Source Sans Pro', sans-serif;
 color: gray;
-margin: 5px;
+margin: 5px 3px 2px 8px;
 `
 
 const SalesPrice = styled.div`
 color: red;
 font-family: 'Source Sans Pro', sans-serif;
+margin: 5px 10px 2px 8px;
 `
 
 export default function RelatedCard({id, setID, currentFeatures}) {
@@ -190,7 +190,7 @@ export default function RelatedCard({id, setID, currentFeatures}) {
         <div onClick={() => setID(id)}><ProductCategory>{relatedProductInfo.category}</ProductCategory>
         <ProductName>{relatedProductInfo.name}</ProductName>
         {relatedStyleInfo.sale_price !== null ?
-        <div><StrikePrice>{relatedStyleInfo.default_price}</StrikePrice><SalesPrice>{relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>{relatedStyleInfo.default_price}</ProductPrice>}
+        <div><StrikePrice>${relatedStyleInfo.default_price}</StrikePrice><SalesPrice>${relatedStyleInfo.sale_price}</SalesPrice></div> : <ProductPrice>${relatedStyleInfo.default_price}</ProductPrice>}
         <AverageStars rating={averageRating} /></div>
       </RelatedItemsCard>}
       </div>

@@ -5,6 +5,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+#logo {
+  font-family: 'Julius Sans One', sans-serif;
+}
+
 #master-container {
   width: 70%;
   margin: auto;
