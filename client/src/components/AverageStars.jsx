@@ -23,13 +23,8 @@ const FilledStar = styled(IoIosStar)`
 `;
 
 const BlankStar = styled(IoIosStarOutline)`
-<<<<<<< HEAD
-  height: 25px;
-  width: 25px;
-=======
   height: 20px;
   width: 20px;
->>>>>>> main
   color: black;
 `
 
