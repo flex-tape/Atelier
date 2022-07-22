@@ -29,7 +29,7 @@ const UnfilledPortion = styled.div`
 `;
 
 const StarRatingItem = styled.li`
-  background-color: ${props => props.itemClicked ? 'orange' : 'white'}
+  background-color: ${props => props.inFilter ? 'orange' : 'white'}
 `;
 
 
@@ -41,11 +41,7 @@ export default function RatingsBar(props) {
       let newState = props.starsFilter.slice();
       newState.push(e.currentTarget.id);
       await props.setStarsFilter(newState);
-      // console.log(props.starsFilter)
     } else {
-      // let foundIndex = props.starsFilter.indexOf(e.currentTarget.id);
-      // let newState = props.starsFilter.slice();
-      // console.log('foundindex is..', foundIndex)
       let newState = props.starsFilter.filter( (el) => {
         return el !== e.currentTarget.id;
       })
@@ -61,7 +57,7 @@ export default function RatingsBar(props) {
   }
 
   return (
-    <StarRatingItem id={props.starValue} onClick={clickHandler} itemClicked={itemClicked}>
+    <StarRatingItem id={props.starValue} onClick={clickHandler} itemClicked={itemClicked}  inFilter={props.starsFilter.includes(props.starValue)}>
       <RatingsBarText>
         {props.starValue} stars
       </RatingsBarText>

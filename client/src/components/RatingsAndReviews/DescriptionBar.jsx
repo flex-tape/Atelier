@@ -1,29 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Descriptions = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 1em;
-  width: 90%;
+  // justify-content: flex-end;
+  // padding-bottom: 1em;
+  // width: 90%;
+  align-items: stretch;
+  // align-content: center;
+  margin: 20px 0;
+  margin-top: 5px;
 `
 
 const SingleDes = styled.div`
   display: flex;
   flex-direction: column;
+  // justify-content: space-around;
   align-items: center;
   width: 20%;
-  font-size: 0.8em;
+  font-size: 0.8em !important;
+
+  // & div:first-child {
+  //   font-size: 12px;
+  // }
+  gap: 8px;
 `
 
 const Characteristics = styled.div`
   font-color: inherit;
   font-size: 1em;
   padding-bottom: 0.5em;
-  width: 10%;
+  // width: 10%;
+  // margin: 0 auto;
+  text-align: center;
 `
 
 export default function DescriptionBar(props) {
+
   const descriptionMap = {
     'Size': [
       'A size too small',
@@ -68,10 +81,31 @@ export default function DescriptionBar(props) {
       'Runs long']
   }
 
+  const handleChange = (e) => {
+    console.log('id', e.target.id)
+    console.log('val', e.target.value)
+    props.setCharacteristics(
+      {...props.characteristics,
+      [String(e.target.id)] : Number(e.target.value)
+      }
+    )
+  }
+
   return (
     <>
       <Characteristics>
+        {props.label}
       </Characteristics>
+      <Descriptions>
+        {descriptionMap[props.label].map((desc, index) => {
+          return (
+            <SingleDes key={index}>
+              <input type="radio" id={props.id} name={props.label} value={index + 1} onChange={handleChange}></input>
+              <div>{desc}</div>
+            </SingleDes>
+          )
+        })}
+      </Descriptions>
     </>
   )
 }

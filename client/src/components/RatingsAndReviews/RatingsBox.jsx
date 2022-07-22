@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import calculateReviewAvg from '../../lib/calculateReviewAvg.js';
 import styled from 'styled-components';
 import RatingsBar from './RatingsBar.jsx';
+import AverageStars from '../AverageStars.jsx';
 
 const RatingsBarContainer = styled.div`
   // display: flex;
-  margin: 14px 0;
+  margin: 0px 0;
   // height: 8px;
   width: 100%;
   // margin-bottom: 30px;
-
+  font-size: 12px
 `;
 
 const RecommendedContainer = styled.div`
   margin-bottom: 5px;
-  margin-top: 10px;
+  margin-top: 14px;
   font-size: 14px;
 `;
 
@@ -40,19 +40,39 @@ const SectionHeading = styled.h2`
   margin-top: 0;
 `;
 
+const AvgRatingAndStars = styled.div`
+  span:first-child {
+    font-size: 60px;
+    font-weight: 800;
+    margin-right: 10px;
+  }
+  span svg {
+    height: 17px;
+    width: 17px;
+  }
+
+  span:nth-child(2) {
+    position: relative;
+    bottom: 14px;
+  }
+`;
+
+const RatingsBreakdown = styled.div`
+  h4 {
+    margin-top: 18px
+  }
+`;
+
 export default function RatingsBox(props) {
 
-  let [reviewAvg, setReviewAvg] = useState('');
   let [recommendedPercent, setRecommendedPercent] = useState(0);
 
   useEffect(() => {
-    let reviewAverage = calculateReviewAvg(props.metadata.ratings)['ratingSummary'];
-    setReviewAvg(reviewAverage);
+
     setRecommendedPercent(calculateRecommended(props.metadata.recommended))
-  });
+  }, []);
 
   const calculateRecommended = (obj) => {
-    // console.log(obj)
     let sumReviews = 0;
     let numberOfRecommends;
 
@@ -67,54 +87,50 @@ export default function RatingsBox(props) {
         }
       }
     }
-    // let result = parseInt((numberOfRecommends / sumReviews).toFixed(2));
     let result = (numberOfRecommends / sumReviews).toFixed(2) * 100;
     return String(result);
   }
-
-  // let sortedKeys = Object.keys(props.metadata.ratings).sort( (a, b) => {
-  //   return Number(b) - Number(a);
-  // })
-  // console.log('METADATA IS...', props.metadata.ratings)
-  // console.log(Object.keys(props.metadata.ratings))
-  // console.log(sortedKeys)
-
-  // Object.keys(props.metadata.ratings).map( (rating) => {
-
-  // })
 
   const createRatingsBreakdown = (ratingsObj) => {
     let sortedKeys = Object.keys(ratingsObj).sort((a, b) => b - a);
     return sortedKeys.map((key) => {
       let ratingsPercent = Math.round((parseInt(ratingsObj[key]) / props.reviewTotal) * 100);
       let ratingsPercentRemainder = 100 - ratingsPercent;
-      return <RatingsBar starValue={key} ratingsPercent={ratingsPercent} ratingsPercentRemainder={ratingsPercentRemainder} starsFilter={props.starsFilter} setStarsFilter={props.setStarsFilter} ></RatingsBar>
+
+      return (<RatingsBar key={key} starValue={key} ratingsPercent={ratingsPercent} ratingsPercentRemainder={ratingsPercentRemainder} starsFilter={props.starsFilter} setStarsFilter={props.setStarsFilter} ></RatingsBar>
+      )
     })
   }
 
+  const clickHandler = (e) => {
+    e.preventDefault();
+    props.setStarsFilter([]);
+  }
+
   return (
-    <div>
-      <div><SectionHeading>RATINGS & REVIEWS</SectionHeading></div>
-      <div>
-        {reviewAvg}
-      </div>
+    <>
+      <SectionHeading>RATINGS & REVIEWS</SectionHeading>
+      <AvgRatingAndStars>
+        <span>{String(props.reviewAvg).slice(0, -1)}</span>
+        <span><AverageStars rating={props.reviewAvg}/></span>
+      </AvgRatingAndStars>
       <RecommendedContainer>
         {recommendedPercent}% of reviews recommend this product
       </RecommendedContainer>
-      <div>
+      <RatingsBreakdown>
         <h4>RATINGS BREAKDOWN</h4>
-      </div>
+      </RatingsBreakdown>
 
       <RatingsBarContainer>
         <RatingsBarList>
           {props.hasLoaded && createRatingsBreakdown(props.metadata.ratings)}
         </RatingsBarList>
         {props.starsFilter.length > 0
-        ? (<div>Filters are enabled (<a href="#" onClick={() => props.setStarsFilter([])}>remove</a>)</div>
-        )
-        : null
-      }
+          ? (<div>Filters are enabled (<a href="#" onClick={clickHandler}>remove all</a>)</div>
+          )
+          : null
+        }
       </RatingsBarContainer>
-    </div>
+    </>
   )
 }

@@ -93,7 +93,7 @@ export default function App() {
           <Container id="master-container">
             <RelatedItems setID={setID} productID={productID}/>
             <QandA productID={productID}/>
-            <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
+            <RatingsAndReviews reference={el2} productID={productID} reviewAvg={reviewAvg} setReviewAvg={setReviewAvg} />
           </Container>
       }
     </IDContext.Provider>

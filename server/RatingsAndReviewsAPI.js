@@ -38,7 +38,7 @@ exports.getReviewMetadata = (req, res) => {
 }
 
 exports.addReview = (req, res) => {
-  // console.log(req.body)
+  console.log(req.body)
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/`;
   axios.post(url, req.body, options)
     .then((result) => res.status(201).send(result.data))
@@ -46,9 +46,6 @@ exports.addReview = (req, res) => {
 }
 
 exports.markAsHelpful = (req, res) => {
-  // 1274559
-  // console.log('REQUEST IS...', req)
-  // console.log('REQUEST PARAMS IS...', req.params)
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${req.params.review_id}/helpful`;
   axios.put(url, req.params, options)
     .then((result) => res.status(204).send(result.data))

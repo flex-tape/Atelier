@@ -18,6 +18,7 @@ const RatingStar = styled.div`
 `
 // ${props => props.fill};
 const FilledStar = styled(IoIosStar)`
+
   height: 20px;
   width: 20px;
 `;
