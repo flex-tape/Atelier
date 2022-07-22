@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import dateHandler from '../../lib/dateHandler.js'
+import dateHandler from '../../lib/dateHandler.js';
+import AverageStars from '../AverageStars.jsx';
 
 const TileDiv = styled.div`
   color: black;
@@ -14,9 +15,14 @@ const StarsAndUserInfoBar = styled.div`
   display: flex;
   box-sizing: border-box;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: 7px;
   padding-right: 5px;
-  font-size: 14px;
+  font-size: 13px;
+
+  div:nth-child(2) {
+    opacity: 0.7
+  }
 `;
 
 const ReviewSummary = styled.h4`
@@ -32,8 +38,10 @@ const ReviewBody = styled.div`
   text-align: left;
   p {
     margin: 0;
+    word-break: break-all;
   }
   margin-bottom: 14px;
+
 `;
 
 const ExpandReviewsButton = styled.button`
@@ -100,6 +108,7 @@ const Recommended = styled.div`
     bottom: .10em;
   }
   align-content: center;
+
 `;
 
 const SellerResponse = styled.div`
@@ -109,7 +118,8 @@ const SellerResponse = styled.div`
 const Helpfulness = styled.div`
   box-sizing: border-box;
   padding-top: 6px;
-  font-size: 13px;
+  font-size: 12px;
+  opacity: 0.7;
 
   & a:nth-child(2) {
     margin-left: 4px;
@@ -122,10 +132,26 @@ const Helpfulness = styled.div`
 `;
 
 const HelpfulnessDivider = styled.span`
-  margin-left: 12px;
-  margin-right: 12px;
-  font-size: 16px;
+  margin-left: 9px;
+  margin-right: 9px;
+  font-size: 13px;
   vertical-align: bottom;
+  position: relative;
+  top: 1px;
+`
+
+const AverageStarsContainer = styled.div`
+display: flex;
+justify-content: flex-start;
+  svg {
+    height: 17px;
+    width: 17px;
+  }
+`;
+
+const UserInfo = styled.div`
+  position: relative;
+  bottom: 5px;
 `
 
 export default function ReviewTile(props) {
@@ -157,7 +183,7 @@ export default function ReviewTile(props) {
   }
 
   const listPhotos = props.review.photos.map((photo) =>
-    <img src={photo.url} onClick={() => showImage(photo.url)}></img>
+    <img key={photo.url} src={photo.url} onClick={() => showImage(photo.url)}></img>
   )
 
   const showImage = (image) => {
@@ -209,8 +235,8 @@ export default function ReviewTile(props) {
     <TileDiv>
 
       <StarsAndUserInfoBar>
-        <div>{props.review.rating}</div>
-        <div>{props.review.reviewer_name}, {date}</div>
+        <AverageStarsContainer><AverageStars rating={props.review.rating}></AverageStars></AverageStarsContainer>
+        <UserInfo>{props.review.reviewer_name}, {date}</UserInfo>
       </StarsAndUserInfoBar>
       <ReviewSummary>
         {props.review.summary}

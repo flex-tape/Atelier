@@ -33,8 +33,11 @@ const ReviewsContainer = styled.main`
   // margin: 5px;
   // padding: 15px;
   margin-left: 30px;
-  padding-left: 10px;
-  margin-top: 30px;
+  padding-left: 24px;
+  margin-top: 40px;
+  h3 {
+    margin-bottom: 0;
+  }
 `
 
 export default function RatingsAndReviews(props) {
@@ -123,8 +126,7 @@ export default function RatingsAndReviews(props) {
       {hasLoaded &&
         <Container ref={props.reference} id="ratings-reviews-container">
           <RatingsContainer id="ratings-container">
-            {props.reviewAvg}
-            <RatingsBox metadata={reviewMetadata} hasLoaded={hasLoaded} reviewTotal={reviewTotal} starsFilter={starsFilter} setStarsFilter={setStarsFilter} ></RatingsBox>
+            <RatingsBox metadata={reviewMetadata} hasLoaded={hasLoaded} reviewTotal={reviewTotal} starsFilter={starsFilter} setStarsFilter={setStarsFilter} reviewAvg={props.reviewAvg} ></RatingsBox>
             <FeaturesBox metadata={reviewMetadata}></FeaturesBox>
           </RatingsContainer>
           <ReviewsContainer id="reviews-container">

@@ -13,7 +13,7 @@ const FeaturesListItem = styled.li`
   margin: 12px 0;
   font-size: 11px;
   & :first-of-type {
-    margin-top: 5px;
+    margin-top: 2px;
   }
 `;
 
@@ -32,7 +32,7 @@ export default function FeaturesBox(props) {
 
   const generateFeatureBars = labels.map((label) => {
     return (
-      <FeaturesListItem><FeaturesBar labelDescs={labelDescs[label]} labelName={label} sliderValue={props.metadata.characteristics[label].value}></FeaturesBar></FeaturesListItem>
+      <FeaturesListItem key={label}><FeaturesBar key={label} labelDescs={labelDescs[label]} labelName={label} sliderValue={props.metadata.characteristics[label].value}></FeaturesBar></FeaturesListItem>
     )
   })
 

@@ -85,15 +85,10 @@ export default function App() {
       <Logo>HEVANIS</Logo>
       {pageLoaded &&
         <Container id="master-container">
-<<<<<<< HEAD
-          {reviewAvg}
-          <Logo>ATELIER</Logo>
-=======
->>>>>>> main
-          <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID} />
+          {/* <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID} /> */}
           <RelatedItems setID={setID} productID={productID} />
           <QandA productID={productID} />
-          <RatingsAndReviews productID={productID}/>
+          <RatingsAndReviews productID={productID} reviewAvg={reviewAvg} />
         </Container>
       }
     </IDContext.Provider>

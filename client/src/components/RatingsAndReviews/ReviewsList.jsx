@@ -42,9 +42,11 @@ const UnorderedList = styled.ul`
   }
   & li:first-child div:first-child {
     // border-box: content-box;
-    padding-top: 5px;
+    // padding-top: 5px;
   }
   font-size: 15px;
+  margin-top: 0;
+
 `;
 
 
@@ -62,15 +64,14 @@ export default function ReviewsList(props) {
 
   const listReviewTiles = props.reviews.map((review, index) => {
     if (index < props.reviewDisplayCount && props.starsFilter.indexOf(String(review.rating)) !== -1) {
-      return <li><ReviewTile review={review} /></li>
+      return <li key={review.review_id}><ReviewTile review={review} /></li>
     }
     if (index < props.reviewDisplayCount && props.starsFilter.length === 0) {
-      return <li><ReviewTile review={review} /></li>
+      return <li key={review.review_id}><ReviewTile review={review} /></li>
     }
   });
 
-  const addReviewClickHandler = (e) => {
-    e.preventDefault();
+  const addReviewClickHandler = () => {
     setShowReviewModal(!showReviewModal);
   }
 
@@ -96,9 +97,9 @@ export default function ReviewsList(props) {
           ? null
           : <MoreReviewsButton onClick={props.getMoreReviews} > MORE REVIEWS </MoreReviewsButton>
         }
-        <AddReviewButton onClick={addReviewClickHandler}> ADD A REVIEW </AddReviewButton>
+        <AddReviewButton onClick={() => addReviewClickHandler()}> ADD A REVIEW +</AddReviewButton>
       </ButtonContainer>
-      {showReviewModal && <AddReviewModal addReviewClickHandler={addReviewClickHandler} metadata={props.metadata} productName={productName}></AddReviewModal>}
+      {showReviewModal && <AddReviewModal addReviewClickHandler={ addReviewClickHandler} metadata={props.metadata} productName={productName}></AddReviewModal>}
     </>
 
   )

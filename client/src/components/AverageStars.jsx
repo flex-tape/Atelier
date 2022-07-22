@@ -13,7 +13,7 @@ const RatingStar = styled.div`
   width: ${props => props.fill}%;
   overflow: hidden;
   position: absolute;
-  color: #FFD700;
+  color: black;
 `
 // ${props => props.fill};
 const FilledStar = styled(IoIosStar)`
@@ -24,7 +24,7 @@ const FilledStar = styled(IoIosStar)`
 const BlankStar = styled(IoIosStarOutline)`
   height: 25px;
   width: 25px;
-  color: #FFD700;
+  color: black;
 `
 
 RatingStar.defaultProps = {
@@ -57,7 +57,7 @@ function AverageStars ({ rating }) {
   return (
     <StarRatings>
      { starArray.map((fill, i) => (
-      <div key={i} style={{ position: 'absolute', left: i * 30 }}>
+      <div key={i} style={{ position: 'absolute', left: i * 20 }}>
         <RatingStar fill={fill}>
           <FilledStar />
         </RatingStar>
