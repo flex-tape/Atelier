@@ -10,7 +10,7 @@ import { FiTwitter } from 'react-icons/fi';
 const axios = require('axios');
 
 const Container = styled.div`
-  width: 80%;
+  width: 78%;
   margin: auto;
   border: 2px solid lightgray;
   box-shadow: 7px 7px 7px lightgray;
