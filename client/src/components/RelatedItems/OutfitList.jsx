@@ -47,7 +47,7 @@ const PlusIcon = styled(BsPlus)`
 height: 250px;
 width: 250px;
 margin: 10px;
-background-color: #e6feff;
+background-color: #e6feffa3;
 // border-radius: 10px;
 `
 

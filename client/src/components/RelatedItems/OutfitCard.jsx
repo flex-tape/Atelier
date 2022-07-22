@@ -24,7 +24,7 @@ margin: 7px 10px 10px 10px;
 // margin-top: 5px;
 // margin-bottom: 10px;
 max-width: 100%;
-background-color: #e6feff;
+background-color: #e6feffa3;
 border-radius: 10px;
 `
 
