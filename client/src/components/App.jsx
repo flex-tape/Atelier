@@ -90,20 +90,11 @@ export default function App() {
       <Logo id="logo">HEVANIS</Logo>
       <Overview reviewAvg={reviewAvg} reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
       {pageLoaded &&
-<<<<<<< HEAD
-        <Container id="master-container">
-          {/* <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID} /> */}
-          <RelatedItems setID={setID} productID={productID} />
-          <QandA productID={productID} />
-          <RatingsAndReviews productID={productID} reviewAvg={reviewAvg} />
-        </Container>
-=======
           <Container id="master-container">
             <RelatedItems setID={setID} productID={productID}/>
             <QandA productID={productID}/>
             <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
           </Container>
->>>>>>> main
       }
     </IDContext.Provider>
   )
