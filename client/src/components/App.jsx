@@ -14,13 +14,13 @@ const Container = styled.div`
   font-family: Arial, sans-serif;
 `
 const Logo = styled.h1`
-// width: 85%;
-// margin: auto;
-margin-left: 120px;
-margin-right: 120px;
-padding-left: 168px;
-// background-image: linear-gradient(to right, #ffe6fe , #00fbff6b);
-background-image: linear-gradient(to right,#575b5442,#e6feff);
+  // width: 85%;
+  // margin: auto;
+  margin-left: 120px;
+  margin-right: 120px;
+  padding-left: 168px;
+  // background-image: linear-gradient(to right, #ffe6fe , #00fbff6b);
+  background-image: linear-gradient(to right,#575b5442,#e6feff);
 `
 
 export default function App() {
@@ -84,12 +84,12 @@ export default function App() {
     <IDContext.Provider value={productID}>
       <Logo>HEVANIS</Logo>
       {pageLoaded &&
-        <Container id="master-container">
-          <Overview styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID} />
-          <RelatedItems setID={setID} productID={productID} />
-          <QandA productID={productID} />
-          <RatingsAndReviews productID={productID}/>
-        </Container>
+          <Container id="master-container">
+            <Overview reviewAvg={reviewAvg} reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
+            <RelatedItems setID={setID} productID={productID}/>
+            <QandA productID={productID}/>
+            <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
+          </Container>
       }
     </IDContext.Provider>
   )
