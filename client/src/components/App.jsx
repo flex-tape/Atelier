@@ -86,9 +86,9 @@ export default function App() {
 
     <IDContext.Provider value={productID}>
       <Logo id="logo">HEVANIS</Logo>
+      <Overview reviewAvg={reviewAvg} reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
       {pageLoaded &&
           <Container id="master-container">
-            <Overview reviewAvg={reviewAvg} reference={el1} click={()=> scrollToDiv(el2)} styleID={styleID} setStyleID={setStyleID} setProductID={setProductID} productID={productID}/>
             <RelatedItems setID={setID} productID={productID}/>
             <QandA productID={productID}/>
             <RatingsAndReviews reference={el2} productID={productID} setReviewAvg={setReviewAvg} />
