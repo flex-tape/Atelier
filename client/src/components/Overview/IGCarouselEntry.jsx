@@ -4,10 +4,10 @@ import styled from 'styled-components';
 const Image = styled.img`
   object-fit: cover;
   margin: 10px;
-  height: 100px;
+  height: 75px;
   box-shadow: 7px 7px 7px lightgray;
   cursor: e-resize;
-  border: ${props => props.selected ? '2px solid #000000' : 'none'}
+  border: ${props => props.selected ? '2px solid #000000' : '2px solid #e6feff'}
 
   // img {
   //   height: 70;
