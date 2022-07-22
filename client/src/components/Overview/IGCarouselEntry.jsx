@@ -4,14 +4,14 @@ import styled from 'styled-components';
 const Image = styled.img`
   object-fit: cover;
   margin: 10px;
-  height: 70px;
+  height: 100px;
   box-shadow: 7px 7px 7px lightgray;
   cursor: e-resize;
   border: ${props => props.selected ? '2px solid #000000' : 'none'}
 
-  img {
-    height: 70;
-  }
+  // img {
+  //   height: 70;
+  // }
 `
 Image.defaultProps = {
   selected: false

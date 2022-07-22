@@ -9,11 +9,11 @@ const Container = styled.div`
   justify-content: space-between;
   object-fit: contain;
 
-  img {
-    // width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+  // img {
+  //   width: 100%;
+  //   height: 100%;
+  //   object-fit: contain;
+  // }
 `
 const ImgDiv = styled.img`
   align-self: center;
