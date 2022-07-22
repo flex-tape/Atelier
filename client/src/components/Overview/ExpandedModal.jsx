@@ -88,17 +88,12 @@ export default function ExpandedModal (props) {
 
       const ZoomCoord = Object.create(Coordinates);
 
-      const X = event.clientX - zoom_area.offsetLeft
-      const Y = event.clientY - zoom_area.offsetTop
-
       const mWidth = zoom_area.offsetWidth
       const mHeight = zoom_area.offsetHeight
 
       ZoomCoord.X = ( ZoomCoord.X / mWidth ) * 100
       ZoomCoord.Y = ( ZoomCoord.Y / mHeight ) * 100
 
-      console.log('clientx', ZoomCoord.X);
-      console.log('clienty', ZoomCoord.Y);
       zoom_img.style.transform = 'translate(-'+ZoomCoord.X+'%, -'+ZoomCoord.Y+'%) scale(2.5)'
     })
 
@@ -116,8 +111,6 @@ export default function ExpandedModal (props) {
             <Exit onClick={()=> props.setShowModal(false)}/>
           </Header>
           <Body onClick={handleZoom} src={props.productStyle.photos[props.currentIndex].url}/>
-          {/* {zoomIn && <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/>} */}
-          {/* <ExpandedZoomIn productStyle={props.productStyle} currentIndex={props.currentIndex}/> */}
           <ExpandedCarousel currentIndex={props.currentIndex} setCurrentIndex={props.setCurrentIndex} productStyle={props.productStyle}/>
         </Content>
       </Container>}

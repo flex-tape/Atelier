@@ -64,7 +64,10 @@ const Socials = styled.div`
 `
 const Selector = styled.div`
   flex: 1 200px;
-  margin: 5px;
+  margin-top: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

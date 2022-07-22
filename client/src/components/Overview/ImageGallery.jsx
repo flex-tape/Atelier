@@ -33,12 +33,12 @@ export default function ImageGallery (props) {
 
   return (
     <>
-    {props.hasLoaded && <Container>
+    <Container>
       <IGCarousel currentIndex={props.currentIndex} setCurrentIndex={props.setCurrentIndex} productStyle={props.productStyle}/>
       <ImgDiv>
         {photo !== null ? <MainImg id="test" onClick={()=> props.setShowModal(true)} src={photo}/> : <MainImg id="test" onClick={()=> props.setShowModal(true)} src="https://baeclothing.in/wp-content/uploads/2020/05/placeholder-3-2.jpg"/>}
       </ImgDiv>
-    </Container>}
+    </Container>
     </>
   )
 }
