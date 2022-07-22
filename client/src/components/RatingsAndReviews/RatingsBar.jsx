@@ -29,7 +29,7 @@ const UnfilledPortion = styled.div`
 `;
 
 const StarRatingItem = styled.li`
-  background-color: ${props => props.itemClicked ? 'orange' : 'white'}
+  background-color: ${props => props.inFilter ? 'orange' : 'white'}
 `;
 
 
@@ -57,7 +57,7 @@ export default function RatingsBar(props) {
   }
 
   return (
-    <StarRatingItem id={props.starValue} onClick={clickHandler} itemClicked={itemClicked}>
+    <StarRatingItem id={props.starValue} onClick={clickHandler} itemClicked={itemClicked}  inFilter={props.starsFilter.includes(props.starValue)}>
       <RatingsBarText>
         {props.starValue} stars
       </RatingsBarText>

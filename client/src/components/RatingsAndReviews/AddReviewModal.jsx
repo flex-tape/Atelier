@@ -108,7 +108,7 @@ const Title = styled.h3`
 `
 
 const Header = styled.label`
-  font-size: 2em;
+  font-size: 2.1em;
 `
 const ButtonContainer = styled.div`
   display: flex;

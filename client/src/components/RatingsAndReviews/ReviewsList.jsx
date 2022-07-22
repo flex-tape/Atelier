@@ -31,6 +31,11 @@ const ButtonContainer = styled.div`
 
 const SortBar = styled.form`
   margin-top: 5px;
+  select {
+    font-size: 1em;
+    border: none;
+    text-decoration: underline;
+  }
 `;
 
 const UnorderedList = styled.ul`

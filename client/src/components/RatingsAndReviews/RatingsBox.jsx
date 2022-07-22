@@ -9,7 +9,7 @@ const RatingsBarContainer = styled.div`
   // height: 8px;
   width: 100%;
   // margin-bottom: 30px;
-
+  font-size: 12px
 `;
 
 const RecommendedContainer = styled.div`
@@ -102,6 +102,11 @@ export default function RatingsBox(props) {
     })
   }
 
+  const clickHandler = (e) => {
+    e.preventDefault();
+    props.setStarsFilter([]);
+  }
+
   return (
     <>
       <SectionHeading>RATINGS & REVIEWS</SectionHeading>
@@ -121,7 +126,7 @@ export default function RatingsBox(props) {
           {props.hasLoaded && createRatingsBreakdown(props.metadata.ratings)}
         </RatingsBarList>
         {props.starsFilter.length > 0
-          ? (<div>Filters are enabled (<a href="#" onClick={() => props.setStarsFilter([])}>remove</a>)</div>
+          ? (<div>Filters are enabled (<a href="#" onClick={clickHandler}>remove all</a>)</div>
           )
           : null
         }
