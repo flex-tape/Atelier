@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Image = styled.img`
-  object-fit: cover;
+  object-fit: contain;
   margin: 10px;
   height: 75px;
   box-shadow: 7px 7px 7px lightgray;
