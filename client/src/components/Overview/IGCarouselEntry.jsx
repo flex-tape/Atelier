@@ -7,7 +7,7 @@ const Image = styled.img`
   height: 75px;
   box-shadow: 7px 7px 7px lightgray;
   cursor: e-resize;
-  border: ${props => props.selected ? '2px solid #000000' : '2px solid #e6feff'}
+  border: ${props => props.selected ? '2px solid #000000' : '2px solid #f8f8ff'}
 
   // img {
   //   height: 70;
