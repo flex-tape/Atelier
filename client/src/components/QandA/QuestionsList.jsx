@@ -20,7 +20,6 @@ const QuestionsListContainer = styled.div`
 `
 
 export default function QuestionsList(props) {
-  //const [productID, setProductID] = useState(props.productID);
   const [productName, setProductName] = useState('');
   const [questionsList, setQuestionsList] = useState([]);
   const [fullList, setFullList] = useState([]);

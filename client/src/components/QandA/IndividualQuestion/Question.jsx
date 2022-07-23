@@ -15,7 +15,6 @@ const QuestionDiv = styled.div`
 const Container = styled.div`
   margin-bottom: 20px;
 `
-
 const A = styled.b`
   vertical-align: top;
 `
