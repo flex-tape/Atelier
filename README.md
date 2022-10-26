@@ -17,7 +17,7 @@ Components in this repo have been written with React, pure CSS and Styled Compon
 ## Features
 
 ### Product Overview
-Product Zoom Modal             |  Product Info and Gallery
+Product Zoom Modal         |  Product Info and Gallery
 :-------------------------:|:-------------------------:
 ![Product Zoom Modal](https://imgur.com/vBOFyRH.gif)  |  ![Product Info and Gallery](https://imgur.com/3GpAlvw.gif)
 
