@@ -19,7 +19,7 @@ Components in this repo have been written with React, pure CSS and Styled Compon
 ### Product Overview
 Product Zoom Modal             |  Product Info and Gallery
 :-------------------------:|:-------------------------:
-![Product Zoom Modal](link to gif)  |  ![Product Info and Gallery](https://imgur.com/pbQR1aq.gif)
+![Product Zoom Modal](link to gif)  |  ![Product Info and Gallery](https://imgur.com/a/Bxjj3NE.gif)
 
 Built by <a href=https://github.com/kevhaha>Kevin Ha</a>
 
