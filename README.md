@@ -24,7 +24,11 @@ Product Zoom Modal           |  Product Info and Gallery
 Built by <a href=https://github.com/kevhaha>Kevin Ha</a>
 
 <b>Features</b>
-- Insert features
+- Product Image carousel with zoom modal
+- Share to social media buttons
+- Styles Selector dynamically lists out SKUs based on product
+- Size Selector dynamically fills size and inventory to add to cart
+- Window.scroll to the Ratings & Reviews onClick
 
 ### Related Items
 Comparison Modal             |  Product Carousel
@@ -44,7 +48,9 @@ Question Modal     |  Q&A Listing
 Built by <a href=https://github.com/harrisonzhao97>Harrison Zhao</a>
 
 <b>Features</b>
-- Insert features
+- Form modal to add questions/answers
+- Questions and answers load two at a time, onClick
+- Search functionality to look for question
 
 ### Ratings & Reviews
 Review Modal     |  Reviews Listing
