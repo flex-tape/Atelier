@@ -39,7 +39,7 @@ Built by <a href=https://github.com/toanddao>Toan Dao</a>
 ### Questions & Answers
 Question Modal     |  Q&A Listing
 :-------------------------:|:-------------------------:
-![Add Question Modal](link to gif)  |  ![Q&A Listing](link to gif)
+![Add Question Modal](https://imgur.com/houUhrd.gif)  |  ![Q&A Listing](link to gif)
 
 Built by <a href=https://github.com/harrisonzhao97>Harrison Zhao</a>
 
