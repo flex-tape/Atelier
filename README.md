@@ -57,7 +57,7 @@ Built by <a href=https://github.com/harrisonzhao97>Harrison Zhao</a>
 ### Ratings & Reviews
 Review Modal     |  Reviews Listing
 :-------------------------:|:-------------------------:
-![Add Review Modal](link to gif)  |  ![Review Listing](link to gif)
+![Add Review Modal](https://imgur.com/OvhGbNi.gif)  |  ![Review Listing](https://imgur.com/BzTFMXy)
 
 Built by <a href=https://github.com/chrisxchoi>Chris Choi</a>
 
