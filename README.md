@@ -38,7 +38,9 @@ Comparison Modal             |  Product Carousel
 Built by <a href=https://github.com/toanddao>Toan Dao</a>
 
 <b>Features</b>
-- Insert features
+- Carousel of related products that dynamically render based on the current product being viewed
+- Clicking on the star icon will display a modal which compares the current product with the product selected
+- 'Your Outfit' section where you can add the current product to an outfit list that persists while traversing the site
 
 ### Questions & Answers
 Question Modal     |  Q&A Listing
@@ -60,7 +62,10 @@ Review Modal     |  Reviews Listing
 Built by <a href=https://github.com/chrisxchoi>Chris Choi</a>
 
 <b>Features</b>
-- Insert features
+- Displays ratings and reviews for the current product
+- Sort reviews based on star rating
+- Sort reviews by Relevance, Helpfulness, and Newest
+- 'Add A Review' button which will prompt a modal to write a review
 
 ## Contributors
 
