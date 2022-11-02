@@ -33,7 +33,7 @@ Built by <a href=https://github.com/kevhaha>Kevin Ha</a>
 ### Related Items
 Comparison Modal             |  Product Carousel
 :-------------------------:|:-------------------------:
-![Comparison Modal](https://imgur.com/JM9hyIQ.gif)  |  ![Product Carousel](link to gif)
+![Comparison Modal](https://imgur.com/JM9hyIQ.gif)  |  ![Product Carousel](https://imgur.com/0K6wloT.gif)
 
 Built by <a href=https://github.com/toanddao>Toan Dao</a>
 
