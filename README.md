@@ -45,7 +45,7 @@ Built by <a href=https://github.com/toanddao>Toan Dao</a>
 ### Questions & Answers
 Question Modal     |  Q&A Listing
 :-------------------------:|:-------------------------:
-![Add Question Modal](https://imgur.com/houUhrd.gif)  |  ![Q&A Listing](https://i.imgur.com/QvpELCY.gif)
+![Add Question Modal](https://imgur.com/Dc4tvIK.gif)  |  ![Q&A Listing](https://imgur.com/WLO1zLS.gif)
 
 Built by <a href=https://github.com/harrisonzhao97>Harrison Zhao</a>
 
